@@ -1,0 +1,24 @@
+# Fortran module files
+*.mod
+*.smod
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Processed files
+*.continueless.*
+*.tokens.*
+
+# LaTeX temporary files
+**.tex
+**/*.aux
+**/*.bbl
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+
+# Miscellany
+.DS_Store
+requirements/requirements.txt
