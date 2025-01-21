@@ -20,5 +20,5 @@
 **/*.log
 
 # Miscellany
-.DS_Store
+**/.DS_Store
 requirements/requirements.txt
