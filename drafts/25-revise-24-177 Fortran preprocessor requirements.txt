@@ -1,9 +1,15 @@
-To: J3                                                     J3/24-177r1
+To: J3                                                     J3/25-xxx
 From: JoR
 Subject: Fortran preprocessor requirements
-Date: 2024-October-28
+Date: 2025-January-24
 
-Reference: 23-192r1, 24-108, 24-109, Tutorials/Preprocessor Take 2.pptx
+References: 95-257 Conditional Compilation: The FCC Approach.txt
+            96-063 A Fortran Preprocessor.txt
+            23-192r1 F202Y Define a standard Fortran preprocessor.txt
+            24-108 Preprocessor directives seen in existing Fortran programs.txt
+            24-109 On Fortran awareness in a Fortran preprocessor.txt
+            24-177r1 Fortran preprocessor requirements.txt
+            Tutorials/Preprocessor Take 2.pptx
 
 
 1. Introduction
