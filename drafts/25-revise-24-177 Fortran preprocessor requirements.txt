@@ -102,6 +102,7 @@ Macros are expanded in comment lines that appear to be pragma directives
     #if, #elif, #else
     #include
     #error
+    #warning
     #pragma
 
 Just as #include lines interpolate the source from other files, the
