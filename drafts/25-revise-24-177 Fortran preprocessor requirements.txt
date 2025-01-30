@@ -99,9 +99,10 @@ Macros are expanded in comment lines that appear to be pragma directives
              that uses the ellipsis notation in the parameters
     #undef
     #ifdef and #ifndef
-    #if, #elif, #else
+    #if, #elif, #else, #endif
     #include
     #error
+    #warning
     #pragma
 
 Just as #include lines interpolate the source from other files, the
