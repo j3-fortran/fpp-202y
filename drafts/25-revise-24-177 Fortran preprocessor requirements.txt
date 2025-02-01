@@ -122,7 +122,8 @@ preprocessor will include the text from Fortran INCLUDE lines
 ---------------------------------------------------
     - The "defined" operator
     - From C: && || == != < > <= >= + / * ! & | ^ ~ ( )
-    - From Fortran: = /= .AND. .OR. .NOT.
+    - From Fortran: = /= .AND. .OR. .NOT. .EQ. .NE.
+                    .LT. .LE. .GT. .GE. .EQV. .NEQV.
 
 
 4.4 Macros defined by the preprocessor
