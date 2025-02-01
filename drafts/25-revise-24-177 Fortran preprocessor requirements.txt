@@ -98,8 +98,8 @@ Macros are expanded in comment lines that appear to be pragma directives
     #define  including function-like macros and those
              that uses the ellipsis notation in the parameters
     #undef
-    #ifdef and #ifndef
     #if, #elif, #else, #endif
+    #ifdef, #ifndef, #elifdef, #elifndef
     #include
     #error
     #warning
