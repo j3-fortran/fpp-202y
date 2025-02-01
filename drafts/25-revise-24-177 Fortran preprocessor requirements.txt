@@ -58,13 +58,22 @@ from C and Fortran syntax in the following ways:
     7. FPP recognizes /* ... */ C-style comments on directive lines.
     8. Expressions in #if and #elif directives contain constructs from
        both Fortran and CPP.
-    9. Expressions in #if and #elif directives that evaluate to LOGICAL
-       or INTEGER values. .TRUE. or a non-zero integer are considered
-       true.
-    10. Undefined identifiers are treated as zero, as in CPP.
-    11. Integer expressions in preprocessor directives are calculated in
-       the maximum precision the processor supports. (There are no KIND
-       specifiers on integer constants in the preprocessor.)
+    9. Expressions in #if and #elif directives evaluate to INTEGER values.
+       Zero values are treated as 'false'. Non-zero values are treated as
+       'true'.
+    10 .FALSE. is treated as the integer 0. .TRUE. is treated as the
+       integer 1.
+    11. Undefined identifiers are treated as zero, as in CPP.
+    12. C character constants (such as 'A', '\n') are treated as
+        integer values, as they are in C.
+    13. The Fortran operators .AND., .OR., ,NOT., .EQ., .NE., .EQV., and
+        .NEQV. calculate the save values as the C operators &&, ||, !, ==,
+        !=, ==, and !=, respectively.
+    14. The Fortran operators .LT., .LE., .GT., and .GE. calculate the
+        same values as the C operators <, <=, >, and >=, respectively.
+    15. Integer expressions in preprocessor directives are calculated in
+        the maximum precision the processor supports. (There are no KIND
+        specifiers on integer constants in the preprocessor.)
 
 
 3. FPP Phase 1: Line conjoining
