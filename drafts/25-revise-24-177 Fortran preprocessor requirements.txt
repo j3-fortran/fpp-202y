@@ -6,7 +6,8 @@ Date: 2025-January-24
 References: 95-257 Conditional Compilation: The FCC Approach.txt
             96-063 A Fortran Preprocessor.txt
             23-192r1 F202Y Define a standard Fortran preprocessor.txt
-            24-108 Preprocessor directives seen in existing Fortran programs.txt
+            24-108 Preprocessor directives seen in existing Fortran
+                   programs.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
             24-177r1 Fortran preprocessor requirements.txt
             Tutorials/Preprocessor Take 2.pptx
@@ -142,7 +143,7 @@ __STDF__ is an analog to __STDC__ in C and __cplusplus in C++.  Its primary
 role is to provide preprocessor-visible and vendor-independent identification
 of the underlying target language (i.e., "the processor is Fortran"), which
 enables one to write multi-language header files with conditional compilation
-based on language.  
+based on language.
 
 4.5. Fortran awareness during macro expansion
 ---------------------------------------------
