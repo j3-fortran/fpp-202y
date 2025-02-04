@@ -1,0 +1,200 @@
+To: J3                                                     J3/25-xxx
+From: Gary Klimowicz
+Subject: FPP translation phases
+Date: 2025-February-03
+
+References: 25-114 Fortran preprocessor requirements
+            ISO/IEC 9899:2023 Programming languages -- C
+                   working draft N3096
+
+
+1. Phases before the "processor"
+================================
+The preprocessor will be a mandatory part of the language. Any file
+passed to a processor may contain preprocessor directive lines.
+
+Clause §5.1.1.2 in the C 2023 standard defines eight phases of the
+compilation process. These phases don't prescribe the details of an
+implementation, but are useful for defining in focused terms the
+expected behavior of implementations.
+
+In this INFO paper, we take a similar approach for defining the
+semantics of the proposed Fortran preprocessor, FPP. This should
+simplify the explanation of the expected behavior of any given
+implementation.
+
+For reference, the remainder of section 1 contains the translation
+phases as defined it the C standard. Some phases may not be relevant
+to a Fortran processor. We are most interested in phases 1 through 4
+(preprocessing, which we refer to as CPP).
+
+
+1.1 C Phase 1: Mapping of multibyte characters
+----------------------------------------------
+Physical source file multibyte characters are mapped, in an
+implementation-defined manner, to the source character set
+(introducing new-line characters for end-of-line indicators) if
+necessary.
+
+
+1.2 C Phase 2: Continuation splicing
+------------------------------------
+Each instance of a backslash character (\) immediately followed by a
+new-line character is deleted, splicing physical source lines to form
+logical source lines. Only the last backslash on any physical source
+line shall be eligible for being part of such a splice. A source file
+that is not empty shall end in a new-line character, which shall not
+be immediately preceded by a backslash character before any such
+splicing takes place.
+
+
+1.3. C Phase 3: Preprocessing tokenization and comment removal
+--------------------------------------------------------------
+The source file is decomposed into preprocessing tokens and
+sequences of white-space characters (including comments). A source
+file shall not end in a partial preprocessing token or in a partial
+comment. Each comment is replaced by one space character. New-line
+characters are retained. Whether each nonempty sequence of white-space
+characters other than new-line is retained or replaced by one space
+character is implementation-defined.
+
+
+1.4. C Phase 4: Preprocessing directive handling
+------------------------------------------------
+Preprocessing directive macro invocations are expanded, and_Pragma
+unary operator expressions are executed. If a character sequence that
+matches the syntax of a universal character name is produced by token
+concatenation (6.10.4.3), the behavior is undefined. A #include
+preprocessing directive causes the named header or source file to be
+processed from phase 1 through phase 4, recursively. All preprocessing
+directives are then deleted.
+
+
+1.5. C Phase 5: Character and string escape processing
+------------------------------------------------------
+Each source character set member and escape sequence in character
+constants and string literals is converted to the corresponding member
+of the execution character set. Each instance of a source character or
+escape sequence for which there is no corresponding member is
+converted in an implementation-defined manner to some member of the
+execution character set other than the null (wide) character.
+
+
+1.6. C Phase 6: Handle adjacent string literals
+-----------------------------------------------
+Adjacent string literal tokens are concatenated.
+
+
+1.7. C Phase 7: Syntactic and semantic analysis
+-----------------------------------------------
+White-space characters separating tokens are no longer significant.
+Each preprocessing token is converted into a token. The resulting
+tokens are syntactically and semantically analyzed and translated as a
+translation unit.
+
+
+1.8. C Phase 8: External resolution and linking
+-----------------------------------------------
+All external object and function references are resolved. Library
+components are linked to satisfy external references to functions and
+objects not defined in the current translation. All such translator
+output is collected into a program image which contains information
+needed for execution in its execution environment.
+
+<end of text from C 2023 standard>
+
+
+2. FPP Translation phases
+=========================
+Many of the phases described in the C standard aren't relevant to a
+Fortran processor. We have identified three phases that adequately
+describe the behavior of FPP up through preprocessor directive
+handling.
+
+
+2.1 FPP Phase 1: Line conjoining
+--------------------------------
+We define phase 1 to simply remove continuation lines seen in the
+source file. This applies to both fixed-form and free-form source
+Fortran lines and preprocessor directive lines. The output of this
+phase is a sequence of "logical lines", each of which may be up to 1
+million characters long. Logical lines are a sequence of characters in
+the same order as they are encountered in the input stream.
+
+To support in-line comments (introduced by '!'), this phase inserts
+special new-line markers between the physical lines in a logical line.
+
+Each line consisting of only comment text is passed directly to the
+next phase as a complete logical line.
+
+Fixed-form source lines form logical lines as follows:
+    - It starts with the 5-character statement label field
+    - followed by text from columns 7 through 72 (omitting column 6),
+    - followed by the new-line marker
+    - followed by (the text from columns 7-72 and a new-line marker)
+      from all subsequent continuation lines.
+
+Free-form source lines form logical lines as follows:
+    - It starts with the text from the first line up to (but not
+      including) any '&' marking a continuation,
+    - followed by a new-line marker,
+    - followed by the text of each following continuation line, each
+      with a new-line marker). Continuation lines obey the leading '&'
+      rules as defined in the Fortran standard.
+
+Directive source lines form logical lines as follows:
+    - It starts with the text of the directive line, up to (but
+      not including) any trailing
+
+The output from Phase 1 should contain no Fortran source line
+continuations or directive line continuations.
+
+
+2.2. FPP Phase 2: Comment processing
+------------------------------------
+For fixed and free-form source, phase 2 translates comment-based
+directives (such as '!dir$', '!$omp', '!$acc', 'CDIR$', 'C$OMP',
+and 'C$acc') into some formal pragma (such as a '#pragma' directive).
+
+Which comment-directives phase 2 translates to pragmas is
+processor-dependent.
+
+Phase 2 deletes all other comments (as does CPP phase 3).
+
+
+2.3. FPP Phase 3: Directive processing
+--------------------------------------
+The directive processing phase is analogous to CPP phase 4.
+
+Preprocessor directives are executed.
+
+Macros are expanded in preprocessor directives and in non-preprocessor
+lines (Fortran source lines).
+
+#pragma lines are consumed by the preprocessor phase or expanded
+into Fortran 'pragma' lines (a new feature). Macros are expanded in
+#pragma directives and Fortran pragma lines.
+
+Just as CPP does not expand tokens in strings, there are places in
+Fortran lines that FPP should not recognize or expand tokens.
+
+FPP will not expand in fixed-form
+    - A token "C" or "c" in column 1.
+    - Anything in column 6.
+
+FPP will not expand tokens in either fixed- or free-form:
+    - In Fortran character constants
+    - In FORMAT statements
+    - In the letter-spec-list in an IMPLICIT statement.
+
+The output of phase 3 is a sequence of logical lines containing
+Fortran source. With the exception of #line and #file directive lines
+(for determining source statement origin), the output of phase 3
+contains no preprocessor directive lines.
+
+
+2.4. Phases 4 and beyond
+========================
+Subsequent phases perform the other duties of ``the processor''
+as defined in the Fortran standard (such as syntax analysis, semantic
+analysis and code generation).
