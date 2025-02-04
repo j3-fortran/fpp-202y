@@ -132,17 +132,6 @@ preprocessor will include the text from Fortran INCLUDE lines
     __FILE__
     __DATE__
     __TIME__
-    __STDF__
-    __VA_ARGS__  in the replacement-list of a function-like macro
-      that uses the ellipsis notation in the parameters.
-    __VA_OPT__  in the replacement-list of a function-like macro
-      that uses the ellipsis notation in the parameters.
-
-__STDF__ is an analog to __STDC__ in C and __cplusplus in C++.  Its primary
-role is to provide preprocessor-visible and vendor-independent identification
-of the underlying target language (i.e., "the processor is Fortran"), which
-enables one to write multi-language header files with conditional compilation
-based on language.
 
 4.5. Fortran awareness during macro expansion
 ---------------------------------------------
