@@ -17,19 +17,54 @@ References: 95-257 Conditional Compilation: The FCC Approach.txt
 
 1. Introduction
 ---------------
-Many existing Fortran projects make extensive use of C preprocessor
-directives and expansion. This is usually done to tailor the code to
-specific environments, such as target compilers or machines.
+From paper 96-063, April 3, 1996 (lightly edited):
 
-Existing compiler implementations behave differently in the presence of
-these directives, hampering portability.
+   Frequently Fortran programmers need to maintain more than one
+   version of a code, or to run the code in various environments. The
+   easiest solution for the programmer is to keep a single source file
+   that has all the code variations interleaved within it so that any
+   version can be easily extracted. This way, modifications that apply
+   to all versions need only be made once.
 
-This document attempts to define the requirements for a standardized
-Fortran preprocessor (herein called FPP). The guiding principle is to
-promote Fortran program portability by defining consistent syntax and
-semantics of a subset of the C preprocessor. Some FPP behavior will need
-to be different than the C preprocessor (herein called CPP) to
-accommodate some Fortran idiosyncrasies.
+   Source code preprocessors have long been used to provide these
+   capabilities. They allow the user to insert directive statements
+   within the source code that effect the output of the preprocessor.
+   In general, source code preprocessors permit the user to define
+   special variables and logical constructs that conditionally control
+   which source lines in the file are passed on to the compiler and
+   which lines are skipped over. In addition, the preprocessor's
+   capabilities allow the user to specify how the source code should
+   be changed according to the value of defined string variables and
+   functions.
+
+   Historically, the source code preprocessor found in standard C
+   compilers, CPP, has been used to provide Fortran programmers with
+   these capabilities. However, CPP is too closely tied into the C
+   language syntax and source line format to be used without careful
+   scrutiny. The proposed Fortran PreProcessor, FPP, would provide
+   Fortran-specific source code capabilities that C programmers have
+   long grown to expect.
+
+<end of text borrowed from 96-063>
+
+Existing compiler implementations either use CPP directly, or implement
+Fortran-oriented semantics of CPP in the processor. For simple use cases,
+these implementations support similar functionality and behavior.
+
+Unfortunately, more complex use cases fail to be portable between
+different implementations. This is enough of a problem that WG 5
+raised this as the number 2 issue to address in Fortran 202y, behind
+generics.
+
+This is not a new problem, as evidenced by the J3 discussions from
+the mid 1990s. The introduction of CoCo in Fortran 95 did not solve
+the problem, either.
+
+This document attempts to define the requirements for a mandatory
+Fortran preprocessor. The guiding principle is to promote Fortran
+program portability by defining consistent syntax and semantics of a
+useful subset of CPP. Some FPP behavior will be different than the C
+preprocessor to accommodate some Fortran idiosyncrasies.
 
 
 2. The basic idea: phases before the "processor"
