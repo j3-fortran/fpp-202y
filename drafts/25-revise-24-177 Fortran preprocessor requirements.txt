@@ -11,6 +11,8 @@ References: 95-257 Conditional Compilation: The FCC Approach.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
             24-177r1 Fortran preprocessor requirements.txt
             Tutorials/Preprocessor Take 2.pptx
+            ISO/IEC 9899:2023 Programming languages — C
+                   working draft N3096
 
 
 1. Introduction
@@ -43,30 +45,6 @@ We plan to take a similar approach for defining FPP. This should
 simplify the explanation of the expected behavior of any given
 implementation.
 
-The directive language accepted by FPP is based on the syntax of CPP. It
-is not Fortran, but can contain arbitrary Fortran tokens. It differs
-from C and Fortran syntax in the following ways:
-    1. FPP's directives and token recognition are case sensitive.
-    2. FPP treats blanks adjacent to tokens as significant, even in
-       fixed-form source files.
-    3. FPP directive lines accept backslash (\) for line continuations.
-    4. FPP does not recognize fixed-form (column 6) or free-form (&)
-       continuations on directive lines.
-    5. FPP does not recognize '!' as initiating a comment on directive
-       lines.
-    6. FPP does not recognize '//' as initiating a comment on directive
-       lines.
-    7. FPP recognizes /* ... */ C-style comments on directive lines.
-    8. Expressions in #if and #elif directives contain constructs from
-       both Fortran and CPP.
-    9. Expressions in #if and #elif directives that evaluate to LOGICAL
-       or INTEGER values. .TRUE. or a non-zero integer are considered
-       true.
-    10. Undefined identifiers are treated as zero, as in CPP.
-    11. Integer expressions in preprocessor directives are calculated in
-       the maximum precision the processor supports. (There are no KIND
-       specifiers on integer constants in the preprocessor.)
-
 
 3. FPP Phase 1: Line conjoining
 -------------------------------
@@ -87,14 +65,61 @@ The directive processing phase is analogous to CPP phase 4. Preprocessor
 directives are executed. Macros are expanded in non-preprocessor lines
 (Fortran source lines).
 
-Macros are expanded in comment lines that appear to be pragma directives
-(e.g. '!$omp' or '!$acc' or additional processor-specific choices).
+The directive language accepted by FPP is based on the syntax of CPP. It
+has syntax that differs from Fortran, but macros can expand to include
+arbitrary Fortran tokens. It differs from C and Fortran syntax in the
+following ways.
 
-#pragma lines are expanded into Fortran 'pragma' lines (a new feature).
+Token recognition:
+    1. FPP's directives and token recognition are case sensitive.
+    2. FPP treats blanks adjacent to tokens as significant, even in
+       fixed-form source files.
+
+Line continuation in directives:
+    1. FPP directive lines accept backslash (\) for line continuations.
+    2. FPP does not recognize fixed-form (column 6) or free-form (&)
+       continuations on directive lines.
+
+Comment handling:
+    1. FPP does not recognize '!' as initiating a comment on directive
+       lines. In #if and #elif directive expressions, '!' is interpreted
+       as the C 'not' operator.
+    2. FPP does not recognize '//' as initiating a comment on directive
+       lines. '//' can be used to construct macro definitions that
+       contain Fortran string concatenation.
+    3. FPP recognizes /* ... */ C-style comments on directive lines.
+       /* ... */ comments are not recognized in (non-directive)
+       Fortran source lines.
+    4. Macros are expanded in comment lines that appear to be directives
+       (processor-specific, such as '!$omp', or '!$acc', or others).
+
+Constant expressions in #if and #elif:
+    1. Expressions in #if and #elif directives allow operators from
+       both Fortran and CPP.
+    2. Expressions in #if and #elif directives must be integer constant
+       expressions as specified for CPP (with the extensions described
+       below), and evaluate to INTEGER values. As in CPP, zero values
+       are treated as 'false'. Non-zero values are treated as 'true'.
+    3. .FALSE. and .false. are treated as the integer 0. .TRUE. and .true.
+       are treated as the integer 1.
+    4. Any undefined identifiers that remain after macro expansion
+       (including those lexically identical to keywords or intrinsics)
+       are treated as zero, as in CPP.
+    5. C character constants (such as 'A', '\n') are treated as
+       integer values, as they are in CPP.
+    6. The Fortran operators .AND., .OR., ,NOT., =, and /= evaluate
+       to the same values as the C operators &&, ||, !, ==, and !=,
+       respectively.
+    7. There are no KIND specifiers on integer constants in the
+       preprocessor.
+    8. Integer expressions in preprocessor directives are evaluated using
+       the maximum precision the processor supports.
 
 
 4.1. Directives accepted by the preprocessor
 --------------------------------------------
+The following preprocessor directives will have the same semantics
+as defined in the C23 edition of the C programming language standard.
     #line
     #define  including function-like macros and those
              that uses the ellipsis notation in the parameters
@@ -107,7 +132,9 @@ Macros are expanded in comment lines that appear to be pragma directives
     #pragma
 
 Just as #include lines interpolate the source from other files, the
-preprocessor will include the text from Fortran INCLUDE lines
+preprocessor will include the text from Fortran INCLUDE lines.
+Text interpolated by INCLUDE lines will be treated as if it had
+been included via #include.
 
 
 4.2 Tokens accepted on #define directives
