@@ -28,7 +28,7 @@ From paper 96-063, April 3, 1996 (lightly edited):
 
    Source code preprocessors have long been used to provide these
    capabilities. They allow the user to insert directive statements
-   within the source code that effect the output of the preprocessor.
+   within the source code that affect the output of the preprocessor.
    In general, source code preprocessors permit the user to define
    special variables and logical constructs that conditionally control
    which source lines in the file are passed on to the compiler and
