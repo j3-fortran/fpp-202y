@@ -11,7 +11,7 @@ References: 95-257 Conditional Compilation: The FCC Approach.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
             24-177r1 Fortran preprocessor requirements.txt
             Tutorials/Preprocessor Take 2.pptx
-            ISO/IEC 9899:2023 Programming languages — C
+            ISO/IEC 9899:2023 Programming languages -- C
                    working draft N3096
 
 
