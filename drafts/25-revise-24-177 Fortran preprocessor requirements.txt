@@ -1,5 +1,5 @@
 To: J3                                                     J3/25-xxx
-From: JoR
+From: Gary Klimowicz, Dan Bonachea, Aury Shafran
 Subject: Fortran preprocessor requirements
 Date: 2025-January-24
 
@@ -48,36 +48,35 @@ From paper 96-063, April 3, 1996 (lightly edited):
 <end of text borrowed from 96-063>
 
 Existing compiler implementations either use CPP directly, or implement
-Fortran-oriented semantics of CPP in the processor. For simple use cases,
-these implementations support similar functionality and behavior.
+Fortran-oriented semantics of CPP in the processor. For simple use
+cases, these implementations support similar functionality and behavior.
 
 Many existing Fortran projects make extensive use of C preprocessor
 directives and macro expansion, despite the lack of an FPP standard.
-This is usually done to tailor the code to specific environments,
-such as target compilers or machines.
+This is usually done to tailor the code to specific environments, such
+as target compilers or machines.
 
 Unfortunately, more complex use cases fail to be portable between
-different implementations. This is enough of a problem that WG 5
-raised this as the number 2 issue to address in Fortran 202y, behind
-generics.
+different implementations. This is enough of a problem that WG 5 raised
+this as the number 2 issue to address in Fortran 202y, behind generics.
 
-This is not a new problem, as evidenced by the J3 discussions from
-the mid 1990s. The introduction of CoCo in Fortran 95 did not solve
-the problem, either, because it was not a mandatory part of the standard
-and because it was not compatible with the preprocessor syntax used by
-many existing Fortran projects.
+This is not a new problem, as evidenced by the J3 discussions from the
+mid 1990s. The introduction of CoCo in Fortran 95 did not solve the
+problem, either, because it was not a mandatory part of the standard and
+because it was not compatible with the preprocessor syntax used by many
+existing Fortran projects.
 
 This document attempts to define the requirements for a mandatory
-Fortran preprocessor based on the preprocessor syntax already in
-common use today. The guiding principle is to promote Fortran program
+Fortran preprocessor based on the preprocessor syntax already in common
+use today. The guiding principle is to promote Fortran program
 portability by defining consistent syntax and semantics of a useful
-subset of CPP. Some FPP behavior will be slightly different from CPP,
-in order to accommodate some Fortran idiosyncrasies.
+subset of CPP. Some FPP behavior will be slightly different from CPP, in
+order to accommodate some Fortran idiosyncrasies.
 
 A major overarching goal of this effort is to standardize de facto
-current practice for preprocessing in Fortran compilers and code. It
-is the standard's responsibility to standardize syntax in order to
-settle minor divergences that have arisen amongst pre-standard FPP
+current practice for preprocessing in Fortran compilers and code. It is
+the standard's responsibility to standardize syntax in order to settle
+minor divergences that have arisen amongst pre-standard FPP
 implementations, to the detriment of portability for end users.
 
 
@@ -149,8 +148,8 @@ Constant expressions in #if and #elif:
        expressions as specified for CPP (with the extensions described
        below), and evaluate to INTEGER values. As in CPP, zero values
        are treated as 'false'. Non-zero values are treated as 'true'.
-    3. .FALSE. and .false. are treated as the integer 0. .TRUE. and .true.
-       are treated as the integer 1.
+    3. .FALSE. and .false. are treated as the integer 0.
+       .TRUE. and .true. are treated as the integer 1.
     4. Any undefined identifiers that remain after macro expansion
        (including those lexically identical to keywords or intrinsics)
        are treated as zero, as in CPP.
@@ -161,8 +160,8 @@ Constant expressions in #if and #elif:
        respectively.
     7. There are no KIND specifiers on integer constants in the
        preprocessor.
-    8. Integer expressions in preprocessor directives are evaluated using
-       the maximum precision the processor supports.
+    8. Integer expressions in preprocessor directives are evaluated
+       using the maximum precision the processor supports.
 
 
 4.1. Directives accepted by the preprocessor
@@ -181,9 +180,9 @@ as defined in the C23 edition of the C programming language standard.
     #pragma
 
 Just as #include lines interpolate the source from other files, the
-preprocessor will include the text from Fortran INCLUDE lines.
-Text interpolated by INCLUDE lines will be treated as if it had
-been included via #include.
+preprocessor will include the text from Fortran INCLUDE lines. Text
+interpolated by INCLUDE lines will be treated as if it had been included
+via #include.
 
 
 4.2 Tokens accepted on #define directives
@@ -210,15 +209,16 @@ been included via #include.
     __TIME__
     __STDF__
     __VA_ARGS__  in the replacement-list of a function-like macro
-      that uses the ellipsis notation in the parameters.
-    __VA_OPT__  in the replacement-list of a function-like macro
-      that uses the ellipsis notation in the parameters.
+                 that uses the ellipsis notation in the parameters.
+    __VA_OPT__   in the replacement-list of a function-like macro
+                 that use the ellipsis notation in the parameters.
 
-__STDF__ is an analog to __STDC__ in C and __cplusplus in C++.  Its primary
-role is to provide preprocessor-visible and vendor-independent identification
-of the underlying target language (i.e., "the processor is Fortran"), which
-enables one to write multi-language header files with conditional compilation
-based on language.
+__STDF__ is an analog to __STDC__ in C and __cplusplus in C++. Its
+primary role is to provide preprocessor-visible and vendor-independent
+identification of the underlying target language (i.e., "the processor
+is Fortran"), which enables one to write multi-language header files
+with conditional compilation based on language.
+
 
 4.5. Fortran awareness during macro expansion
 ---------------------------------------------
