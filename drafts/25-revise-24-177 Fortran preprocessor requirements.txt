@@ -51,6 +51,11 @@ Existing compiler implementations either use CPP directly, or implement
 Fortran-oriented semantics of CPP in the processor. For simple use cases,
 these implementations support similar functionality and behavior.
 
+Many existing Fortran projects make extensive use of C preprocessor
+directives and macro expansion, despite the lack of an FPP standard.
+This is usually done to tailor the code to specific environments,
+such as target compilers or machines.
+
 Unfortunately, more complex use cases fail to be portable between
 different implementations. This is enough of a problem that WG 5
 raised this as the number 2 issue to address in Fortran 202y, behind
@@ -58,13 +63,22 @@ generics.
 
 This is not a new problem, as evidenced by the J3 discussions from
 the mid 1990s. The introduction of CoCo in Fortran 95 did not solve
-the problem, either.
+the problem, either, because it was not a mandatory part of the standard
+and because it was not compatible with the preprocessor syntax used by
+many existing Fortran projects.
 
 This document attempts to define the requirements for a mandatory
-Fortran preprocessor. The guiding principle is to promote Fortran
-program portability by defining consistent syntax and semantics of a
-useful subset of CPP. Some FPP behavior will be different than the C
-preprocessor to accommodate some Fortran idiosyncrasies.
+Fortran preprocessor based on the preprocessor syntax already in
+common use today. The guiding principle is to promote Fortran program
+portability by defining consistent syntax and semantics of a useful
+subset of CPP. Some FPP behavior will be slightly different from CPP,
+in order to accommodate some Fortran idiosyncrasies.
+
+A major overarching goal of this effort is to standardize de facto
+current practice for preprocessing in Fortran compilers and code. It
+is the standard's responsibility to standardize syntax in order to
+settle minor divergences that have arisen amongst pre-standard FPP
+implementations, to the detriment of portability for end users.
 
 
 2. The basic idea: phases before the "processor"
