@@ -111,7 +111,7 @@ stream.
 4. FPP Phase 2: Directive processing
 ------------------------------------
 The directive processing phase is analogous to CPP phase 4. Preprocessor
-directives are executed. Macros are expanded in non-preprocessor lines
+directives are executed. Macros are expanded in non-directive lines
 (Fortran source lines).
 
 The directive language accepted by FPP is based on the syntax of CPP. It
@@ -156,7 +156,7 @@ Constant expressions in #if and #elif:
        are treated as zero, as in CPP.
     5. C character constants (such as 'A', '\n') are treated as
        integer values, as they are in CPP.
-    6. The Fortran operators .AND., .OR., ,NOT., =, and /= evaluate
+    6. The Fortran operators .AND., .OR., .NOT., =, and /= evaluate
        to the same values as the C operators &&, ||, !, ==, and !=,
        respectively.
     7. There are no KIND specifiers on integer constants in the
@@ -171,7 +171,7 @@ The following preprocessor directives will have the same semantics
 as defined in the C23 edition of the C programming language standard.
     #line
     #define  including function-like macros and those
-             that uses the ellipsis notation in the parameters
+             that use the ellipsis notation in the parameters
     #undef
     #if, #elif, #else, #endif
     #ifdef, #ifndef, #elifdef, #elifndef
