@@ -1,5 +1,5 @@
 To: J3                                                     J3/25-114
-From: Gary Klimowicz, Dan Bonachea, Aury Shafran
+From: Gary Klimowicz & Dan Bonachea & Aury Shafran
 Subject: Fortran preprocessor requirements
 Date: 2025-February-06
 
