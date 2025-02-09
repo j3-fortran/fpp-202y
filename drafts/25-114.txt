@@ -197,7 +197,13 @@ via #include.
 4.3 Operators accepted in #if and #elif expressions
 ---------------------------------------------------
     - The "defined" operator
-    - From C: && || == != < > <= >= + / * ! & | ^ ~ ( )
+    - From C: && || !          (logical operators)
+              == != < > <= >=  (equality- and relational-expression)
+              + -              (additive-expression, also unary forms)
+              * / %            (multiplicative-expression)
+              & | ^ ~ << >>    (bitwise operators)
+              ? :              (conditional-expression)
+              ( )              (parenthetical grouping)
     - From Fortran: = /= .AND. .OR. .NOT.
 
 
