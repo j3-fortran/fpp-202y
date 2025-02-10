@@ -238,9 +238,8 @@ FPP will not expand in fixed-form
 
 
 FPP will not expand tokens in either fixed- or free-form:
-    - In character constants
-    - In FORMAT statements
-    - In the letter-spec-list in an IMPLICIT statement.
+    - In character literal constants.
+    - In character string edit descriptors (quoted character strings).
 
 
 4.6 Output of Phase 2
