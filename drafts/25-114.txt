@@ -207,7 +207,10 @@ expansion, and may for example include any tokens valid in Fortran or C.
               & | ^ ~ << >>    (bitwise operators)
               ? :              (conditional-expression)
               ( )              (parenthetical grouping)
-
+Earlier revisions of this document considered allowing Fortran syntax in
+#if and #elif expressions, such as:
+ = /= .AND. .OR. .NOT. .TRUE. .FALSE.
+but we eventually decided to omit these due to a lack of compelling use cases.
 
 4.4 Macros defined by the preprocessor
 ---------------------------------------------
