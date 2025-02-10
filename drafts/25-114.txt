@@ -161,7 +161,8 @@ Constant expressions in #if and #elif:
     7. There are no KIND specifiers on integer constants in the
        preprocessor.
     8. Integer expressions in preprocessor directives are evaluated
-       using the maximum precision the processor supports.
+       using the integer kind that has the largest decimal exponent range
+       supported by the processor.
 
 
 4.1. Directives accepted by the preprocessor
