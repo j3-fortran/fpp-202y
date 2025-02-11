@@ -121,7 +121,7 @@ phase is a sequence of "logical lines", each of which may be up to 1
 million characters long. Logical lines are a sequence of characters in
 the same order as they are encountered in the input stream.
 
-To support in-line comments (introduced by '!'), this phase inserts
+To support Fortran-style comments (introduced by '!'), this phase inserts
 special new-line markers between the physical lines in a logical line.
 
 Each line consisting of only comment text is passed directly to the
