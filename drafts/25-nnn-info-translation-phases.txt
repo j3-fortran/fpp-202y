@@ -168,7 +168,7 @@ The directive processing phase is analogous to CPP phase 4.
 
 Preprocessor directives are executed.
 
-Macros are expanded in preprocessor directives and in non-preprocessor
+Macros are expanded in preprocessor directives and in non-directive
 lines (Fortran source lines).
 
 #pragma lines are consumed by the preprocessor phase or expanded
