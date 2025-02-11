@@ -188,7 +188,7 @@ FPP will not expand tokens in either fixed- or free-form:
     - In the letter-spec-list in an IMPLICIT statement.
 
 The output of phase 3 is a sequence of logical lines containing
-Fortran source. With the exception of #line and #file directive lines
+Fortran source. With the exception of processor-dependent #line and #file directive lines
 (for determining source statement origin), the output of phase 3
 contains no preprocessor directive lines.
 
