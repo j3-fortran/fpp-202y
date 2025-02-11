@@ -127,7 +127,7 @@ special new-line markers between the physical lines in a logical line.
 Each line consisting of only comment text is passed directly to the
 next phase as a complete logical line.
 
-Fixed-form source lines form logical lines as follows:
+Fixed-form non-directive source lines form logical lines as follows:
     - It starts with the 5-character statement label field
     - followed by text from columns 7 through 72 (omitting column 6),
     - followed by the new-line marker
