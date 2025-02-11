@@ -134,7 +134,7 @@ Fixed-form non-directive source lines form logical lines as follows:
     - followed by (the text from columns 7-72 and a new-line marker)
       from all subsequent continuation lines.
 
-Free-form source lines form logical lines as follows:
+Free-form non-directive source lines form logical lines as follows:
     - It starts with the text from the first line up to (but not
       including) any '&' marking a continuation,
     - followed by a new-line marker,
