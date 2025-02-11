@@ -12,7 +12,7 @@ References: 95-257 Conditional Compilation: The FCC Approach.txt
             24-177r1 Fortran preprocessor requirements.txt
             Tutorials/Preprocessor Take 2.pptx
             ISO/IEC 9899:2023 Programming languages -- C
-                   working draft N3096
+                   (working draft N3096)
 
 
 1. Introduction
@@ -193,8 +193,9 @@ directive and handled by the preprocessor during expansion:
     - __VA_OPT__   in the replacement-list of a function-like macro
                    that use the ellipsis notation in the parameters.
 
-Any other text in the replacement-list is preserved unchanged during macro
-expansion, and may for example include any tokens valid in Fortran or C.
+Any other text in the replacement-list is preserved unchanged during
+macro expansion, and may for example include any tokens valid in Fortran
+or C.
 
 
 4.3 Operators accepted in #if and #elif expressions
@@ -207,10 +208,13 @@ expansion, and may for example include any tokens valid in Fortran or C.
               & | ^ ~ << >>    (bitwise operators)
               ? :              (conditional-expression)
               ( )              (parenthetical grouping)
+
 Earlier revisions of this document considered allowing Fortran syntax in
 #if and #elif expressions, such as:
- = /= .AND. .OR. .NOT. .TRUE. .FALSE.
-but we eventually decided to omit these due to a lack of compelling use cases.
+    = /= .AND. .OR. .NOT. .TRUE. .FALSE.
+but we eventually decided to omit these due to a lack of compelling
+use cases.
+
 
 4.4 Macros defined by the preprocessor
 ---------------------------------------------
@@ -232,7 +236,7 @@ with conditional compilation based on language.
 Just as CPP does not expand tokens in strings, there are places in
 Fortran lines that FPP should not recognize or expand tokens.
 
-FPP will not expand in fixed-form
+FPP will not expand in fixed-form:
     - A token "C" or "c" in column 1.
     - Anything in column 6.
 
