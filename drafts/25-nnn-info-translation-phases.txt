@@ -159,7 +159,7 @@ and 'C$acc') into some formal pragma (such as a '#pragma' directive).
 Which comment-directives phase 2 translates to pragmas is
 processor-dependent.
 
-Phase 2 deletes all other comments (as does CPP phase 3).
+Phase 2 deletes all other comments (as does CPP phase 3), replacing each with a single space.
 
 
 2.3. FPP Phase 3: Directive processing
