@@ -142,7 +142,8 @@ Comment handling:
        (processor-specific, such as '!$omp', or '!$acc', or others).
 
 Constant expressions in #if and #elif:
-    1. Expressions in #if and #elif directives allow operators from CPP.
+    1. Expressions in #if and #elif directives allow most operators
+       from CPP (see section 4.3 below).
     2. Expressions in #if and #elif directives must be integer constant
        expressions as specified for CPP and evaluate to INTEGER values.
        As in CPP, zero values are treated as 'false'. Non-zero values
