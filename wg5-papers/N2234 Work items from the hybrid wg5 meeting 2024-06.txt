@@ -1,0 +1,124 @@
+                  ISO/IEC JTC1/SC22/WG5-N2234
+
+
+             WORK ITEMS FROM THE HYBRID WG5 MEETING
+         HELD ON JUNE 27 TO 28, 2024 IN BERKELEY, CA, USA
+
+
+This is the work item list for the next revision of ISO/IEC 1539:2023
+Fortran, referred to as Fortran 202Y, as adopted by WG5 at its 2024 
+meeting in Berkeley, California, USA. It incorporates items (through US17)
+previously adopted as set out in N2222.
+
+This list is subject to amendment by WG5. References are to ISO WG5
+N-documents or INCITS/Fortran papers (yy-nnn), but please understand that
+this work item list is for general concepts and that development of the
+features will be done by INCITS/Fortran, and may or may not closely resemble
+detailed descriptions in the referenced papers.
+
+ACCEPTED
+
+
+- JP01. Include generic subprograms described in N2217.
+        Ref. N2217 "JP-01 Japan NB Request for F202Y - Generic Subprograms"
+             24-148r1 "Revised formal specifications for generic subprogram"
+
+- US01. Make default implicit typing obsolete.
+        Ref. 23-177 "F202Y Obsolete default implicit typing"
+
+- US02. Make the D format descriptor obsolete.
+        Ref. 12-178 "F202Y Make the D format edit descriptor obsolescent"
+
+- US03. Add note that the real model is not IEEE 754.
+        Ref. 23-180 "F202Y Note that the real model is not IEEE 754"
+
+- US04. Add asynchronous tasks.
+        Ref: 23-174 "Asynchronous Tasks in Fortran"
+
+- US05. Add C interoperability for new interchange floating point types in C.
+        Ref. 23-176 "C interoperability for new interchange floating-point types"
+
+- US06. Provide a mechanism to specify global binding name for non
+        C-interoperable.
+        Ref. 23-201 "F202Y Global binding name for non C-interoperable"
+
+- US07. Improve rank-independent functionality.
+        Ref. 23-184r1 for a list of proposals under consideration.
+
+- US08. Improve polymorphic PURE function results.
+        Ref. 23-186 "Polymorphic outputs from pure"
+
+- US09. Allow I/O on enumeration type values.
+        Ref. 23-151r1 "F202Y Allow I/O of enumeration type names"
+
+- US10. Add a Fortran-friendly preprocessor.
+        Ref. 23-192r1 "F202Y Define a standard Fortran preprocessor"
+
+- US11. Provide intrinsics for source location.
+        Ref. 23-193r1 "F202Y Intrinsics for source location".
+
+- US12. Add maximum rank/corank constants to ISO_FORTRAN_ENV.
+        Ref. 23-194 "F202Y Add maximum rank/corank constants to ISO_FORTRAN_ENV"
+
+- US13. Add namespace-like access to module entities.
+        Ref. 23-196 "Access to module entities"
+
+- US14. Add scoped access to enumeration values.
+        Ref. 23-197 "Scoped access to enumeration enumerators"
+
+- US15. Add support for describing the target of a pointer as immutable.
+        Ref. 23-198 "Readonly pointers"
+
+- US16. Define default KIND values to use throughout a program unit.
+        Ref. 23-199 "Default kinds"
+
+- US17. Add Generic programming templates, including strong requirements.
+        Investigate other mechanisms for simplifying the use of templates.
+        Ref: 23-155r1 "Formal syntax for generics"
+             23-182r1 "Expanded Requirements"
+             23-187 "Shorthands for Simple Templates"
+             23-189 "F202Y allow polymorphic deferred type"
+             23-190 "Properties for requirements"
+             24-125r5 "Formal syntax (1 of 3): deferred arguments"
+             24-126r4 "Formal syntax (2 of 3): templates and instantiation"
+             24-127r4 "Formal syntax (3 of 3): REQUIREMENT and REQUIRES"
+             24-130 "Formal specs for TEMPLATE"
+             24-131 "Generics formal specs: semantics of instantiating templates"
+             24-133 "Formal specs for REQUIREMENT and REQUIRES"
+
+- US18. Allow Polymorphism in Coarrays
+        Ref: 23-217 "Usable Polymorphism in Coarrays"
+
+- US19. Add more math functions from IEEE-754
+        Ref: 23-234r2 "IEEE-754 Recommended Math Functions"
+
+- US23/DIN4 Add generic processing of assumed-rank object
+        Ref: 24-136r1 "DIN-4: Generic processing of assumed-rank objects"
+
+- US24  Add rank-independent looping
+        Ref: See 24-143 "Rank-independent looping"
+
+- US25  Add ability to interpret complex as real and vice versa
+        Ref: 24-129 "allow complex pointer to reals and vice versa"
+
+- DIN3a Add support for atomic operations in local memory
+        Ref: N2230 "DIN Suggestions for F202Y" (other features requested
+        in DIN3 were not accepted.)
+
+CONDITIONALLY ACCEPTED
+
+The following features received mixed support at the 2024 WG5 meeting.
+Further discussion by INCITS/Fortran in October 2024 will inform a WG5
+letter ballot in November 2024 as to whether to keep any or all of these
+features on the work item list.
+
+- US20  Add SCAN and CO_SCAN
+        Ref: 23-235r2 "SCAN and CO_SCAN"
+
+- US22/DIN2 Add unions in interoperable derived types
+        Ref: 24-117 Unions in interoperable derived types
+
+- DIN1  Add execution of collective procedures on a specified team
+        Ref: N2230 "DIN Suggestions for F202Y"
+
+
