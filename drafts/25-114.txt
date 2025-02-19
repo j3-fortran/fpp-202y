@@ -139,11 +139,12 @@ Comment handling:
     3. FPP recognizes /* ... */ C-style comments on directive lines.
        /* ... */ comments are not recognized in (non-directive)
        Fortran source lines.
-    4. On (non-directive) Fortran source lines, macros are expanded within
-       all Fortran-style comment lines (i.e., as defined by clauses 6.3.2.3
-       and 6.3.3.2 in the Fortran 2023 interpretation document). This notably
-       implies macro expansion within processor-specific "directive-style"
-       comment lines (such as '!$omp', or '!$acc', or others).
+    4. On (non-directive) Fortran source lines, macros are expanded
+       within all Fortran-style comment lines (i.e., as defined by
+       clauses 6.3.2.3 and 6.3.3.2 in the Fortran 2023 interpretation
+       document). This notably implies macro expansion within processor-
+       specific "directive-style" comment lines (such as '!$omp', or
+       '!$acc', or others).
 
 Constant expressions in #if and #elif:
     1. Expressions in #if and #elif directives allow most operators
