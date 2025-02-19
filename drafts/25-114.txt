@@ -139,8 +139,11 @@ Comment handling:
     3. FPP recognizes /* ... */ C-style comments on directive lines.
        /* ... */ comments are not recognized in (non-directive)
        Fortran source lines.
-    4. Macros are expanded in comment lines as described in clauses
-       6.3.2.3 and 6.3.3.2 in the Fortran 2023 interpretation document.
+    4. On (non-directive) Fortran source lines, macros are expanded within
+       all Fortran-style comment lines (i.e., as defined by clauses 6.3.2.3
+       and 6.3.3.2 in the Fortran 2023 interpretation document). This notably
+       implies macro expansion within processor-specific "directive-style"
+       comment lines (such as '!$omp', or '!$acc', or others).
 
 Constant expressions in #if and #elif:
     1. Expressions in #if and #elif directives allow most operators
@@ -247,8 +250,10 @@ FPP will not expand tokens in either fixed- or free-form:
     - In character literal constants.
     - In character string edit descriptors (quoted character strings).
 
-FPP will not expand tokens in any alternative syntax for character
-literal constants or edit descriptors that the processor supports.
+If alternative syntax for character literal constants is available,
+FPP will not expand tokens in either fixed- or free-form:
+    - In the alternative syntax for character literal constants.
+    - In the alternative syntax for character string edit descriptors.
 
 
 4.6 Output of Phase 2
