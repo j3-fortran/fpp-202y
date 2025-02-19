@@ -6,6 +6,7 @@ Date: 2025-February-06
 References: 95-257 Conditional Compilation: The FCC Approach.txt
             96-063 A Fortran Preprocessor.txt
             23-192r1 F202Y Define a standard Fortran preprocessor.txt
+            24-007 Fortran 2023 Interpretation Document
             24-108 Preprocessor directives seen in existing Fortran
                    programs.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
@@ -138,8 +139,11 @@ Comment handling:
     3. FPP recognizes /* ... */ C-style comments on directive lines.
        /* ... */ comments are not recognized in (non-directive)
        Fortran source lines.
-    4. Macros are expanded in comment lines that appear to be directives
-       (processor-specific, such as '!$omp', or '!$acc', or others).
+    4. On (non-directive) Fortran source lines, macros are expanded within
+       all Fortran-style comment lines (i.e., as defined by clauses 6.3.2.3
+       and 6.3.3.2 in the Fortran 2023 interpretation document). This notably
+       implies macro expansion within processor-specific "directive-style"
+       comment lines (such as '!$omp', or '!$acc', or others).
 
 Constant expressions in #if and #elif:
     1. Expressions in #if and #elif directives allow most operators
@@ -245,6 +249,11 @@ FPP will not expand in fixed-form:
 FPP will not expand tokens in either fixed- or free-form:
     - In character literal constants.
     - In character string edit descriptors (quoted character strings).
+
+If alternative syntax for character literal constants is available,
+FPP will not expand tokens in either fixed- or free-form:
+    - In the alternative syntax for character literal constants.
+    - In the alternative syntax for character string edit descriptors.
 
 
 4.6 Output of Phase 2
