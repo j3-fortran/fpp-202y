@@ -1,7 +1,7 @@
-To: J3                                                     J3/25-114
+To: J3                                                     J3/25-114r2
 From: Gary Klimowicz & Dan Bonachea & Aury Shafran
 Subject: Fortran preprocessor requirements
-Date: 2025-February-06
+Date: 2025-February-19
 
 References: 95-257 Conditional Compilation: The FCC Approach.txt
             96-063 A Fortran Preprocessor.txt
