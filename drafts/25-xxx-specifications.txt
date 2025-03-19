@@ -2,7 +2,7 @@ To: J3                                                         J3/24-148
 From: JoR
 Subject: Formal specifications for the Fortran preprocessor (FPP)
 Date: 2025-March-09
-References: 25-114r2
+References: 25-114r2 Fortran preprocessor requirements
             25-007 Fortran 2023 Interpretation Document
             24-108 Preprocessor directives seen in existing Fortran
                    programs.txt
