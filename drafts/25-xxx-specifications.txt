@@ -80,7 +80,7 @@ li32. Fortran source fragments may be continued with a continuation
       of a fixed-form line as specified in Fortran 2023 6.3.3.3).
 
       Example 1 (free-form):
-          call subroutine foo(1, 2, &
+          call subroutine_foo(1, 2, &
       #ifdef USE_3
                                     3, &
       #else
