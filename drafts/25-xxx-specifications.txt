@@ -50,8 +50,14 @@ li21. In fixed-form input files, a '#' in column 6 of a non-comment
       line does not introduce a directive line.
 
 li22. A preprocessor directive can be continued with a backslash '\'
-      immediately followed a new-line. The backslash and new-line are
-      deleted.
+      immediately followed by a new-line. The backslash and new-line are
+      deleted, the content of the subsequent line are textually appended
+      to the current directive, and the subsequent line is deleted.
+      This process repeats until the current directive does not end 
+      with a backslash '\' immediately followed by a new-line.
+
+li23. Preprocessor directive continuation processing described by the prior rule is
+      effectively performed before any other processing of the text in affected lines.
 
 li23. The maximum length of a preprocessor directive (including
       continuation text) is one million characters.
