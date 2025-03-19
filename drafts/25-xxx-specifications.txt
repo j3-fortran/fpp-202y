@@ -69,9 +69,6 @@ li30. Fortran source fragments are those lines that are neither
       preprocessor directive lines (or continuations thereof)
       nor Fortran comment lines.
 
-li21. In a fixed-form Fortran fragment, a '#' in column 6 does not make
-      the line a directive line; it is a Fortran source fragment.
-
 
 
 li31. Text on fixed-form Fortran source fragments is ignored beyond
