@@ -65,8 +65,9 @@ li23. The maximum length of a preprocessor directive (including
 li24. A non-empty source file shall not end with a '\' followed
       immediately by a new-line as required in C 2023 5.1.1.2 bullet 2.
 
-li30. Fortran source fragments are those lines that are not Fortran
-      comment lines nor preprocessor directive lines.
+li30. Fortran source fragments are those lines that are neither 
+      preprocessor directive lines (or continuations thereof)
+      nor Fortran comment lines.
 
 li21. In a fixed-form Fortran fragment, a '#' in column 6 does not make
       the line a directive line; it is a Fortran source fragment.
