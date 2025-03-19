@@ -41,12 +41,10 @@ li00. The Fortran preprocessor recognizes three distinct types of lines:
       preprocessing directives (and continuation lines thereof), 
       Fortran comment lines, and Fortran source fragments.
 
-li10. Fortran comment lines are defined as in 25-007 6.2.2.3 and
-      6.2.3.2.
-
-li20. Lines that are not Fortran comment lines that have a '#'
-      character as the first non-blank character of the line are
-      directive lines, as required by C 2023 6.10.1 paragraph 2.
+li10. A line that has a '#'
+      character as the first non-blank character of the line is a
+      directive line (as required by C 2023 6.10.1 paragraph 2),
+      except when otherwise specified by the next two rules.
 
 li21. In fixed-form input files, a '#' in column 6 of a non-comment
       line does not introduce a directive line.
