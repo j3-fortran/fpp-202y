@@ -146,7 +146,9 @@ co02. '/*' ... '*/' comments on directive lines shall extend past a
 co03. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 5.1.1.2 bullet 3.
 
-co04. Directive lines shall not contain Fortran '!' style comments.
+co04. In a directive line, the '!' character is not interpreted as introducing 
+      a Fortran-style comment, and neither the `!` character nor any subsequent
+      text are removed by the preprocessor.
 
 co05. Directive lines (by definition) cannot contain Fortran
       fixed-form 'C' or '*' style comments.
