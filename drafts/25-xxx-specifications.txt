@@ -176,7 +176,7 @@ di03. The '#undef' directive
 di04. The '#include' directive
 
 di03. The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' directive collective
+      '#elifndef', '#else', '#endif' directives
 
 di04. The '#error' and '#warning' directives
 
