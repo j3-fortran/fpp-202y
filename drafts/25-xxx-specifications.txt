@@ -38,8 +38,8 @@ handling, and tokenization for the preprocessor.)
 -----------
 
 li00. The Fortran preprocessor recognizes three distinct types of lines:
-      Fortran source fragments, Fortran comment lines, and preprocessing
-      directives.
+      preprocessing directives (and continuation lines thereof), 
+      Fortran comment lines, and Fortran source fragments.
 
 li10. Fortran comment lines are defined as in 25-007 6.2.2.3 and
       6.2.3.2.
