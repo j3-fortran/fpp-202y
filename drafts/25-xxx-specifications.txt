@@ -240,7 +240,8 @@ di07. The non-directive directive
 
 4.9 The '#' and '##' operators
 ------------------------------
-
+4.2 The identifiers __VA_ARGS__ and __VA_OPT__
+----------------------------------------------
 
 
 
