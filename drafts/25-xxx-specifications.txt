@@ -121,10 +121,12 @@ ws03. Whitespace characters are significant in determining token
       boundaries in preprocessor directive lines.
 
 ws02. Whitespace characters are significant in determining token
-      boundaries in fixed-form and free-fort Fortran source fragments.
+      boundaries for the purposes of recognizing macro names, 
+      in both fixed-form and free-form Fortran source fragments.
 
 ws03. Whitespace characters are significant in determining token
-      boundaries in fixed-form and free-fort Fortran comment lines.
+      boundaries for the purposes of recognizing macro names, 
+      in both fixed-form and free-form Fortran comment lines.
 
 ws04. In fixed-form input, macro names are not recognized as such when
       spaces are inserted into their invocations.
