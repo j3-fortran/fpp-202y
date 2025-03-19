@@ -207,7 +207,7 @@ di07. The non-directive directive
 
 
 3.3 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' directive collective
+      '#elifndef', '#else', '#endif' directives
 ---------------------------------------------------------
 
 
