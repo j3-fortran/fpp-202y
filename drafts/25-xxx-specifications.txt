@@ -114,7 +114,7 @@ cs03. Preprocessor-defined macro names are case-sensitive.
 2.1.3 Significance of whitespace
 --------------------------------
 
-ws01. The whitespace characters blank and the tab character may appear
+ws01. The whitespace characters blank and horizontal tab character may appear
       on directive lines.
 
 ws03. Whitespace characters are significant in determining token
