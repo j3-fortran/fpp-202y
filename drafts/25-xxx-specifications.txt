@@ -247,7 +247,8 @@ di07. The non-directive directive
 5 Expressions allowed in #if and #elif directives
 =================================================
 
-
+5.1 The 'defined' operator
+--------------------------
 
 6 Expression evaluation in #if and #elif directives
 ===================================================
