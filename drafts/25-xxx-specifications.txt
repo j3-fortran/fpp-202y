@@ -59,9 +59,8 @@ li17. Preprocessor directive continuation processing described by the prior rule
 li19. The maximum length of a preprocessor directive (including
       continuation text) is one million characters.
 
-li21. A non-empty source file shall not end with a directive line
-      that ends with a '\' followed
-      immediately by a new-line (as required in C 2023 5.1.1.2 bullet 2).
+li21. A source file that ends with a directive line shall neither end with a '\', 
+      nor a '\' followed immediately by a new-line (analogously to C 2023 5.1.1.2 bullet 2).
 
 li31. Fortran comment lines are defined as in 25-007 6.2.2.3 and
       6.2.3.2.
