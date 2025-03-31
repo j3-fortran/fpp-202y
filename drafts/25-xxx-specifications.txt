@@ -62,8 +62,8 @@ li19. The maximum length of a preprocessor directive (including
 li21. A source file that ends with a directive line shall neither end with a '\', 
       nor a '\' followed immediately by a new-line (analogously to C 2023 5.1.1.2 bullet 2).
 
-li31. Fortran comment lines are defined as in 25-007 6.2.2.3 and
-      6.2.3.2.
+li31. Fortran comment lines are defined as in 25-007 6.3.2.3 and
+      6.3.3.2.
 
 li41. Fortran source fragments are those lines that are neither
       preprocessor directive lines (or continuations thereof)
