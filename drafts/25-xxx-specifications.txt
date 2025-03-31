@@ -183,7 +183,7 @@ to05. Directive names are recognized at the beginning of a line.
 to07. The '#' character on a directive line may be preceded or followed
       by whitespace.
 
-to09. The preprocessor is line oriented. To define the end of
+to09. The preprocessor is line-oriented. To define the end of
       a logical line (after continuation handling), the 'EOL' token
       is shown explicitly in the illustrative syntax.
 
