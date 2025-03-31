@@ -142,7 +142,7 @@ co03. Directive lines shall not contain C style '//' comments.
 
 co05. '/*' ... '*/' comments on directive lines shall extend past a
       new-line only if the line ends in '\' new-line, indicating a
-      continuation line. (Maybe controversial)
+      continuation line.
 
 co07. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 5.1.1.2 bullet 3.
