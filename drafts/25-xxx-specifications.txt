@@ -164,7 +164,7 @@ As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
 
 We use illustrative syntax to describe the directive specifications,
-and the execution behavior of the preprocess on Fortran comment lines
+and the translation behavior of the preprocess on Fortran comment lines
 and Fortran source fragment lines.
 
 This illustrative syntax makes use of these "tokens".
