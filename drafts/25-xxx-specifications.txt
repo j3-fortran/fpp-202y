@@ -158,7 +158,7 @@ co11. Directive lines (by definition) cannot contain Fortran
 2.5 Token lexicon
 -----------------
 
-The preprocessor is a token-manipulation engine (See C 2023 5.1.1.2
+The preprocessor decomposes the source file into preprocessing tokens (see C 2023 5.1.1.2
 Translation phases).
 As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
