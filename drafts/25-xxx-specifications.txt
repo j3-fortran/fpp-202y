@@ -7,7 +7,7 @@ References: 25-114r2 Fortran preprocessor requirements
             24-108 Preprocessor directives seen in existing Fortran
                    programs.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
-            ISO/IEC 9899:2023 Programming languages -- C
+            ISO/IEC 9899:2023 Programming languages -- C ("C 2023")
                    (working draft N3096)
 
 
@@ -115,6 +115,9 @@ cs05. Preprocessor-defined macro names are case-sensitive.
 ws01. The whitespace characters blank and horizontal tab character may appear
       on directive lines.
 
+ws02. Whitespace may appear before or after the '#' character that
+      introduces a directive line.
+
 ws03. Whitespace characters are significant in determining token
       boundaries in preprocessor directive lines.
 
@@ -171,14 +174,13 @@ This illustrative syntax makes use of these "tokens".
 Further definition of the recognized tokens is deferred to the upcoming preprocessor syntax paper.
 
 
-to01. In definitions of object macros and function/like macros,
+to01. In the definitions of object macros and function-like macros,
       the tokens that may appear in a replacement list include those
-      allowed in Fortran and those allowed in C integer expressions.
+      allowed in Fortran source, those allowed in C integer expressions,
+      and any additional tokens recognized by the processor.
 
-to03. Without naming them all explicitly, they appear in the illustrative
+to03. Without naming all the tokens explicitly, they appear in the illustrative
       syntax in subsequent sections.
-
-to05. Directive names are recognized at the beginning of a line.
 
 to07. The '#' character on a directive line may be preceded or followed
       by whitespace.
