@@ -175,8 +175,10 @@ Further definition of the recognized tokens is deferred to the upcoming preproce
 
 
 to01. In the definitions of object macros and function-like macros,
-      the tokens that may appear in a replacement list include those
-      allowed in Fortran source, those allowed in C integer expressions,
+      the replacement list may include any arbitrary sequence of 
+      characters that doesn't include a new-line. Once tokenized,
+      this for example may include any tokens allowed in Fortran 
+      source lines, those allowed in C integer expressions,
       and any additional tokens recognized by the processor.
 
 to03. Without naming all the tokens explicitly, they appear in the illustrative
