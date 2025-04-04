@@ -184,8 +184,6 @@ to01. In the definitions of object macros and function-like macros,
 to03. Without naming all the tokens explicitly, they appear in the illustrative
       syntax in subsequent sections.
 
-to07. The '#' character on a directive line may be preceded or followed
-      by whitespace.
 
 to09. The preprocessor is line-oriented. To define the end of
       a logical line (after continuation handling), the 'EOL' token
