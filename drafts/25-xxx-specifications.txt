@@ -7,7 +7,7 @@ References: 25-114r2 Fortran preprocessor requirements
             24-108 Preprocessor directives seen in existing Fortran
                    programs.txt
             24-109 On Fortran awareness in a Fortran preprocessor.txt
-            ISO/IEC 9899:2023 Programming languages -- C
+            ISO/IEC 9899:2023 Programming languages -- C ("C 2023")
                    (working draft N3096)
 
 
@@ -28,53 +28,51 @@ discussions, these have included line continuation processing, comment
 handling, and tokenization for the preprocessor.)
 
 
-2. Formal specifications
-========================
+2 Lexical specifications
+------------------------
 
-2.1 Lexical specifications
---------------------------
-
-2.1.1 Lines
------------
+2.1 Lines
+---------
 
 li00. The Fortran preprocessor recognizes three distinct types of lines:
       preprocessing directives (and continuation lines thereof),
       Fortran comment lines, and Fortran source fragments.
 
-li10. A line that has a '#'
+li11. A line that has a '#'
       character as the first non-blank character of the line is a
       directive line (as required by C 2023 6.10.1 paragraph 2),
       except when otherwise specified by the next two rules.
 
-li21. In fixed-form input files, a '#' in column 6 of a non-comment
+li13. In fixed-form input files, a '#' in column 6 of a non-comment
       line does not introduce a directive line.
 
-li22. A preprocessor directive can be continued with a backslash '\'
+li15. A preprocessor directive can be continued with a backslash '\'
       immediately followed by a new-line. The backslash and new-line are
       deleted, the content of the subsequent line are textually appended
       to the current directive, and the subsequent line is deleted.
       This process repeats until the current directive does not end
       with a backslash '\' immediately followed by a new-line.
 
-li23. Preprocessor directive continuation processing described by the prior rule is
+li17. Preprocessor directive continuation processing described by the prior rule is
       effectively performed before any other processing of the text in affected lines.
 
-li23. The maximum length of a preprocessor directive (including
+li19. The maximum length of a preprocessor directive (including
       continuation text) is one million characters.
 
-li24. A non-empty source file shall not end with a '\' followed
-      immediately by a new-line as required in C 2023 5.1.1.2 bullet 2.
+li21. A source file that ends with a directive line shall neither end with a '\', 
+      nor a '\' followed immediately by a new-line (analogously to C 2023 5.1.1.2 bullet 2).
 
-li30. Fortran source fragments are those lines that are neither
+li31. Fortran comment lines are defined as in 25-007 6.3.2.3 and
+      6.3.3.2.
+
+li41. Fortran source fragments are those lines that are neither
       preprocessor directive lines (or continuations thereof)
       nor Fortran comment lines.
 
-
-
-li31. Text on fixed-form Fortran source fragments is ignored beyond
+li43. Text on fixed-form Fortran source fragments is ignored beyond
       column 72.
 
-li32. Fortran source fragments may be continued with a continuation
+li45. Fortran source fragments may be continued with a continuation
       ('&' at the end of a free-form line as specified in Fortran 2023
       6.3.2.4, or with a non-blank, non-zero character in column 6
       of a fixed-form line as specified in Fortran 2023 6.3.3.3).
@@ -99,68 +97,109 @@ li32. Fortran source fragments may be continued with a continuation
 
 
 
-2.1.2 Case sensitivity of identifiers
--------------------------------------
+2.2 Case sensitivity of identifiers
+-----------------------------------
 
 cs01. Directive names are case-sensitive and recognized in lower-case.
 
-cs02. Macro names and function-like macro argument names are
+cs03. Macro names and function-like macro argument names are
       case-sensitive.
 
-cs03. Preprocessor-defined macro names are case-sensitive.
+cs05. Preprocessor-defined macro names are case-sensitive.
 
 
 
-2.1.3 Significance of whitespace
---------------------------------
+2.3 Significance of whitespace
+------------------------------
 
 ws01. The whitespace characters blank and horizontal tab character may appear
       on directive lines.
 
+ws02. Whitespace may appear before or after the '#' character that
+      introduces a directive line.
+
 ws03. Whitespace characters are significant in determining token
       boundaries in preprocessor directive lines.
 
-ws02. Whitespace characters are significant in determining token
+ws05. Outside of character constants, multiple whitespace characters
+      on a directive line are treated as a single space.
+
+ws07. Whitespace characters are significant in determining token
       boundaries for the purposes of recognizing macro names,
       in both fixed-form and free-form Fortran source fragments.
 
-ws03. Whitespace characters are significant in determining token
+ws09. Whitespace characters are significant in determining token
       boundaries for the purposes of recognizing macro names,
       in both fixed-form and free-form Fortran comment lines.
 
-ws04. In fixed-form input, macro names are not recognized as such when
+ws11. In fixed-form input, macro names are not recognized as such when
       spaces are inserted into their invocations.
 
 
-2.2 Comments
+2.4 Comments
 ------------
 
 co01. Directive lines may contain C-style '/*' ... '*/' comments.
 
-co02. Directive lines shall not contain C style '//' comments.
+co03. Directive lines shall not contain C style '//' comments.
 
-co02. '/*' ... '*/' comments on directive lines shall extend past a
+co05. '/*' ... '*/' comments on directive lines shall extend past a
       new-line only if the line ends in '\' new-line, indicating a
-      continuation line. (Maybe controversial)
+      continuation line.
 
-co03. '/*' ... '*/' comments on directive lines are replaced by a
+co07. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 5.1.1.2 bullet 3.
 
-co04. In a directive line, the '!' character is not interpreted as introducing
+co09. In a directive line, the '!' character is not interpreted as introducing
       a Fortran-style comment, and neither the `!` character nor any subsequent
       text are removed by the preprocessor.
 
-co05. Directive lines (by definition) cannot contain Fortran
+co11. Directive lines (by definition) cannot contain Fortran
       fixed-form 'C' or '*' style comments.
 
 
-2.4 Token lexicon
+2.5 Token lexicon
 -----------------
-[gak: List the character sequences that are recognized as separate tokens
-on directives and in Fortran source fragments. This should include
-Fortran identifiers, Fortran numeric constants, Fortran character
-constants, the Fortran operators, and the C operators used to construct
-constant-integer-expression.]
+
+The preprocessor decomposes the source file into preprocessing tokens (see C 2023 5.1.1.2
+Translation phases).
+As such, there is a specific lexicon of tokens recognized by
+the preprocessor (including unrecognizable tokens).
+
+We use illustrative syntax to describe the directive specifications,
+and the translation behavior of the preprocess on Fortran comment lines
+and Fortran source fragment lines.
+
+This illustrative syntax makes use of these "tokens".
+Further definition of the recognized tokens is deferred to the upcoming preprocessor syntax paper.
+
+
+to01. In the definitions of object macros and function-like macros,
+      the replacement list may include any arbitrary sequence of 
+      characters that doesn't include a new-line. Once tokenized,
+      this for example may include any tokens allowed in Fortran 
+      source lines, those allowed in C integer expressions,
+      and any additional tokens recognized by the processor.
+
+to03. Without naming all the tokens explicitly, they appear in the illustrative
+      syntax in subsequent sections.
+
+
+to09. The preprocessor is line-oriented. To define the end of
+      a logical line (after continuation handling), the 'EOL' token
+      is shown explicitly in the illustrative syntax.
+
+to11. The following tokens also appear in the illustrative syntax below.
+
+      |---------------------|-------------------------------------------|
+      | Token name          |  Characters                               |
+      |---------------------|-------------------------------------------|
+      | ID                  | Regex [A-Za-z][A-Za-z0-9_]*               |
+      | WHOLE_NUMBER        | Regex [0-9]+                              |
+      | REAL_NUMBER         | Fortran 2023 R714 real-literal-constant.  |
+      | CHARACTER_STRING    | Fortran 2023 R724 char-literal-constant.  |
+      | UNRECOGNIZED_TOKEN  | Any character not recognized above.       |
+      |---------------------|-------------------------------------------|
 
 
 
