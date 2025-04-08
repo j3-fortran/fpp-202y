@@ -293,26 +293,68 @@ di07. The non-directive directive
 ===================================================
 
 
-
 7 Predefined macros
 ===================
 
+pm01. Any macro name predefined by the implementation shall begin with a
+      leading underscore followed by an uppercase letter or a second
+      underscore.
+
+pm02. The implementation shall not predefine the macro `__cplusplus`,
+      nor any macro whose name starts with `__STDC`.
+
+pm10. The values of the predefined macros listed in the following subclauses
+      (except for `__FILE__` and `__LINE__`) remain constant throughout the
+      program unit.
+
+pm12. None of the predefined macros listed in the following subclauses nor
+      the identifier `defined` shall be the subject of a #define or a #undef
+      preprocessing directive.
+
+pm15. The presumed source file name and line number can be changed by the #line
+      directive.
+
+The following macro names shall be defined by the implementation:
 
 7.1 __LINE__
 ------------
 
+pm20. `__LINE__` shall be predefined to a WHOLE_NUMBER representing 
+      the presumed line number (within the current source file) 
+      of the current source line.
 
 7.2 __FILE__
 ------------
 
+pm30. `__FILE__` shall be predefined to a CHARACTER_STRING representing
+      the presumed name of the current source file
 
 7.3 __DATE__
 ------------
 
+pm40. `__DATE__` shall be predefined to a CHARACTER_STRING representing
+      the date of translation of the preprocessing program unit
+
+pm41. `__DATE__` shall be a character literal constant of the form "Mmm dd yyyy",
+      where the names of the months are the same as those specified in C 2023 for the
+      asctime function, and the first character of dd is a space character if the
+      value is less than 10.
+
+pm42. If the date of translation is not available, an implementation-defined
+      valid date shall be supplied.
 
 7.4 __TIME__
 ------------
 
+pm50. `__TIME__` shall be predefined to a CHARACTER_STRING representing
+      the time of translation of the preprocessing program unit
+
+pm51. `__TIME__` shall be a character literal constant of the form "hh:mm:ss",
+      where hh is the hour of the day, mm is the minutes of the hour, and ss is the
+      seconds of the minute.
+
+pm52. If the time of translation is not available, an implementation-defined
+      valid time shall be supplied.
 
 7.5 __STDF__
 ------------
@@ -322,7 +364,7 @@ identification of the underlying target language (i.e., "the processor
 is Fortran"), which enables one to write multi-language header files
 with conditional compilation based on language.
 
-st01. The predefined value of __STDF__ is 1.
+pm61. `__STDF__` shall be predefined to the WHOLE_NUMBER 1
 
 
 
