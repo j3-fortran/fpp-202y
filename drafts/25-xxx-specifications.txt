@@ -296,6 +296,13 @@ di07. The non-directive directive
 7 Predefined macros
 ===================
 
+pm00. Macro names beginning with a leading underscore followed by an uppercase
+      letter or a second underscore are reserved to the processor. Reserved
+      names shall not be the subject of a #define or #undef preprocessing
+      directive within a program unit.
+      [Note: Any macro name matching the regular expression `/^_[A-Z_][A-Za-z0-9_]*$/`
+      is considered reserved.]
+
 pm01. Any macro name predefined by the implementation shall begin with a
       leading underscore followed by an uppercase letter or a second
       underscore.
@@ -307,8 +314,7 @@ pm10. The values of the predefined macros listed in the following subclauses
       (except for `__FILE__` and `__LINE__`) remain constant throughout the
       program unit.
 
-pm12. None of the predefined macros listed in the following subclauses nor
-      the identifier `defined` shall be the subject of a #define or a #undef
+pm12. The identifier `defined` shall not be the subject of a #define or a #undef
       preprocessing directive.
 
 pm15. The presumed source file name and line number can be changed by the #line
