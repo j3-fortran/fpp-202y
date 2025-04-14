@@ -300,7 +300,7 @@ pm00. Macro names beginning with a leading underscore followed by an uppercase
       letter or a second underscore are reserved to the processor. Reserved
       names shall not be the subject of a #define or #undef preprocessing
       directive within a program unit.
-      [Note: Any macro name matching the regular expression `/^_[A-Z][A-Za-z0-9_]*$/`
+      [Note: Any macro name matching the regular expression `/^_[A-Z_][A-Za-z0-9_]*$/`
       is considered reserved.]
 
 pm01. Any macro name predefined by the processor shall begin with a
