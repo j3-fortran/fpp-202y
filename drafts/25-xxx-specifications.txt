@@ -310,6 +310,9 @@ pm01. Any macro name predefined by the processor shall begin with a
 pm02. The processor shall not predefine the macro `__cplusplus`,
       nor any macro whose name starts with `__STDC`.
 
+pm03. Unless listed in the following subclauses, the processor shall not
+      predefine any macro whose name starts with `__STDF` or `__stdf`.
+
 pm10. The values of the predefined macros listed in the following subclauses
       (except for `__FILE__` and `__LINE__`) remain constant throughout the
       program unit.
