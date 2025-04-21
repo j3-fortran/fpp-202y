@@ -504,7 +504,7 @@ pr02. The token-list may not be empty.
 
 pr20. The token-list is expanded.
 
-pr22. The #pragma directive causes the implementation to behave
+pr22. The #pragma directive causes the processor to behave
       in a processor-defined manner.
 
 pr24. Any #pragma that is not recognized by the implementation
