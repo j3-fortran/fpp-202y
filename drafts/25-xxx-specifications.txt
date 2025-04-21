@@ -530,7 +530,7 @@ nu02. The only tokens allowed on a null directive are the '#' and
 nu10. The null directive has no effect.
 
 
-3.10 The non-directive directive
+3.10 The processor-dependent directive
 --------------------------------
 
 Example syntax:
