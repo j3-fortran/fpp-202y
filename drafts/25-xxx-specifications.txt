@@ -384,7 +384,7 @@ Example syntax:
 in02. In the first form, the CHARACTER_STRING may be delimited with
       single-quote "'" or double-quote '"' characters.
 
-in04. A "_kind" specifier shall not appear following the CHARACTER_STRING.
+in04. CHARACTER_STRING shall not include a kind type parameter.
 
 in06. In the second form, the character-list is any sequence of
       processor-specific characters except EOL and `>`.
