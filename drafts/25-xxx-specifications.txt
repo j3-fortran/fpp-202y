@@ -547,7 +547,7 @@ nd02. The token-list in a processor-dependent directive may not begin
 3.10.2 Evaluation semantics specifications
 -------------------------------------------
 
-nd20. The result of evaluating a non-directive is processor-dependent.
+nd20. The result of evaluating a processor-dependent directive is processor-dependent.
 
 
 
