@@ -541,7 +541,7 @@ Example syntax:
 
 nd02. The token-list in a non-directive directive may not begin
       with any of the directive names appearing in the syntax above
-      ('define', 'undef', 'include,, etc.).
+      ('define', 'undef', 'include', etc.).
 
 
 3.10.2 Evaluation semantics specifications
