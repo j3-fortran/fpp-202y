@@ -471,10 +471,9 @@ li04. The WHOLE_NUMBER shall not exceed 2147483647.
 3.7.2 Evaluation semantics specifications
 -----------------------------------------
 
-li20. In the first example, the #line directive causes the preprocessor
-      to behave as if the following sequence of Fortran source lines or
-      comment lines begins with a source line that has a line number
-      specified by the WHOLE_NUMBER.
+li20. In both forms, the #line directive causes the processor
+      to behave as if the following sequence of lines begins with a 
+      presumed line number specified by the WHOLE_NUMBER.
 
 li22. In the second example, the #line directive causes the preprocessor
       to behave as if the following sequence of Fortran source lines or
