@@ -375,6 +375,7 @@ ud24.
 Example syntax:
       #include CHARACTER_STRING EOL
       #include <character-list> EOL
+      #include token-list EOL
 
 
 3.4.1 Static semantics specifications
