@@ -238,7 +238,7 @@ di08. The '#pragma' directive
 
 di09. The null directive
 
-di10. The non-directive directive
+di10. The processor-dependent directive
 
 
 
