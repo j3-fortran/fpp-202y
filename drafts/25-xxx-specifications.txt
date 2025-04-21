@@ -296,25 +296,31 @@ di07. The non-directive directive
 7 Predefined macros
 ===================
 
-pm01. Any macro name predefined by the implementation shall begin with a
+pm00. Macro names beginning with a leading underscore followed by an uppercase
+      letter or a second underscore are reserved to the processor. Reserved
+      names shall not be the subject of a #define or #undef preprocessing
+      directive within a program unit.
+      [Note: Any macro name matching the regular expression `/^_[A-Z_][A-Za-z0-9_]*$/`
+      is considered reserved.]
+
+pm01. Any macro name predefined by the processor shall begin with a
       leading underscore followed by an uppercase letter or a second
       underscore.
 
-pm02. The implementation shall not predefine the macro `__cplusplus`,
+pm02. The processor shall not predefine the macro `__cplusplus`,
       nor any macro whose name starts with `__STDC`.
 
 pm10. The values of the predefined macros listed in the following subclauses
       (except for `__FILE__` and `__LINE__`) remain constant throughout the
       program unit.
 
-pm12. None of the predefined macros listed in the following subclauses nor
-      the identifier `defined` shall be the subject of a #define or a #undef
+pm12. The identifier `defined` shall not be the subject of a #define or a #undef
       preprocessing directive.
 
 pm15. The presumed source file name and line number can be changed by the #line
       directive.
 
-The following macro names shall be defined by the implementation:
+The following macro names shall be defined by the processor:
 
 7.1 __LINE__
 ------------
@@ -340,7 +346,7 @@ pm41. `__DATE__` shall be a character literal constant of the form "Mmm dd yyyy"
       asctime function, and the first character of dd is a space character if the
       value is less than 10.
 
-pm42. If the date of translation is not available, an implementation-defined
+pm42. If the date of translation is not available, a processor-dependent
       valid date shall be supplied.
 
 7.4 __TIME__
@@ -353,7 +359,7 @@ pm51. `__TIME__` shall be a character literal constant of the form "hh:mm:ss",
       where hh is the hour of the day, mm is the minutes of the hour, and ss is the
       seconds of the minute.
 
-pm52. If the time of translation is not available, an implementation-defined
+pm52. If the time of translation is not available, a processor-dependent
       valid time shall be supplied.
 
 7.5 __STDF__
