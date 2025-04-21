@@ -475,10 +475,12 @@ li20. In both forms, the #line directive causes the processor
       to behave as if the following sequence of lines begins with a 
       presumed line number specified by the WHOLE_NUMBER.
 
-li24. In the second example, the #line directive causes the preprocessor
+li24. In the second form, the #line directive causes the processor
       to change the presumed file name of the source file to be the
       contents of the CHARACTER_STRING.
 
+li25. In the second form, the CHARACTER_STRING must be delimited with
+      double-quote '"' characters (not single-quote "'" characters).
 
 3.8 The '#pragma' directive
 ---------------------------
