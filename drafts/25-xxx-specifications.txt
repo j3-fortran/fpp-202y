@@ -386,7 +386,7 @@ in02. In the first form, the CHARACTER_STRING may be delimited with
 in04. A "_kind" specifier shall not appear following the CHARACTER_STRING.
 
 in06. In the second form, the character-list is any sequence of
-      processor-specific characters.
+      processor-specific characters except EOL and `>`.
 
 
 3.4.2 Evaluation semantics specifications
