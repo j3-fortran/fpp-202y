@@ -397,7 +397,7 @@ in20. The preprocessor searches in processor-defined places for the
 
 in22. It is an error if the processor cannot locate the specified file.
 
-in24. If the file is located, the preprocessor replaces the #include
+in24. If the file is located, the processor replaces the #include
       directive line with the contents of that file.
 
 in26. A #include directive may appear in an included file, up to a
