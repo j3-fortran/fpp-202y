@@ -539,7 +539,7 @@ Example syntax:
 3.10.1 Static semantics specifications
 --------------------------------------
 
-nd02. The token-list in a non-directive directive may not begin
+nd02. The token-list in a processor-dependent directive may not begin
       with any of the directive names appearing in the syntax above
       ('define', 'undef', 'include', etc.).
 
