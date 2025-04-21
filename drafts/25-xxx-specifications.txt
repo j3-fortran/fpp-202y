@@ -440,7 +440,7 @@ error conditions in the input.
 
 ew02. The token-list is expanded.
 
-ew04. The preprocessor produces a diagnostic message that includes
+ew04. The processor produces a diagnostic message that includes
       the result of the token expansion.
 
 ew06. The #error directive causes the compilation process to end after
