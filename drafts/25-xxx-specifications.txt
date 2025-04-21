@@ -475,11 +475,6 @@ li20. In both forms, the #line directive causes the processor
       to behave as if the following sequence of lines begins with a 
       presumed line number specified by the WHOLE_NUMBER.
 
-li22. In the second example, the #line directive causes the preprocessor
-      to behave as if the following sequence of Fortran source lines or
-      comment lines begins with a source line that has a line number
-      specified by the WHOLE_NUMBER.
-
 li24. In the second example, the #line directive causes the preprocessor
       to change the presumed file name of the source file to be the
       contents of the CHARACTER_STRING.
