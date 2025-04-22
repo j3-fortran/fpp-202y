@@ -388,9 +388,17 @@ in04. CHARACTER_STRING shall not include a kind type parameter.
 in06. In the second form, the character-list is any sequence of
       processor-specific characters except EOL and `>`.
 
+in08. In the third form, the token-list does not match the previous
+      two forms.
+
 
 3.4.2 Evaluation semantics specifications
 -----------------------------------------
+
+in18. In the third form, the token-list is processed as in normal
+      text (see the section on Macro Recognition and Expansion below).
+      The directive resulting after all replacements shall match one
+      of the previous two forms, and evaluation proceeds as such.
 
 in20. The preprocessor searches in processor-defined places for the
       file denoted by the CHARACTER_STRING or the character-list.
