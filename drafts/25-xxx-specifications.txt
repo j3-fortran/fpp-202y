@@ -197,8 +197,10 @@ to11. The following tokens also appear in the illustrative syntax below.
       | ID                  | Regex [A-Za-z][A-Za-z0-9_]*               |
       | WHOLE_NUMBER        | Regex [0-9]+                              |
       | REAL_NUMBER         | Fortran 2023 R714 real-literal-constant.  |
-      | CHARACTER_STRING    | Fortran 2023 R724 char-literal-constant.  |
+      | CHARACTER_STRING    | RegEx "[^"\n]*"                           |
       | UNRECOGNIZED_TOKEN  | Any character not recognized above.       |
+      | EOL                 | The new-line ending a directive line,     |
+      |                     | after continuation processing (see li15). |
       |---------------------|-------------------------------------------|
 
 
@@ -381,9 +383,6 @@ Example syntax:
 3.4.1 Static semantics specifications
 --------------------------------------
 
-in02. In the first form, the CHARACTER_STRING may be delimited with
-      single-quote "'" or double-quote '"' characters.
-
 in04. CHARACTER_STRING shall not include a kind type parameter.
 
 in06. In the second form, the character-list is any sequence of
@@ -439,10 +438,10 @@ error conditions in the input.
 3.6.2 Evaluation semantics specifications
 -----------------------------------------
 
-ew02. The token-list is expanded.
+ew02. The token-list is not expanded.
 
 ew04. The processor produces a diagnostic message that includes
-      the result of the token expansion.
+      the token-list.
 
 ew06. The #error directive causes the compilation process to end after
       preprocessing the input files.
