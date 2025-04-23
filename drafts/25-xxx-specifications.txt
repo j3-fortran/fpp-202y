@@ -485,9 +485,6 @@ li24. In the second form, the #line directive causes the processor
       to change the presumed file name of the source file to be the
       contents of the CHARACTER_STRING.
 
-li25. In the second form, the CHARACTER_STRING must be delimited with
-      double-quote '"' characters (not single-quote "'" characters).
-
 3.8 The '#pragma' directive
 ---------------------------
 
