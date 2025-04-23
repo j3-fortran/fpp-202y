@@ -383,8 +383,6 @@ Example syntax:
 3.4.1 Static semantics specifications
 --------------------------------------
 
-in04. CHARACTER_STRING shall not include a kind type parameter.
-
 in06. In the second form, the character-list is any sequence of
       processor-specific characters except EOL and `>`.
 
