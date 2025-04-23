@@ -165,6 +165,8 @@ The preprocessor decomposes the source file into preprocessing tokens (see C 202
 Translation phases).
 As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
+As in C 2023, these tokens are recognized after any line and
+comment handling specified in the "Line" and "Comments" sections above.
 
 We use illustrative syntax to describe the directive specifications,
 and the translation behavior of the preprocess on Fortran comment lines
