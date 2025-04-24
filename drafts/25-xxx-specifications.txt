@@ -315,9 +315,9 @@ df04. The identifier-list is a comma-separated list of ID tokens.
 
 df06. No identifier may appear more than once in the identifier-list.
 
-df08. The identifier names in the identifier-list have "scope" in the
-      replacement list. (See the section "Macro recognition and expansion" for the
-      semantics of function-like macro expansion.)
+df08. The identifier names in the identifier-list define macro "parameters" that affect
+      macro expansion of the replacement list. (See the section "Macro recognition and 
+      expansion" for the semantics of function-like macro expansion.)
 
 df10. The replacement-list may be the empty sequence of tokens.
 
