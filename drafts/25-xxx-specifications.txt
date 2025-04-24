@@ -316,7 +316,7 @@ df04. The identifier-list is a comma-separated list of ID tokens.
 df06. No identifier may appear more than once in the identifier-list.
 
 df08. The identifier names in the identifier-list have "scope" in the
-      replacement list. (See the section on macro expansion for the
+      replacement list. (See the section "Macro recognition and expansion" for the
       semantics of function-like macro expansion.)
 
 df10. The replacement-list may be the empty sequence of tokens.
@@ -326,7 +326,7 @@ df12. Whitespace before or after the replacement-list is not
 
 df16. The "..." between the parentheses specifies that the function-like
       macro may be invoked with a variable number of arguments. (See the
-      section on macro expansion for the semantics of function-like macros
+      section "Macro recognition and expansion" for the semantics of function-like macros
       with a variable number of arguments.)
 
 
@@ -396,8 +396,8 @@ in08. In the third form, the token-list does not match the previous
 -----------------------------------------
 
 in18. In the third form, the token-list is processed as in Fortran
-      source fragments (see the section on Macro Recognition and
-      Expansion below). The directive resulting after all replacements
+      source fragments (see the section on "Macro recognition and
+      expansion" below). The directive resulting after all replacements
       shall match one of the previous two forms, and evaluation proceeds
       as such.
 
