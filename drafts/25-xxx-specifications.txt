@@ -334,7 +334,7 @@ df16. The "..." between the parentheses specifies that the function-like
 -----------------------------------------
 
 df30. This #define directive defines a function-like macro with parameters
-      (dummy arguments) as specified in the identifier-list and function
+      as specified in the identifier-list and function
       body as specified in the replacement list.
 
 df32. This #define directive does not scan the replacement-list
