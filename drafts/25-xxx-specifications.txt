@@ -371,8 +371,6 @@ ud20. If no definition exists for the identifier ID, this directive has
 ud22. The definition for the object-like macro or function-like macro
       named by ID is removed.
 
-ud24.
-
 3.4 The '#include' directive
 ----------------------------
 
