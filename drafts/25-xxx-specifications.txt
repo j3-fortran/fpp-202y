@@ -384,7 +384,7 @@ Example syntax:
 --------------------------------------
 
 in06. In the second form, the character-list is any sequence of
-      processor-specific characters except EOL and `>`.
+      processor-dependent characters except EOL and `>`.
 
 in08. In the third form, the token-list does not match the previous
       two forms.
