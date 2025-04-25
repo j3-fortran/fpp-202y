@@ -451,7 +451,7 @@ ew04. The processor produces a diagnostic message that includes
       the token-list.
 
 
-ew10. Additional behavior is processor-specific.
+ew10. Additional behavior is processor-dependent.
 
 
 3.7 The '#line' directive
