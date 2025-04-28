@@ -165,6 +165,8 @@ The preprocessor decomposes the source file into preprocessing tokens (see C 202
 Translation phases).
 As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
+As in C 2023, these tokens are recognized after any line and
+comment handling specified in the "Line" and "Comments" sections above.
 
 We use illustrative syntax to describe the directive specifications,
 and the translation behavior of the preprocess on Fortran comment lines
@@ -197,8 +199,10 @@ to11. The following tokens also appear in the illustrative syntax below.
       | ID                  | Regex [A-Za-z][A-Za-z0-9_]*               |
       | WHOLE_NUMBER        | Regex [0-9]+                              |
       | REAL_NUMBER         | Fortran 2023 R714 real-literal-constant.  |
-      | CHARACTER_STRING    | Fortran 2023 R724 char-literal-constant.  |
+      | CHARACTER_STRING    | RegEx "[^"\n]*" where '\n' represents new-line. |
       | UNRECOGNIZED_TOKEN  | Any character not recognized above.       |
+      | EOL                 | The new-line ending a directive line,     |
+      |                     | after continuation processing (see li15). |
       |---------------------|-------------------------------------------|
 
 
@@ -206,7 +210,20 @@ to11. The following tokens also appear in the illustrative syntax below.
 3 #-Directives
 ==============
 
-di01. The '#define' macro directive
+The following directives are recognized during Fortran preprocessing.
+Detailed specifications for each directive appear in the subsections
+below.
+
+We use illustrative syntax in the detailed descriptions. Detailed
+syntax will appear in a paper to be named later.
+
+Most directives take a sequence of tokens (as defined in the section
+"Token lexicon" above). In the detailed descriptions and illustrative
+syntax below, we denote these as just "token-list" or
+"replacement-list".
+
+
+di01. The '#define' object-like macro directive
 
 di02. The '#define' function-like macro directive
 
@@ -214,56 +231,320 @@ di03. The '#undef' directive
 
 di04. The '#include' directive
 
-di03. The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
+di05. The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
       '#elifndef', '#else', '#endif' directives
 
-di04. The '#error' and '#warning' directives
+di06. The '#error' and '#warning' directives
 
-di05. The '#line' directive
+di07. The '#line' directive
 
-di06. The '#pragma' directive
+di08. The '#pragma' directive
 
-di07. The non-directive directive
+di09. The null directive
+
+di10. The processor-dependent directive
 
 
 
+3.1 The '#define' object-like macro directive
+---------------------------------------------
 
-3.1 The '#define' macro directive
----------------------------------
+See also the rules for expanding object-like macros in the
+section "Macro recognition and expansion" below.
+
+Example syntax:
+      #define ID replacement-list EOL
+
+
+3.1.1 Static semantics specifications
+--------------------------------------
+
+do02. The replacement-list is a (possibly empty) sequence of tokens.
+
+do04. The identifier ID must be immediately followed by whitespace
+      or EOL.
+
+do06. Whitespace before or after the replacement-list is not
+      considered to be part of the replacement-list.
+
+
+3.1.2 Evaluation semantics specifications
+-----------------------------------------
+
+do20. The #define directive defines the identifier denoted by ID
+      to be the sequence of tokens specified in the replacement list.
+
+do22. There is one namespace for all macro identifiers.
+
+do24. The #define directive does not scan the replacement-list
+      for macros to expand.
+
+do26. An identifier currently defined as an object-like macro shall not
+      be redefined by another #define preprocessing directive unless
+      the second definition is an object-like macro definition and
+      the two replacement lists are identical (as in C 2023).
+
+do28. Two replacement lists are identical if and only if the
+      preprocessing tokens in both have the same number, ordering,
+      spelling, and white-space separation, where all white-space
+      separations are considered identical (as in C 2023).
+
+
 
 
 3.2 The '#define' function-like macro directive
 -----------------------------------------------
 
+See also the rules for expanding function-like macros in the
+section "Macro recognition and expansion" below.
+
+Example syntax:
+      #define ID() replacement-list EOL
+      #define ID(identifier-list) replacement-list EOL
+      #define ID(...) replacement-list EOL
+      #define ID(identifier-list, ...) replacement-list EOL
+
+
+3.2.1 Static semantics specifications
+--------------------------------------
+
+df02. The identifier ID must be immediately followed by the
+      left parenthesis '(' with no intervening whitespace.
+
+df04. The identifier-list is a comma-separated list of ID tokens.
+
+df06. No identifier may appear more than once in the identifier-list.
+
+df08. The identifier names in the identifier-list define macro "parameters" that affect
+      macro expansion of the replacement list. (See the section "Macro recognition and 
+      expansion" for the semantics of function-like macro expansion.)
+
+df10. The replacement-list may be the empty sequence of tokens.
+
+df12. Whitespace before or after the replacement-list is not
+      considered to be part of the replacement-list.
+
+df16. The "..." between the parentheses specifies that the function-like
+      macro may be invoked with a variable number of arguments. (See the
+      section "Macro recognition and expansion" for the semantics of function-like macros
+      with a variable number of arguments.)
+
+
+3.2.2 Evaluation semantics specifications
+-----------------------------------------
+
+df30. This #define directive defines a function-like macro with parameters
+      as specified in the identifier-list and function
+      body as specified in the replacement list.
+
+df32. This #define directive does not scan the replacement-list
+      for macros to expand.
+
+df34. An identifier currently defined as a function-like macro shall not
+      be redefined by another #define preprocessing directive unless
+      the second definition is a function-like macro definition and
+      the two replacement lists are identical (as in C 2023).
+
 
 3.3 The '#undef' directive
 --------------------------
 
+Example syntax:
+      #undef ID EOL
 
+
+3.3.1 Static semantics specifications
+-------------------------------------
+
+ud02. ID shall not be one of the macros defined in the "Predefined macros"
+      section below.
+
+ud04. The specified identifier may or may not have been defined.
+
+
+3.3.2 Evaluation semantics specifications
+-----------------------------------------
+
+ud20. If no definition exists for the identifier ID, this directive has
+      no effect.
+
+ud22. The definition for the object-like macro or function-like macro
+      named by ID is removed.
 
 3.4 The '#include' directive
 ----------------------------
 
+Example syntax:
+      #include CHARACTER_STRING EOL
+      #include <character-list> EOL
+      #include token-list EOL
 
-3.3 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
+
+3.4.1 Static semantics specifications
+--------------------------------------
+
+in06. In the second form, the character-list is any sequence of
+      processor-dependent characters except EOL and `>`.
+
+in08. In the third form, the token-list does not match the previous
+      two forms.
+
+
+3.4.2 Evaluation semantics specifications
+-----------------------------------------
+
+in18. In the third form, the token-list is processed as in Fortran
+      source fragments (see the section on "Macro recognition and
+      expansion" below). The directive resulting after all replacements
+      shall match one of the previous two forms, and evaluation proceeds
+      as such.
+
+in20. The preprocessor searches in processor-defined places for the
+      file denoted by the CHARACTER_STRING or the character-list.
+
+in22. It is an error if the processor cannot locate the specified file.
+
+in24. If the file is located, the processor replaces the #include
+      directive line with the contents of that file.
+
+in26. A #include directive may appear in an included file, up to a
+      processor-defined nesting limit.
+in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"), 
+      the #include directive is not prohibited from including the
+      same source file at a deeper level of nesting.
+
+3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
       '#elifndef', '#else', '#endif' directives
 ---------------------------------------------------------
 
+Example syntax:
 
-3.4 The '#error' and '#warning' directives
+
+
+3.5.1 Static semantics specifications
+--------------------------------------
+
+
+3.5.2 Evaluation semantics specifications
+-----------------------------------------
+
+
+3.6 The '#error' and '#warning' directives
 ------------------------------------------
 
+Example syntax:
+        #error token-list EOL
+        #warning token-list EOL
 
-3.5 The '#line' directive
+The #error and #warning directives are used to announce user-defined
+error conditions in the input.
+
+
+3.6.1 Static semantics specifications
+--------------------------------------
+
+
+3.6.2 Evaluation semantics specifications
+-----------------------------------------
+
+ew02. The token-list is not expanded.
+
+ew04. The processor produces a diagnostic message that includes
+      the token-list.
+
+
+ew10. Additional behavior is processor-dependent.
+
+
+3.7 The '#line' directive
 -------------------------
 
+Example syntax:
+        #line WHOLE_NUMBER EOL
+        #line WHOLE_NUMBER CHARACTER_STRING EOL
 
-3.6 The '#pragma' directive
+
+3.7.1 Static semantics specifications
+--------------------------------------
+
+li02. The WHOLE_NUMBER shall not be zero.
+
+li04. The WHOLE_NUMBER shall not exceed 2147483647.
+
+
+3.7.2 Evaluation semantics specifications
+-----------------------------------------
+
+li20. In both forms, the #line directive causes the processor
+      to behave as if the following sequence of lines begins with a 
+      presumed line number specified by the WHOLE_NUMBER.
+
+li24. In the second form, the #line directive causes the processor
+      to change the presumed file name of the source file to be the
+      contents of the CHARACTER_STRING.
+
+3.8 The '#pragma' directive
 ---------------------------
 
+Example syntax:
+        #pragma token-list EOL
 
-3.7 The non-directive directive
--------------------------------
+
+3.8.1 Static semantics specifications
+--------------------------------------
+
+pr02. The token-list may not be empty.
+
+
+3.8.2 Evaluation semantics specifications
+-----------------------------------------
+
+pr20. The token-list is expanded.
+
+pr22. The #pragma directive causes the processor to behave
+      in a processor-defined manner.
+
+pr24. Any #pragma that is not recognized by the processor
+      is ignored.
+
+
+3.9 The null directive
+----------------------
+
+Example syntax:
+        # EOL
+
+3.9.1 Static semantics specifications
+--------------------------------------
+
+nu02. The only tokens allowed on a null directive are the '#' and
+      the end-of-line indicator EOL.
+
+
+3.9.2 Evaluation semantics specifications
+-----------------------------------------
+
+nu10. The null directive has no effect.
+
+
+3.10 The processor-dependent directive
+--------------------------------
+
+Example syntax:
+        # token-list EOL
+
+3.10.1 Static semantics specifications
+--------------------------------------
+
+nd02. The token-list in a processor-dependent directive may not begin
+      with any of the directive names appearing in the syntax above
+      ('define', 'undef', 'include', etc.).
+
+
+3.10.2 Evaluation semantics specifications
+-------------------------------------------
+
+nd20. The result of evaluating a processor-dependent directive is processor-dependent.
 
 
 
