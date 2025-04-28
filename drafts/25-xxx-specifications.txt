@@ -409,7 +409,9 @@ in24. If the file is located, the processor replaces the #include
 
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
-
+in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"), 
+      the #include directive is not prohibited from including the
+      same source file at a deeper level of nesting.
 
 3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
       '#elifndef', '#else', '#endif' directives
