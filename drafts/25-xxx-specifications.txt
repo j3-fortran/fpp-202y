@@ -480,7 +480,7 @@ if40. As shown in the illustrative syntax, there should be no more
 -----------------------------------------
 
 
-ix05. The #ifdef and #ifndef macros are evaluated as if they had been
+ix05. The #ifdef and #ifndef directives are evaluated as if they had been
       written "#if defined(ID)" and "#if !defined(ID)" respectively.
       (For brevity, the descriptions of #ifdef and #ifndef directives
       below are omitted, and assume this transformation.)
