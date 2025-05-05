@@ -414,20 +414,132 @@ in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
       the #include directive is not prohibited from including the
       same source file at a deeper level of nesting.
 
+
 3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' directives
+      '#elifndef', '#else', '#endif' conditional directives
 ---------------------------------------------------------
 
-Example syntax:
+Example syntax (extra spacing for illustration purposes only):
+    General form:
+        <if-head>  <lines>                        #endif EOL
+        <if-head>  <lines>  <if-elif>             #endif EOL
+        <if-head>  <lines>  <if-elif>  <if-else>  #endif EOL
 
+    Where:
+        <if-head> is one of:
+            #if token-list EOL  <lines>
+            #ifdef ID EOL       <lines>
+            #ifndef ID EOL      <lines>
+
+        <if-elif> is zero or more of:
+            #elif     token-list EOL  <lines>
+            #elifdef  ID EOL          <lines>
+            #elifndef ID EOL          <lines>
+
+        <if-else> is zero or one of:
+            #else EOL  <lines>
+
+        <lines> are zero or more of:
+            directive lines
+            Fortran comment lines
+            Fortran source lines
 
 
 3.5.1 Static semantics specifications
---------------------------------------
+-------------------------------------
+
+if05. A #if, ##ifdef, or #ifndef directive signals the start
+      of a list of conditional directives.
+
+if10: Whitespace must immediately follow the directives tokens
+      'ifdef', 'ifndef', 'elifdef', and 'elifndef' to separate
+      them from the ID tokens.
+
+if15. The list of #elif, #elifdef, and #elifndef directives, and
+      the #else directive (if present) are part of the same list
+      of directives introduced by the #if directive.
+
+if20. The chain of conditional directives ends with the #endif
+      directive.
+
+if25. Within a conditional directive list, a #if, #ifdef, or
+      #endif directive introduces a new list of conditional
+      directives, at a new nesting level, within the enclosing
+      conditional directive list.
+
+if30. The conditional directive lists must properly nest.
+
+if35. As shown in the illustrative syntax, there should be
+      no unmatched #endif directives.
+
+if40. As shown in the illustrative syntax, there should be
+      no more than one #else directive in a list of conditional
+      directives at any nesting level.
 
 
 3.5.2 Evaluation semantics specifications
 -----------------------------------------
+
+
+ix05. The #ifdef and #ifndef macros are evaluated as if
+      they had been written "#if defined(ID)" and
+      "#if !defined(ID)" respectively.
+
+ix10. The #elifdef and #elifndef macros are evaluated as if
+      they had been written "#elif defined(ID)" and "#elif !defined(ID)"
+      respectively.
+
+ix15. The token-lists in #if and #elif are processed as described
+      in the section "Macro recognition and expansion".
+
+ix20. After expansion, the resulting token list in #if and #elif
+      directives must represent a valid integer expression as
+      described in the section "Expressions allowed in #if and
+      #elif directives".
+
+ix25. The resulting token list is parsed and evaluated according
+      to the semantic rules described in section "Expressions allowed
+      in #if and #elif directives".
+
+ix30. If the expression in a #if evaluates to a C true value, the
+      <lines> immediately following the #if participate in preprocessing.
+      They are subject to preprocessing expansion,  substitution, and
+      evaluation of processing directives in the <lines>.
+
+ix40. Further preprocessing when #if evaluates to C true proceeds.
+      Subsequent #elif and #else directives at the same level of
+      nesting are skipped, and do not participate in preprocessing
+      except to be examined for proper nesting of conditional directives.
+
+ix45. If the expression in a #if evaluates to a C false value (zero),
+      the lines immediately following the #if directive are skipped, and
+      examined only to determine nesting of conditionals. No token
+      expansion occurs. No Fortran comment lines or source lines are
+      made available to the processor. Processing continues with
+      processing any #elif directives at the same level of nesting, as
+      described below.
+
+ix50. When the #if expression evaluates to C false, the #elif directives
+      at the same nesting level are evaluated in the order they appear
+      in the source. Those whose expression evaluate to false are
+      skipped in the same manner as when a #if clause evaluates to false.
+
+ix55. When a #elif expression evaluates to C true, the <lines>
+      immediately following the #elif participate in preprocessing
+      just as they do when the expression in a #if evaluates to C true.
+      Subsequent #elif and #else directives at the same nesting
+      level are skipped, as described for #if.
+
+ix60. When no #if expression or #elif expression evaluates to C true
+      and a #else directive is present at the same nesting level,
+      the <lines> between the #else directive and the matching #endif
+      directive are subject to preprocessing, expansion and substitution
+      as they would be in #if true processing.
+
+ix65. When no #if expression or #elif expression evaluates to C true
+      and no #else directive is present at the same nesting level,
+      there are no <lines> in the list of conditional directives
+      subject to preprocessing.
 
 
 3.6 The '#error' and '#warning' directives
