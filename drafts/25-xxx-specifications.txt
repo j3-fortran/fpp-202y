@@ -421,9 +421,9 @@ in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
 
 Example syntax (extra spacing for illustration purposes only):
     General form:
-        <if-head>  <lines>                        #endif EOL
-        <if-head>  <lines>  <if-elif>             #endif EOL
-        <if-head>  <lines>  <if-elif>  <if-else>  #endif EOL
+        <if-head>                        #endif EOL
+        <if-head>  <if-elif>             #endif EOL
+        <if-head>  <if-elif>  <if-else>  #endif EOL
 
     Where:
         <if-head> is one of:
