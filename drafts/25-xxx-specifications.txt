@@ -448,7 +448,7 @@ Example syntax (extra spacing for illustration purposes only):
 3.5.1 Static semantics specifications
 -------------------------------------
 
-if05. A #if, ##ifdef, or #ifndef directive signals the start of a list
+if05. A #if, #ifdef, or #ifndef directive signals the start of a list
       of conditional directives.
 
 if10: Whitespace must immediately follow the directives tokens
