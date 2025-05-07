@@ -135,6 +135,10 @@ ws09. Whitespace characters are significant in determining token
 ws11. In fixed-form input, macro names are not recognized as such when
       spaces are inserted into their invocations.
 
+ws13. Whitespace must immediately follow the directive tokens
+      'ifdef', 'ifndef', 'elifdef', and 'elifndef' to separate them
+      from the ID tokens that follow these directive names.
+
 
 2.4 Comments
 ------------
