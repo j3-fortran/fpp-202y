@@ -789,7 +789,7 @@ evaluate with the same semantics as their Fortran counterparts.
 |      |    ^    |   e1 ^ e2    |   left   |    Fortran IAND(e1, e2)    |
 |      |    &    |   e1 & e2    |   left   |    Fortran IEOR(e1, e2)    |
 |------+---------+--------------+----------+----------------------------|
-|      |   ==    |   e1 == e2   |   left   |  1 if e1 == e2, 0 otherwise |
+|      |   ==    |   e1 == e2   |   left   | 1 if e1 == e2, 0 otherwise |
 |      |   !=    |   e1 != e2   |   left   | 1 if e1 /= e2, 0 otherwise |
 |------+---------+--------------+----------+----------------------------|
 |      |    >    |   e1 > e2    | nonassoc | 1 if e1 > e2, 0 otherwise  |
