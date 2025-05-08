@@ -713,7 +713,7 @@ ex15. The resulting list of tokens shall be a valid expression
       below.
 
 ex15. Preprocessing computes the integer value of this expressions
-      using the greatest integer range available to the processor.to
+      using the greatest integer range available to the processor to
       determine the truth or falsity of the controlling expression.
 
 ex20. The evaluation of the expression shall not generate a
