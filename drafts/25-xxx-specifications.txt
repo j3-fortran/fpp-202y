@@ -700,11 +700,121 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 5 Expressions allowed in #if and #elif directives
 =================================================
 
-5.1 The 'defined' operator
---------------------------
+ex05. Controlling expressions are made up of "primary expressions" and
+      operators applied to subexpressions.
 
-6 Expression evaluation in #if and #elif directives
-===================================================
+ex10. When evaluating a #if or #elif directive, preprocessing
+      evaluates and expands all object-like macros and function-like
+      macro calls to create a token-list of the expression to be
+      evaluated.
+
+ex15. The resulting list of tokens shall be a valid expression
+      comprised of primary expressions and operators as described
+      below.
+
+ex15. Preprocessing computes the integer value of this expressions
+      using the greatest integer range available to the processor.to
+      determine the truth or falsity of the controlling expression.
+
+ex20. The evaluation of the expression shall not generate a
+      computational error (such as divide by zero).
+
+ex20. When the expression evaluates to zero, the controlling expression
+      will be considered "false". If the expression evaluates to
+      any non-zero value, the controlling expression will be considered
+      "true".
+
+
+5.1 Primary expressions
+-----------------------
+
+Preprocessing recognizes the following primary expressions in
+controlling expressions.
+
+Since expression evaluation occurs *after* token expansion, there will
+be no object-like macros or function-like macros left to evaluate. All
+instances of ID or ID (args) will all have been replaced with their
+expansions.
+
+We list them here for completeness in describing the illustrative
+syntax of controlling expressions.
+
+| Primary      | Evaluation semantics                        |
+|--------------+---------------------------------------------|
+| ID           | The expansion of the object-like macro ID   |
+| ID (args)    | The expansion of the function-like macro ID |
+| WHOLE_NUMBER | Decimal value of WHOLE_NUMBER               |
+| ( expr )     | Parenthesized expressions                   |
+|--------------+---------------------------------------------|
+
+
+
+5.1 Operators allowed in controlling expressions
+------------------------------------------------
+
+To maintain compatibility with the use of C preprocessing directives
+in many existing Fortran programs, the operators allowed in
+controlling expressions in #if and #elif expressions are a subset of
+those defined in the C 2023 standard §6.5 "Expressions" and §6.6
+"Constant expressions".
+
+A "precedence level" is assigned to each operator that determines
+how the operators combine with sub-expressions containing other operators
+at different precedence levels.
+
+An "associativity" is assigned to each operator that determines how
+operators at the same precedence level are combined.
+    - "left" means the operator binds to the left,
+    - "right" means the operator binds to the right.
+    - "nonassoc" means that the operator is not associative.
+
+The following table describes the semantics of the allowed operators
+in conditional expressions. The table is grouped by precedence level,
+from lowest precedence to highest.
+
+We label subexpressions "e1", "e2", and "e3" to aid in describing the
+evaluation semantics. Unless otherwise specified, all operators
+evaluate with the same semantics as their Fortran counterparts.
+
+
+| Prec |   Op    |    Syntax    |  Assoc'y |  Evaluation Semantics      |
+|------+---------+--------------+----------+----------------------------|
+| low  |   ? :   | e1 ? e2 : e3 |  right   |      conditional-expr      |
+|------+---------+--------------+----------+----------------------------|
+|      |   ¦¦    |   e1 || e2   |   left   |       Fortran .OR.         |
+|------+---------+--------------+----------+----------------------------|
+|      |   &&    |   e1 && e2   |   left   |       Fortran .AND.        |
+|------+---------+--------------+----------+----------------------------|
+|      |    ¦    |   e1 | e2    |   left   |    Fortran IOR(e1, e2)     |
+|      |    ^    |   e1 ^ e2    |   left   |    Fortran IAND(e1, e2)    |
+|      |    &    |   e1 & e2    |   left   |    Fortran IEOR(e1, e2)    |
+|------+---------+--------------+----------+----------------------------|
+|      |   ==    |   e1 == e2   |   left   |  1 if e1 == e2, 0 otherwise |
+|      |   !=    |   e1 != e2   |   left   | 1 if e1 /= e2, 0 otherwise |
+|------+---------+--------------+----------+----------------------------|
+|      |    >    |   e1 > e2    | nonassoc | 1 if e1 > e2, 0 otherwise  |
+|      |   >=    |   e1 >= e2   | nonassoc | 1 if e1 >= e2, 0 otherwise |
+|      |    <    |   e1 < e2    | nonassoc | 1 if e1 < e2, 0 otherwise  |
+|      |   <=    |   e1 <= e2   | nonassoc | 1 if e1 <= e2, 0 otherwise |
+|------+---------+--------------+----------+----------------------------|
+|      |   <<    |   e1 << e2   |   left   | Fortran ISHFT(e1, e2)      |
+|      |   >>    |   e1 >> e2   |   left   | Fortran ISHFT(e1, -e2)     |
+|------+---------+--------------+----------+----------------------------|
+|      |    +    |   e1 + e2    |   left   |             +              |
+|      |    -    |   e1 - e2    |   left   |             -              |
+|------+---------+--------------+----------+----------------------------|
+|      |    *    |   e1 * e2    |   left   |             *              |
+|      |    /    |   e1 / e2    |   left   |             /              |
+|      |    %    |   e1 % e2    |   left   |    Fortran MOD(e1, e2)     |
+|------+---------+--------------+----------+----------------------------|
+|      | unary + |     + e1     |  right   |        unary +             |
+|      | unary + |     - e2     |  right   |        unary -             |
+|      | defined |  defined ID  | nonassoc |    1 if the identifier     |
+|      |         |              |          |   has a #defined value,    |
+|      |         |              |          |     0 otherwise            |
+|------+---------+--------------+----------+----------------------------|
+| high | ( e1 )  |              |   N/A    |            e1              |
+|------+---------+--------------+----------+----------------------------|
 
 
 7 Predefined macros
