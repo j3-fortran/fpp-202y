@@ -811,7 +811,9 @@ evaluate with the same semantics as their Fortran counterparts.
 |      |    %    |   e1 % e2    |   left   |    Fortran MOD(e1, e2)     |
 |------+---------+--------------+----------+----------------------------|
 |      | unary + |     + e1     |  right   |        unary +             |
-|      | unary + |     - e2     |  right   |        unary -             |
+|      | unary - |     - e1     |  right   |        unary -             |
+|      | unary ~ |     ~ e1     |  right   |     Fortran NOT(e1)        |
+|      | unary ! |     ! e1     |  right   | 1 if e1 == 0, 0 otherwise  |
 |      | defined |  defined ID  | nonassoc |    1 if the identifier     |
 |      |         |              |          |   has a #defined value,    |
 |      |         |              |          |     0 otherwise            |
