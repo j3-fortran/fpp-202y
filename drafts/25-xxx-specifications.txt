@@ -712,7 +712,7 @@ ex15. The resulting list of tokens shall be a valid expression
       comprised of primary expressions and operators as described
       below.
 
-ex15. Preprocessing computes the integer value of this expressions
+ex17. Preprocessing computes the integer value of conditional expressions
       using the greatest integer range available to the processor to
       determine the truth or falsity of the controlling expression.
 
