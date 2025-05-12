@@ -705,7 +705,7 @@ ex05. Controlling expressions are made up of "primary expressions" and
 
 ex10. When evaluating a #if or #elif directive, preprocessing
       evaluates and expands all object-like macros and function-like
-      macro calls to create a token-list of the expression to be
+      macro invocations to create a token-list of the expression to be
       evaluated.
 
 ex15. The resulting list of tokens shall be a valid expression
