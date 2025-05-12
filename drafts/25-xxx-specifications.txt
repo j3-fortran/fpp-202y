@@ -716,8 +716,9 @@ ex15. Preprocessing computes the integer value of this expressions
       using the greatest integer range available to the processor to
       determine the truth or falsity of the controlling expression.
 
-ex20. The evaluation of the expression shall not generate a
-      computational error (such as divide by zero).
+ex20. The processor shall reject a program if evaluation of
+      the expression generates a computational error (such 
+      as divide by zero).
 
 ex25. When the expression evaluates to zero, the controlling expression
       will be considered "false". If the expression evaluates to
