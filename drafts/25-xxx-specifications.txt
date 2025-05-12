@@ -719,7 +719,7 @@ ex15. Preprocessing computes the integer value of this expressions
 ex20. The evaluation of the expression shall not generate a
       computational error (such as divide by zero).
 
-ex20. When the expression evaluates to zero, the controlling expression
+ex25. When the expression evaluates to zero, the controlling expression
       will be considered "false". If the expression evaluates to
       any non-zero value, the controlling expression will be considered
       "true".
