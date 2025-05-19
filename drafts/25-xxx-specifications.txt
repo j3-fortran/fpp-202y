@@ -655,10 +655,3 @@ is Fortran"), which enables one to write multi-language header files
 with conditional compilation based on language.
 
 pm61. `__STDF__` shall be predefined to the WHOLE_NUMBER 1
-
-
-
-8 Output of the preprocessor
-============================
-[gak: What we want to say about the specifics of the output, presumably
-as a token stream, not necessarily as a character stream.]
