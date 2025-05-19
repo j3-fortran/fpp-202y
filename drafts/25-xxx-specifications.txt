@@ -655,3 +655,51 @@ is Fortran"), which enables one to write multi-language header files
 with conditional compilation based on language.
 
 pm61. `__STDF__` shall be predefined to the WHOLE_NUMBER 1
+
+Appendix A: Divergences from C
+==============================
+
+In many ways, the FPP specified by this document adheres to the
+existing practice established by the C preprocessor over the past
+several decades. However FPP semantics also deliberately diverge from
+the analogous behavior of the C preprocessor as specified in C 2023. 
+This non-normative section enumerates such deliberate differences,
+as a reference for readers to assist in comparisons.
+
+General differences include:
+
+dfc10. FPP does not recognize `//`-style comments on directive lines.
+
+dfc20. FPP omits the `#embed` directive added in C 2023.
+
+dfc30. FPP omits (and forbids) many predefined macros whose name begin
+       with `__STDC`.
+
+dfc40. FPP expands macro invocations inside Fortran comments on
+       source lines and in Fortran comment lines.
+
+dfc50. When determining argument boundaries in the invocation of a
+       function-like macro, FPP ignores commas surrounded by matching
+       sets of `[  ]` or `(/  /)` brackets, in addition to matching
+       sets of `(  )` parentheses.
+
+Differences in the conditional expression grammar for `#if` and
+`#elif` directives include:
+
+dfc80. FPP omits the comma operator.
+
+dfc82. FPP omits character literal constants.
+
+dfc84. FPP omits the `true` and `false` boolean literals added in
+       C 2023.
+
+dfc86. FPP omits the `__has_include` expression added in C 2023.
+
+dfc88. FPP omits the `__has_c_attribute` expression added in C 2023.
+
+dfc90. FPP omits the `__has_embed` expression added in C 2023.
+
+[dob: This section may need to be amended as we settle on unresolved
+     topics such as _Pragma]
+
+
