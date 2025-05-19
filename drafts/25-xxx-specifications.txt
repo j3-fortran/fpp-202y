@@ -452,6 +452,8 @@ ew02. The token-list is not expanded.
 ew04. The processor produces a diagnostic message that includes
       the token-list.
 
+ew06. The processor shall reject a submitted program if the processor
+      encounters a `#error` directive during preprocessing.
 
 ew10. Additional behavior is processor-dependent.
 
