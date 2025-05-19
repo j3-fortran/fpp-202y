@@ -732,8 +732,8 @@ ex25. When the expression evaluates to zero, the controlling expression
 Preprocessing recognizes the following primary expressions in
 controlling expressions.
 
-Since expression evaluation occurs *after* token expansion, there will
-be no object-like macros or function-like macros left to evaluate. All
+Since expression evaluation occurs *after* macro expansion, there will
+be no object-like macro or function-like macro invocations left to expand. All
 instances of ID or ID (args) will all have been replaced with their
 expansions.
 
