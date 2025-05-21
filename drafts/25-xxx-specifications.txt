@@ -494,8 +494,8 @@ ix12. In the descriptions below, <group> constructs may be "skipped".
         - Conditional directives within the <group> are recognized only
           to maintain proper nesting of conditional directives.
         - No nested directives in the <group> are processed.
-        - No Fortran comment lines or source lines in the <group>
-          are examined for macro expansion.
+        - No macro expansion takes place in directive lines, Fortran
+          comment lines or source lines in the <group>.
         - No skipped lines of any kind in the <group> are made available
           subsequent processing by the processor.
 
