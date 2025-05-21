@@ -221,6 +221,11 @@ syntax below, we denote these as just "token-list" or
 "replacement-list".
 
 
+di00. The directives listed in di01-di08 are only recognized as such
+      if the token immediately following the '#' introducing a
+      directive line exactly matches one of the standard directive
+      names ('define', 'if', 'pragma', etc.).
+
 di01. The '#define' object-like macro directive
 
 di02. The '#define' function-like macro directive
@@ -230,13 +235,15 @@ di03. The '#undef' directive
 di04. The '#include' directive
 
 di05. The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' directives
+      '#elifndef', '#else', '#endif' conditional directives
 
 di06. The '#error' and '#warning' directives
 
 di07. The '#line' directive
 
 di08. The '#pragma' directive
+
+
 
 di09. The null directive
 
@@ -315,7 +322,7 @@ df04. The identifier-list is a comma-separated list of ID tokens.
 df06. No identifier may appear more than once in the identifier-list.
 
 df08. The identifier names in the identifier-list define macro "parameters" that affect
-      macro expansion of the replacement list. (See the section "Macro recognition and 
+      macro expansion of the replacement list. (See the section "Macro recognition and
       expansion" for the semantics of function-like macro expansion.)
 
 df10. The replacement-list may be the empty sequence of tokens.
@@ -421,25 +428,28 @@ in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
 
 Example syntax (extra spacing for illustration purposes only):
     General form:
-        <if-head>                        #endif EOL
-        <if-head>  <if-elif>             #endif EOL
-        <if-head>  <if-elif>  <if-else>  #endif EOL
+        <if-head>                             #endif EOL
+        <if-head>  <if-elif-list>             #endif EOL
+        <if-head>  <if-elif-list>  <if-else>  #endif EOL
 
     Where:
         <if-head> is one of:
-            #if token-list EOL  <lines>
-            #ifdef ID EOL       <lines>
-            #ifndef ID EOL      <lines>
+            #if token-list EOL  <group>
+            #ifdef ID EOL       <group>
+            #ifndef ID EOL      <group>
 
-        <if-elif> is zero or more of:
-            #elif     token-list EOL  <lines>
-            #elifdef  ID EOL          <lines>
-            #elifndef ID EOL          <lines>
+        <if-elif-list> is zero or more of:
+            <if-elif> <group>
 
-        <if-else> is zero or one of:
-            #else EOL  <lines>
+        <if-elif> is one of:
+            #elif     token-list EOL  <group>
+            #elifdef  ID EOL          <group>
+            #elifndef ID EOL          <group>
 
-        <lines> are zero or more of:
+        <if-else> is one of:
+            #else EOL  <group>
+
+        <group> is zero or more of:
             directive lines
             Fortran comment lines
             Fortran source lines
@@ -450,10 +460,6 @@ Example syntax (extra spacing for illustration purposes only):
 
 if05. A #if, #ifdef, or #ifndef directive signals the start of a list
       of conditional directives.
-
-if10: Whitespace must immediately follow the directives tokens
-      'ifdef', 'ifndef', 'elifdef', and 'elifndef' to separate them
-      from the ID tokens.
 
 if15. The list of #elif, #elifdef, and #elifndef directives, and the
       #else directive (if present) are part of the same list of
@@ -468,12 +474,6 @@ if25. Within a conditional directive list, a #if, #ifdef, or #endif
 
 if30. The conditional directive lists must properly nest.
 
-if35. As shown in the illustrative syntax, there should be no
-      unmatched #endif directives.
-
-if40. As shown in the illustrative syntax, there should be no more
-      than one #else directive in a list of conditional directives at
-      any nesting level.
 
 
 3.5.2 Evaluation semantics specifications
@@ -485,68 +485,80 @@ ix05. The #ifdef and #ifndef directives are evaluated as if they had been
       (For brevity, the descriptions of #ifdef and #ifndef directives
       below are omitted, and assume this transformation.)
 
-ix10. The #elifdef and #elifndef macros are evaluated as if they had
+ix10. The #elifdef and #elifndef directives are evaluated as if they had
       been written "#elif defined(ID)" and "#elif !defined(ID)"
       respectively.
 
-ix15. The token-lists in #if and #elif are processed as described in
-      the section "Macro recognition and expansion".
+ix12. In the descriptions below, <group> constructs may be "skipped".
+      When skipped,
+        - Conditional directives within the <group> are recognized only
+          to maintain proper nesting of conditional directives.
+        - No nested directives in the <group> are processed.
+        - No Fortran comment lines or source lines in the <group>
+          are examined for macro expansion.
+        - No skipped lines of any kind in the <group> are made available
+          subsequent processing by the processor.
 
-ix20. After expansion, the resulting token list in #if and #elif
-      directives must represent a valid integer expression as
+ix14. In the descriptions below, <group> constructs that are not
+      skipped participate in further preprocessing and processing.
+      When participating
+
+        - Macros are expanded in Fortran comment lines and source
+          lines.
+        - Nested directives in the <group> are processed.
+        - The resulting Fortran comment lines and source lines
+          are made available for subsequent processing by the
+          processor.
+
+ix15. Before evaluating the token-lists in the <if-head> and <if-elif>
+      constructs, macros in the token-lists are processed as described
+      in the section "Macro recognition and expansion".
+
+ix20. After expansion, the resulting token list in <if-head> and <if-elif>
+      constructs must be able to be parsed as a valid integer expression as
       described in the section "Expressions allowed in #if and #elif
-      directives". This expression is called the "controlling
+      directives" static semantics. This expression is called the "controlling
       expression" for the directive.
 
-ix25. Controlling expressions in #if and #elif directives are parsed
-      and evaluated according to the semantic rules described in
-      section "Expressions allowed in #if and #elif directives".
+ix25. The values of controlling expressions in <if-head> and <if-elif>
+      constructs are evaluated according to the evaluation semantics
+      described in the section "Expressions allowed in #if and #elif
+      directives".
 
-ix30. If the controlling expression in a #if evaluates to a nonzero
-      value, the <lines> immediately following the #if participate in
-      preprocessing. They are subject to preprocessing expansion,
-      substitution, and evaluation of processing directives in the
-      <lines>.
+ix30. If the controlling expression in an <if-head> evaluates to a
+      nonzero value, then the <group> contained within that <if-head>
+      construct participates in further preprocessing, as describe
+      above. Subsequent <if-elif> and <if-else> constructs at the same
+      level of nesting are skipped.
 
-ix40. Further preprocessing when #if controlling expression evaluates
-      to a nonzero value proceeds. Subsequent #elif and #else
-      directives at the same level of nesting are skipped, and do not
-      participate in preprocessing except to be examined for proper
-      nesting of conditional directives.
+ix45. If the controlling expression in an <if-head> construct
+      evaluates to a zero value, then the <group> contained within
+      that <if-head> construct is skipped. Preprocessing continues
+      with any <if-elif> constructs at the same level of nesting, as
+      described below.
 
-ix45. If the controlling expression in a #if evaluates to a zero
-      value, the lines immediately following the #if directive are
-      skipped, and examined only to determine nesting of conditionals.
-      Within these lines, no token expansion occurs, and no Fortran
-      comment lines nor source lines are made available for subsequent
-      processing by the processor. Preprocessing continues with any
-      #elif directives at the same level of nesting, as described
-      below.
+ix50. When the controlling expression in an <if-head> construct
+      evaluates to zero, the controlling expressions in each <if-elif>
+      construct at the same nesting level are evaluated in turn. Those
+      <group>s whose controlling expression evaluates to zero are
+      skipped.
 
-ix50. When the #if controlling expression evaluates to zero, the
-      controlling expressions in each of the #elif directives at the
-      same nesting level are evaluated in turn. Those whose expression
-      evaluate to false are skipped in the same manner as when a #if
-      clause evaluates to false.
+ix55. When the controlling expression in an <if-elif> construct
+      evaluates to a nonzero value, the <group> contained within that
+      <if-elif> construct continues to participate in preprocessing.
+      Subsequent <if-elif> constructs and any remaining <if-else>
+      constructs at the same nesting level are skipped.
 
-ix55. When a #elif controlling expression evaluates to a nonzero
-      value, the <lines> immediately following the #elif participate
-      in preprocessing just as they do when the controlling expression
-      in a #if evaluates to a nonzero value. Subsequent #elif and
-      #else directives at the same nesting level are skipped, as
-      described for #if.
+ix60. When all controlling expressions in the <if-head> construct and
+      <if-elif> constructs evaluate to a zero value and an <if-else>
+      construct is present at the same nesting level, the <group>
+      contained in the <if-else> construct continues to participate in
+      preprocessing.
 
-ix60. When all controlling expression in #if or #elif directives
-      evaluates to a zero value and a #else directive is present at
-      the same nesting level, the <lines> between the #else directive
-      and the matching #endif directive are subject to preprocessing,
-      expansion and substitution as they would be in #if true
-      processing.
-
-ix65. When all controlling expression in #if or #elif directives
-      evaluates to a zero value and no #else directive is present at
-      the same nesting level, there are no <lines> in the list of
-      conditional directives subject to preprocessing.
+ix65. When all controlling expressions in the <if-head> construct and
+      all <if-elif> constructs evaluate to a zero value and no
+      <if-else> construct is present at the same nesting level, then
+      all <group>s in these constructs are skipped.
 
 
 3.6 The '#error' and '#warning' directives
