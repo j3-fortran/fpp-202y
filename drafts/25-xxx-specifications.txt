@@ -243,8 +243,6 @@ di07. The '#line' directive
 
 di08. The '#pragma' directive
 
-
-
 di09. The null directive
 
 di10. The processor-dependent directive
