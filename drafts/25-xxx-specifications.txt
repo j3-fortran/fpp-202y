@@ -198,9 +198,7 @@ to11. The following tokens also appear in the illustrative syntax below.
       |---------------------|-------------------------------------------|
       | ID                  | Regex [A-Za-z][A-Za-z0-9_]*               |
       | WHOLE_NUMBER        | Regex [0-9]+                              |
-      | REAL_NUMBER         | Fortran 2023 R714 real-literal-constant.  |
       | CHARACTER_STRING    | RegEx "[^"\n]*" where '\n' represents new-line. |
-      | UNRECOGNIZED_TOKEN  | Any character not recognized above.       |
       | EOL                 | The new-line ending a directive line,     |
       |                     | after continuation processing (see li15). |
       |---------------------|-------------------------------------------|
