@@ -675,7 +675,7 @@ dfc10. FPP does not recognize `//`-style comments on directive lines.
 
 dfc20. FPP omits the `#embed` directive added in C 2023.
 
-dfc30. FPP omits (and forbids) many predefined macros whose name begin
+dfc30. FPP omits (and forbids) many predefined macros whose names begin
        with `__STDC`.
 
 dfc40. FPP expands macro invocations inside Fortran comments on
