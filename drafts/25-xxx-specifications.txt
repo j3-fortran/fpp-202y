@@ -198,9 +198,7 @@ to11. The following tokens also appear in the illustrative syntax below.
       |---------------------|-------------------------------------------|
       | ID                  | Regex [A-Za-z][A-Za-z0-9_]*               |
       | WHOLE_NUMBER        | Regex [0-9]+                              |
-      | REAL_NUMBER         | Fortran 2023 R714 real-literal-constant.  |
       | CHARACTER_STRING    | RegEx "[^"\n]*" where '\n' represents new-line. |
-      | UNRECOGNIZED_TOKEN  | Any character not recognized above.       |
       | EOL                 | The new-line ending a directive line,     |
       |                     | after continuation processing (see li15). |
       |---------------------|-------------------------------------------|
@@ -271,8 +269,9 @@ do06. Whitespace before or after the replacement-list is not
 3.1.2 Evaluation semantics specifications
 -----------------------------------------
 
-do20. The #define directive defines the identifier denoted by ID
-      to be the sequence of tokens specified in the replacement list.
+do20. This #define directive defines an object-like macro named by ID
+      with a replacement list comprised of the tokens specified in the
+      replacement-list.
 
 do22. There is one namespace for all macro identifiers.
 
@@ -333,17 +332,18 @@ df16. The "..." between the parentheses specifies that the function-like
 3.2.2 Evaluation semantics specifications
 -----------------------------------------
 
-df30. This #define directive defines a function-like macro with parameters
-      as specified in the identifier-list and function
-      body as specified in the replacement list.
+df30. This #define directive defines a function-like macro named by ID
+      with the specified macro parameters and with a replacement list
+      comprised of the tokens specified in the replacement-list.
 
 df32. This #define directive does not scan the replacement-list
       for macros to expand.
 
 df34. An identifier currently defined as a function-like macro shall not
       be redefined by another #define preprocessing directive unless
-      the second definition is a function-like macro definition and
-      the two replacement lists are identical (as in C 2023).
+      the second definition is a function-like macro definition, with
+      the same number and spelling of the parameters, and the two
+      replacement lists are identical (as in C 2023).
 
 
 3.3 The '#undef' directive
@@ -409,6 +409,7 @@ in24. If the file is located, the processor replaces the #include
 
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
+
 in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"), 
       the #include directive is not prohibited from including the
       same source file at a deeper level of nesting.
@@ -674,7 +675,7 @@ dfc10. FPP does not recognize `//`-style comments on directive lines.
 
 dfc20. FPP omits the `#embed` directive added in C 2023.
 
-dfc30. FPP omits (and forbids) many predefined macros whose name begin
+dfc30. FPP omits (and forbids) many predefined macros whose names begin
        with `__STDC`.
 
 dfc40. FPP expands macro invocations inside Fortran comments on
