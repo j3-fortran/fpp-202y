@@ -690,16 +690,38 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 4 Macro recognition and expansion
 ---------------------------------
 
+NOTE: This section is currently incomplete.  A self-contained
+specification for macro recognition and expansion will appear in a
+forthcoming paper.
 
+4.1 Comparison to Macro recognition and expansion in CPP
+--------------------------------------------------------
 
+We intend for macro recognition and expansion to operate almost
+exactly as specified in C 2023 section 6.10.5, however it will differ
+in minor ways to accomodate Fortran syntax. The following exceptions
+have consensus amongst the authors:
 
-4.9 The '#' and '##' operators
-------------------------------
+me10. When determining argument boundaries in the invocation of a
+      function-like macro, FPP ignores commas surrounded by matching
+      sets of `[  ]` or `(/  /)` brackets, in addition to matching
+      sets of `(  )` parentheses (as specified in C 2023 section
+      6.10.5-11).
+
+Additional details are still under discussion and will be outlined in
+a future paper.
+
 4.2 The identifiers __VA_ARGS__ and __VA_OPT__
 ----------------------------------------------
 
+As specified in C 2023 section 6.10.5.1, see also section 4.1
+above.
 
+4.9 The '#' and '##' operators
+------------------------------
 
+As specified in C 2023 section 6.10.5.{2,3}, see also section 4.1
+above.
 
 
 5 Expressions allowed in #if and #elif directives
@@ -925,11 +947,6 @@ dfc30. FPP omits (and forbids) many predefined macros whose names begin
 dfc40. FPP expands macro invocations inside Fortran comments on
        source lines and in Fortran comment lines.
 
-dfc50. When determining argument boundaries in the invocation of a
-       function-like macro, FPP ignores commas surrounded by matching
-       sets of `[  ]` or `(/  /)` brackets, in addition to matching
-       sets of `(  )` parentheses.
-
 dfc60. The token-list in the FPP `#pragma` directive may not be empty.
 
 Differences in the conditional expression grammar for `#if` and
@@ -948,5 +965,6 @@ dfc88. FPP omits the `__has_c_attribute` expression added in C 2023.
 
 dfc90. FPP omits the `__has_embed` expression added in C 2023.
 
-[dob: This section may need to be amended as we settle on unresolved
-     topics such as _Pragma]
+Differences in macro recognition and expansion are currently
+documented explicitly in section 4.1.
+
