@@ -555,16 +555,59 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 4 Macro recognition and expansion
 ---------------------------------
 
+This section is currently incomplete.  A self-contained specification
+for macro recognition and expansion will appear in a forthcoming
+paper.
+
+4.1 Comparison to Macro recognition and expansion in CPP
+--------------------------------------------------------
+
+We intend for macro recognition and expansion to operate almost
+exactly as specified in C 2023 section 6.10.5, with the following
+minor exceptions:
+
+me10. When determining argument boundaries in the invocation of a
+      function-like macro, FPP ignores commas surrounded by matching
+      sets of `[  ]` or `(/  /)` brackets, in addition to matching
+      sets of `(  )` parentheses (as specified in C 2023 section
+      6.10.5-11).
+
+me30. As specified by C 2023 6.10.5-10: "Within the sequence of
+      preprocessing tokens making up an invocation of a function-like
+      macro, new-line is considered a normal white-space character."
+
+me31. In addition, within the sequence of preprocessing tokens making
+      up an invocation of a function-like macro, a `&` character
+      immediately followed by a newline is immediately replaced
+      by a single blank character before subsequent processing.
+
+me32. The combination of rules me30 and me31 above imply that
+      when the invocation of a function-like macro is broken across
+      Fortran source lines, no line continuation character is
+      required, but that a Fortran &-style line continuation character
+      may optionally be used without changing the expanded result.
+
+me35. When performing macro recognition on a Fortran source line, if
+      the sequence of preprocessing tokens making up an invocation of
+      a function-like macro includes a `!` token, the rest of the
+      current line is treated as a comment; specifically, all tokens
+      starting with that `!` up through and including the next
+      subsequent newline are immediately deleted and replaced with a
+      single blank character, before further processing of the macro
+      arguments.
 
 
-
-4.9 The '#' and '##' operators
-------------------------------
 4.2 The identifiers __VA_ARGS__ and __VA_OPT__
 ----------------------------------------------
 
+As specified in C 2023 section 6.10.5.1, see also section 4.1
+above.
 
+4.9 The '#' and '##' operators
+------------------------------
 
+As specified in C 2023 section 6.10.5.{2,3}, see also section 4.1
+above.
 
 
 5 Expressions allowed in #if and #elif directives
@@ -681,11 +724,6 @@ dfc30. FPP omits (and forbids) many predefined macros whose names begin
 dfc40. FPP expands macro invocations inside Fortran comments on
        source lines and in Fortran comment lines.
 
-dfc50. When determining argument boundaries in the invocation of a
-       function-like macro, FPP ignores commas surrounded by matching
-       sets of `[  ]` or `(/  /)` brackets, in addition to matching
-       sets of `(  )` parentheses.
-
 Differences in the conditional expression grammar for `#if` and
 `#elif` directives include:
 
@@ -702,7 +740,9 @@ dfc88. FPP omits the `__has_c_attribute` expression added in C 2023.
 
 dfc90. FPP omits the `__has_embed` expression added in C 2023.
 
+Differences in macro recognition and expansion are currently
+documented explicitly in section 4.1.
+
 [dob: This section may need to be amended as we settle on unresolved
      topics such as _Pragma]
-
 
