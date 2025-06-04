@@ -577,14 +577,25 @@ me30. As specified by C 2023 6.10.5-10: "Within the sequence of
       macro, new-line is considered a normal white-space character."
 
 me31. In addition, within the sequence of preprocessing tokens making
-      up an invocation of a function-like macro, a `&` character
-      immediately followed by a newline is immediately replaced
-      by a single blank character before subsequent processing.
+      up an invocation of a function-like macro: if a `&` character is
+      immediately followed by a newline, which is immediately followed
+      by zero or more whitespace characters, which in turn are
+      immediately followed by another `&` character, then this
+      sequence of characters is immediately removed (splicing the two
+      lines and removing the `&` characters and intervening
+      whitespace) before subsequent processing.
 
-me32. The combination of rules me30 and me31 above imply that
+me32. Finally, within the sequence of preprocessing tokens making
+      up an invocation of a function-like macro: if a `&` character is
+      immediately followed by a newline (and the sequence does not
+      match the conditions of rule me31) then both are immediately
+      replaced by a single blank character before subsequent
+      processing.
+
+me33. The combination of rules me30..me32 above imply that
       when the invocation of a function-like macro is broken across
-      Fortran source lines, no line continuation character is
-      required, but that a Fortran &-style line continuation character
+      Fortran source lines, no line continuation characters are
+      required, but that Fortran &-style line continuation characters
       may optionally be used without changing the expanded result.
 
 me35. When performing macro recognition on a Fortran source line, if
