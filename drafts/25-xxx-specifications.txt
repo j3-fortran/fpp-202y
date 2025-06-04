@@ -807,7 +807,7 @@ op07. The following table describes the semantics of the allowed operators
 
 
 op12. The logical OR operator guarantees left-to-right evaluation; if the first
-      operand evaluates to 1, the second operand is not evaluated and the
+      operand evaluates to non-zero, the second operand is not evaluated and the
       resulting value is 1. Otherwise, the second operand is evaluated
       and provides the resulting value.
 
