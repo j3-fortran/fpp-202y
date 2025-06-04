@@ -632,7 +632,8 @@ pr02. The token-list may not be empty.
 3.8.2 Evaluation semantics specifications
 -----------------------------------------
 
-pr20. The token-list is expanded.
+pr20. The token-list is processed as in Fortran source fragments (see the
+      section on "Macro recognition and expansion" below).
 
 pr22. The #pragma directive causes the processor to behave
       in a processor-defined manner.
