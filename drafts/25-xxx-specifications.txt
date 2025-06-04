@@ -628,11 +628,16 @@ Example syntax:
 
 pr02. The token-list may not be empty.
 
+pr10. The token-list shall not begin with the identifier `STDF`, either
+      before or after macro expansion.
+
 
 3.8.2 Evaluation semantics specifications
 -----------------------------------------
 
-pr20. The token-list is expanded.
+pr20. The semantics of the token-list are processor-dependent. 
+      In particular, it is processor-dependent whether macro 
+      expansion is performed on the token-list. 
 
 pr22. The #pragma directive causes the processor to behave
       in a processor-defined manner.
@@ -924,6 +929,8 @@ dfc50. When determining argument boundaries in the invocation of a
        function-like macro, FPP ignores commas surrounded by matching
        sets of `[  ]` or `(/  /)` brackets, in addition to matching
        sets of `(  )` parentheses.
+
+dfc60. The token-list in the FPP `#pragma` directive may not be empty.
 
 Differences in the conditional expression grammar for `#if` and
 `#elif` directives include:
