@@ -628,6 +628,9 @@ Example syntax:
 
 pr02. The token-list may not be empty.
 
+pr10. The token-list shall not begin with the identifier `STDF`, either
+      before or after macro expansion.
+
 
 3.8.2 Evaluation semantics specifications
 -----------------------------------------
