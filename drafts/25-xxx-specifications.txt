@@ -59,7 +59,7 @@ li17. Preprocessor directive continuation processing described by the prior rule
 li19. The maximum length of a preprocessor directive (including
       continuation text) is one million characters.
 
-li21. A source file that ends with a directive line shall neither end with a '\', 
+li21. A source file that ends with a directive line shall neither end with a '\',
       nor a '\' followed immediately by a new-line (analogously to C 2023 5.1.1.2 bullet 2).
 
 li31. Fortran comment lines are defined as in 25-007 6.3.2.3 and
@@ -177,9 +177,9 @@ Further definition of the recognized tokens is deferred to the upcoming preproce
 
 
 to01. In the definitions of object macros and function-like macros,
-      the replacement list may include any arbitrary sequence of 
+      the replacement list may include any arbitrary sequence of
       characters that doesn't include a new-line. Once tokenized,
-      this for example may include any tokens allowed in Fortran 
+      this for example may include any tokens allowed in Fortran
       source lines, those allowed in C integer expressions,
       and any additional tokens recognized by the processor.
 
@@ -415,7 +415,7 @@ in24. If the file is located, the processor replaces the #include
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
 
-in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"), 
+in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
       the #include directive is not prohibited from including the
       same source file at a deeper level of nesting.
 
@@ -455,21 +455,21 @@ Example syntax (extra spacing for illustration purposes only):
 3.5.1 Static semantics specifications
 -------------------------------------
 
-if05. A #if, #ifdef, or #ifndef directive signals the start of a list
+if05. A #if, #ifdef, or #ifndef directive signals the start of a chain
       of conditional directives.
 
-if15. The list of #elif, #elifdef, and #elifndef directives, and the
-      #else directive (if present) are part of the same list of
+if15. The chain of #elif, #elifdef, and #elifndef directives, and the
+      #else directive (if present) are part of the same chain of
       directives introduced by the #if directive.
 
 if20. The chain of conditional directives ends with the #endif
       directive.
 
-if25. Within a conditional directive list, a #if, #ifdef, or #ifndef
-      directive introduces a new list of conditional directives, at a new
-      nesting level, within the enclosing conditional directive list.
+if25. Within a conditional directive chain, a #if, #ifdef, or #ifndef
+      directive introduces a new chain of conditional directives, at a new
+      nesting level, within the enclosing conditional directive chain.
 
-if30. The conditional directive lists must properly nest.
+if30. The conditional directive chains must properly nest.
 
 
 
@@ -484,7 +484,7 @@ ix05. The #ifdef and #ifndef directives are evaluated as if they had been
 
 ix10. The #elifdef and #elifndef directives are evaluated as if they had
       been written "#elif defined(ID)" and "#elif !defined(ID)"
-      respectively. (For brevity, the descriptions below 
+      respectively. (For brevity, the descriptions below
       assume this transformation has been made).
 
 ix12. In the descriptions below, <group> constructs may be "skipped".
@@ -509,7 +509,7 @@ ix14. In the descriptions below, <group> constructs that are not
           processor.
 
 ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
-      constructs that are not skipped, macros in the token-lists are 
+      constructs that are not skipped, macros in the token-lists are
       processed as described in the section "Macro recognition and expansion".
 
 ix20. After expansion, the resulting token list in <if-head> and <if-elif>
@@ -609,7 +609,7 @@ li04. The WHOLE_NUMBER shall not exceed 2147483647.
 -----------------------------------------
 
 li20. In both forms, the #line directive causes the processor
-      to behave as if the following sequence of lines begins with a 
+      to behave as if the following sequence of lines begins with a
       presumed line number specified by the WHOLE_NUMBER.
 
 li24. In the second form, the #line directive causes the processor
@@ -742,8 +742,8 @@ The following macro names shall be defined by the processor:
 7.1 __LINE__
 ------------
 
-pm20. `__LINE__` shall be predefined to a WHOLE_NUMBER representing 
-      the presumed line number (within the current source file) 
+pm20. `__LINE__` shall be predefined to a WHOLE_NUMBER representing
+      the presumed line number (within the current source file)
       of the current source line.
 
 7.2 __FILE__
@@ -795,7 +795,7 @@ Appendix A: Divergences from C
 In many ways, the FPP specified by this document adheres to the
 existing practice established by the C preprocessor over the past
 several decades. However FPP semantics also deliberately diverge from
-the analogous behavior of the C preprocessor as specified in C 2023. 
+the analogous behavior of the C preprocessor as specified in C 2023.
 This non-normative section enumerates such deliberate differences,
 as a reference for readers to assist in comparisons.
 
@@ -834,5 +834,3 @@ dfc90. FPP omits the `__has_embed` expression added in C 2023.
 
 [dob: This section may need to be amended as we settle on unresolved
      topics such as _Pragma]
-
-
