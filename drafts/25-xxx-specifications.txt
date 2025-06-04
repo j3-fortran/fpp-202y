@@ -929,6 +929,9 @@ dfc50. When determining argument boundaries in the invocation of a
        sets of `[  ]` or `(/  /)` brackets, in addition to matching
        sets of `(  )` parentheses.
 
+dfc60. The token-list in the FPP `#pragma` directive is always
+       subject to macro replacement, and may not be empty.
+
 Differences in the conditional expression grammar for `#if` and
 `#elif` directives include:
 
