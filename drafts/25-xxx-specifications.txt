@@ -700,7 +700,7 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 5 Expressions allowed in #if and #elif directives
 =================================================
 
-ex05. Controlling expressions are made up of "primary expressions" and
+ex05. Controlling expressions are made up of WHOLE_NUMBERs and
       operators applied to subexpressions.
 
 ex10. When evaluating a #if or #elif directive, preprocessing
@@ -708,8 +708,15 @@ ex10. When evaluating a #if or #elif directive, preprocessing
       macro invocations to create a token-list of the expression to be
       evaluated.
 
+ex12. Since expression evaluation occurs *after* macro expansion, there will
+      be no object-like macro or function-like macro invocations left to expand.
+      All remaining IDs other than `true` (including those lexically identical
+      to keywords such as `false`) are replaced with the WHOLE_NUMBER 0, true is
+      replaced with the WHOLE_NUMBER 1, and then each preprocessing token is
+      converted into a token.
+
 ex15. The resulting list of tokens shall be a valid expression
-      comprised of primary expressions and operators as described
+      comprised of WHOLE_NUMBERs and operators as described
       below.
 
 ex17. Preprocessing computes the integer value of conditional expressions
@@ -726,65 +733,41 @@ ex25. When the expression evaluates to zero, the controlling expression
       "true".
 
 
-5.1 Primary expressions
------------------------
-
-Preprocessing recognizes the following primary expressions in
-controlling expressions.
-
-Since expression evaluation occurs *after* macro expansion, there will
-be no object-like macro or function-like macro invocations left to expand. All
-instances of ID or ID (args) will all have been replaced with their
-expansions.
-
-We list them here for completeness in describing the illustrative
-syntax of controlling expressions.
-
-| Primary      | Evaluation semantics                        |
-|--------------+---------------------------------------------|
-| ID           | The expansion of the object-like macro ID   |
-| ID (args)    | The expansion of the function-like macro ID |
-| WHOLE_NUMBER | Decimal value of WHOLE_NUMBER               |
-| ( expr )     | Parenthesized expressions                   |
-|--------------+---------------------------------------------|
-
-
-
 5.1 Operators allowed in controlling expressions
 ------------------------------------------------
 
-To maintain compatibility with the use of C preprocessing directives
-in many existing Fortran programs, the operators allowed in
-controlling expressions in #if and #elif expressions are a subset of
-those defined in the C 2023 standard §6.5 "Expressions" and §6.6
-"Constant expressions".
+op01. To maintain compatibility with the use of C preprocessing directives
+      in many existing Fortran programs, the operators allowed in
+      controlling expressions in #if and #elif expressions are a subset of
+      those defined in the C 2023 standard §6.5 "Expressions" and §6.6
+      "Constant expressions".
 
-A "precedence level" is assigned to each operator that determines
-how the operators combine with sub-expressions containing other operators
-at different precedence levels.
+op03. A "precedence level" is assigned to each operator that determines
+      how the operators combine with sub-expressions containing other operators
+      at different precedence levels.
 
-An "associativity" is assigned to each operator that determines how
-operators at the same precedence level are combined.
-    - "left" means the operator binds to the left,
-    - "right" means the operator binds to the right.
-    - "nonassoc" means that the operator is not associative.
+op05. An "associativity" is assigned to each operator that determines how
+      operators at the same precedence level are combined.
+          - "left" means the operator binds to the left,
+          - "right" means the operator binds to the right.
+          - "nonassoc" means that the operator is not associative.
 
-The following table describes the semantics of the allowed operators
-in conditional expressions. The table is grouped by precedence level,
-from lowest precedence to highest.
+op07. The following table describes the semantics of the allowed operators
+      in conditional expressions. The table is grouped by precedence level,
+      from lowest precedence to highest.
 
-We label subexpressions "e1", "e2", and "e3" to aid in describing the
-evaluation semantics. Unless otherwise specified, all operators
-evaluate with the same semantics as their Fortran counterparts.
+      We label subexpressions "e1", "e2", and "e3" to aid in describing the
+      evaluation semantics. Unless otherwise specified, all operators
+      evaluate with the same semantics as their Fortran counterparts.
 
 
 | Prec |   Op    |    Syntax    |  Assoc'y |  Evaluation Semantics      |
 |------+---------+--------------+----------+----------------------------|
 | low  |   ? :   | e1 ? e2 : e3 |  right   |      conditional-expr      |
 |------+---------+--------------+----------+----------------------------|
-|      |   ¦¦    |   e1 || e2   |   left   |       Fortran .OR.         |
+|      |   ¦¦    |   e1 || e2   |   left   |        logical OR          |
 |------+---------+--------------+----------+----------------------------|
-|      |   &&    |   e1 && e2   |   left   |       Fortran .AND.        |
+|      |   &&    |   e1 && e2   |   left   |        logical AND         |
 |------+---------+--------------+----------+----------------------------|
 |      |    ¦    |   e1 | e2    |   left   |    Fortran IOR(e1, e2)     |
 |------+---------+--------------+----------+----------------------------|
@@ -797,8 +780,8 @@ evaluate with the same semantics as their Fortran counterparts.
 |------+---------+--------------+----------+----------------------------|
 |      |    >    |   e1 > e2    |   left   | 1 if e1 > e2, 0 otherwise  |
 |      |   >=    |   e1 >= e2   |   left   | 1 if e1 >= e2, 0 otherwise |
-|      |    <    |   e1 < e2    |   left  | 1 if e1 < e2, 0 otherwise  |
-|      |   <=    |   e1 <= e2   |   left  | 1 if e1 <= e2, 0 otherwise |
+|      |    <    |   e1 < e2    |   left   | 1 if e1 < e2, 0 otherwise  |
+|      |   <=    |   e1 <= e2   |   left   | 1 if e1 <= e2, 0 otherwise |
 |------+---------+--------------+----------+----------------------------|
 |      |   <<    |   e1 << e2   |   left   | Fortran ISHFT(e1, e2)      |
 |      |   >>    |   e1 >> e2   |   left   | Fortran ISHFT(e1, -e2)     |
@@ -814,13 +797,16 @@ evaluate with the same semantics as their Fortran counterparts.
 |      | unary - |     - e1     |  right   |        unary -             |
 |      | unary ~ |     ~ e1     |  right   |     Fortran NOT(e1)        |
 |      | unary ! |     ! e1     |  right   | 1 if e1 == 0, 0 otherwise  |
-|      | defined |  defined ID  | nonassoc |    1 if the identifier     |
-|      |         |              |          |   has a #defined value,    |
-|      |         |              |          |     0 otherwise            |
 |------+---------+--------------+----------+----------------------------|
 | high | ( e1 )  |              |   N/A    |            e1              |
 |------+---------+--------------+----------+----------------------------|
 
+
+op12. The logical OR operator guarantees left-to-right evaluation; if the first
+      operand compares equal to 0, the second operand is not evaluated.
+
+op13. The logical AND operator guarantees left-to-right evaluation; if the first
+      operand compares equal to 1, the second operand is not evaluated.
 
 7 Predefined macros
 ===================
