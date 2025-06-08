@@ -690,7 +690,7 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 4 Macro recognition and expansion
 ---------------------------------
 
-NOTE: This section is currently incomplete.  A self-contained
+NOTE: This section is currently incomplete. A self-contained
 specification for macro recognition and expansion will appear in a
 forthcoming paper.
 
