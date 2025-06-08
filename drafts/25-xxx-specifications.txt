@@ -40,7 +40,7 @@ li00. The Fortran preprocessor recognizes three distinct types of lines:
 
 li11. A line that has a '#'
       character as the first non-blank character of the line is a
-      directive line (as required by C 2023 6.10.1 paragraph 2),
+      directive line (as required by C 2023 section 6.10.1 paragraph 2),
       except when otherwise specified by the next two rules.
 
 li13. In fixed-form input files, a '#' in column 6 of a non-comment
@@ -60,7 +60,7 @@ li19. The maximum length of a preprocessor directive (including
       continuation text) is one million characters.
 
 li21. A source file that ends with a directive line shall neither end with a '\',
-      nor a '\' followed immediately by a new-line (analogously to C 2023 5.1.1.2 bullet 2).
+      nor a '\' followed immediately by a new-line (analogously to C 2023 section 5.1.1.2 bullet 2).
 
 li31. Fortran comment lines are defined as in 25-007 6.3.2.3 and
       6.3.3.2.
@@ -148,7 +148,7 @@ co05. '/*' ... '*/' comments on directive lines shall extend past a
       continuation line.
 
 co07. '/*' ... '*/' comments on directive lines are replaced by a
-      single space, as specified in C 2023 5.1.1.2 bullet 3.
+      single space, as specified in C 2023 section 5.1.1.2 bullet 3.
 
 co09. In a directive line, the '!' character is not interpreted as introducing
       a Fortran-style comment, and neither the `!` character nor any subsequent
@@ -161,7 +161,7 @@ co11. Directive lines (by definition) cannot contain Fortran
 2.5 Token lexicon
 -----------------
 
-The preprocessor decomposes the source file into preprocessing tokens (see C 2023 5.1.1.2
+The preprocessor decomposes the source file into preprocessing tokens (see C 2023 section 5.1.1.2
 Translation phases).
 As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
@@ -770,7 +770,7 @@ ex25. When the expression evaluates to zero, the controlling expression
 op01. To maintain compatibility with the use of C preprocessing directives
       in many existing Fortran programs, the operators allowed in
       controlling expressions in #if and #elif expressions are a subset of
-      those defined in the C 2023 standard §6.5 "Expressions" and §6.6
+      those defined in C 2023 section 6.5 "Expressions" and section 6.6
       "Constant expressions".
 
 op03. A "precedence level" is assigned to each operator that determines
