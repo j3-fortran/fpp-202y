@@ -11,8 +11,8 @@ References: 25-114r2 Fortran preprocessor requirements
                    (working draft N3096)
 
 
-1. Introduction
-===============
+1 Introduction
+==============
 
 At its meeting Feb 19, 2025, J3 decided to approve requirements for
 a cpp-like preprocessor for Fortran 202Y (paper 25-114r2).
@@ -29,7 +29,7 @@ handling, and tokenization for the preprocessor.)
 
 
 2 Lexical specifications
-------------------------
+========================
 
 2.1 Lines
 ---------
@@ -260,7 +260,7 @@ Example syntax:
 
 
 3.1.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 do02. The replacement-list is a (possibly empty) sequence of tokens.
 
@@ -310,7 +310,7 @@ Example syntax:
 
 
 3.2.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 df02. The identifier ID must be immediately followed by the
       left parenthesis '(' with no intervening whitespace.
@@ -386,7 +386,7 @@ Example syntax:
 
 
 3.4.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 in06. In the second form, the character-list is any sequence of
       processor-dependent characters except EOL and '>'.
@@ -422,7 +422,7 @@ in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
 
 3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
       '#elifndef', '#else', '#endif' conditional directives
----------------------------------------------------------
+-----------------------------------------------------------
 
 Example syntax (extra spacing for illustration purposes only):
     General form:
@@ -572,7 +572,7 @@ error conditions in the input.
 
 
 3.6.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 
 3.6.2 Evaluation semantics specifications
@@ -598,7 +598,7 @@ Example syntax:
 
 
 3.7.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 li02. The WHOLE_NUMBER shall not be zero.
 
@@ -653,7 +653,7 @@ Example syntax:
         # EOL
 
 3.9.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 nu02. The only tokens allowed on a null directive are the '#' and
       the end-of-line indicator EOL.
@@ -666,7 +666,7 @@ nu10. The null directive has no effect.
 
 
 3.10 The processor-dependent directive
---------------------------------
+--------------------------------------
 
 Example syntax:
         # token-list EOL
@@ -688,7 +688,7 @@ nd20. The result of evaluating a processor-dependent directive is processor-depe
 
 
 4 Macro recognition and expansion
----------------------------------
+=================================
 
 NOTE: This section is currently incomplete. A self-contained
 specification for macro recognition and expansion will appear in a
