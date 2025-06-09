@@ -244,22 +244,22 @@ di00. The directives listed in di01-di08 are only recognized as such
       directive line exactly matches one of the standard directive
       names ('define', 'if', 'pragma', etc.).
 
-di01. The '#define' object-like macro directive
+di01. The #define object-like macro directive
 
-di02. The '#define' function-like macro directive
+di02. The #define function-like macro directive
 
-di03. The '#undef' directive
+di03. The #undef directive
 
-di04. The '#include' directive
+di04. The #include directive
 
-di05. The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' conditional directives
+di05. The #if, #ifdef, #ifndef, #elif, #elifdef,
+      #elifndef, #else, #endif conditional directives
 
-di06. The '#error' and '#warning' directives
+di06. The #error and #warning directives
 
-di07. The '#line' directive
+di07. The #line directive
 
-di08. The '#pragma' directive
+di08. The #pragma directive
 
 di09. The null directive
 
@@ -267,8 +267,8 @@ di10. The processor-dependent directive
 
 
 
-3.1 The '#define' object-like macro directive
----------------------------------------------
+3.1 The #define object-like macro directive
+-------------------------------------------
 
 See also the rules for expanding object-like macros in
 section 4 "Macro identification and expansion" below.
@@ -315,8 +315,8 @@ do28. Two replacement lists are identical if and only if the
 
 
 
-3.2 The '#define' function-like macro directive
------------------------------------------------
+3.2 The #define function-like macro directive
+---------------------------------------------
 
 See also the rules for expanding function-like macros in the
 section 4 "Macro identification and expansion" below.
@@ -375,8 +375,8 @@ df34. An identifier currently defined as a function-like macro shall
 
 
 
-3.3 The '#undef' directive
---------------------------
+3.3 The #undef directive
+------------------------
 
 Example syntax:
       #undef ID EOL
@@ -404,8 +404,8 @@ ud22. The definition for the object-like macro or function-like macro
 
 
 
-3.4 The '#include' directive
-----------------------------
+3.4 The #include directive
+--------------------------
 
 Example syntax:
       #include CHARACTER_STRING EOL
@@ -450,9 +450,9 @@ in28. Unlike INCLUDE lines (see Fortran 2023 section 6.4, "Including
 
 
 
-3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
-      '#elifndef', '#else', '#endif' conditional directives
------------------------------------------------------------
+3.5 The #if, #ifdef, #ifndef, #elif, #elifdef, #elifndef, #else,
+        #endif conditional directives
+----------------------------------------------------------------
 
 Example syntax (extra spacing for illustration purposes only):
     General form:
@@ -596,8 +596,8 @@ ix65. When all controlling expressions in the <if-head> construct and
 
 
 
-3.6 The '#error' and '#warning' directives
-------------------------------------------
+3.6 The #error and #warning directives
+--------------------------------------
 
 Example syntax:
         #error token-list EOL
@@ -620,14 +620,14 @@ ew04. The processor produces a diagnostic message that includes
       the token-list.
 
 ew06. The processor shall reject a submitted program if the processor
-      encounters a '#error' directive during preprocessing.
+      encounters a #error directive during preprocessing.
 
 ew10. Additional behavior is processor-dependent.
 
 
 
-3.7 The '#line' directive
--------------------------
+3.7 The #line directive
+-----------------------
 
 Example syntax:
         #line WHOLE_NUMBER EOL
@@ -655,15 +655,15 @@ li24. In the second form, the #line directive causes the processor
 
 
 
-3.8 The '#pragma' directive
----------------------------
+3.8 The #pragma directive
+-------------------------
 
 Example syntax:
         #pragma token-list EOL
 
 
 3.8.1 Static semantics specifications
---------------------------------------
+-------------------------------------
 
 pr02. The token-list may not be empty.
 
@@ -781,8 +781,8 @@ ex05. When evaluating a #if or #elif directive, first every instance
       replaced with the resulting WHOLE_NUMBER. A 'defined' expression
       evaluates to 1 if the identifier is currently defined as a macro
       name (that is, if it is predefined or if it has been the subject
-      of a '#define' preprocessing directive without an intervening
-      '#undef' directive with the same subject identifier), 0 if it is
+      of a #define preprocessing directive without an intervening
+      #undef directive with the same subject identifier), 0 if it is
       not.
 
 ex10. When evaluating a #if or #elif directive and after 'defined'
@@ -1006,7 +1006,7 @@ General differences include:
 
 dfc10. FPP does not recognize '//'-style comments on directive lines.
 
-dfc20. FPP omits the '#embed' directive added in C 2023.
+dfc20. FPP omits the #embed directive added in C 2023.
 
 dfc30. FPP omits (and forbids) many predefined macros whose names
        begin with '__STDC'.
@@ -1014,10 +1014,10 @@ dfc30. FPP omits (and forbids) many predefined macros whose names
 dfc40. FPP expands macro invocations inside Fortran comments on
        source lines and in Fortran comment lines.
 
-dfc60. The token-list in the FPP '#pragma' directive may not be empty.
+dfc60. The token-list in the FPP #pragma directive may not be empty.
 
-Differences in the conditional expression grammar for '#if' and
-'#elif' directives include:
+Differences in the conditional expression grammar for #if and #elif
+directives include:
 
 dfc80. FPP omits the comma operator.
 
