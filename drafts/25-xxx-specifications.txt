@@ -521,7 +521,7 @@ ix10. The #elifdef and #elifndef directives are evaluated as if they
 
 ix12. In the descriptions below, <group> constructs may be "skipped".
       When skipped:
-      
+
         - Conditional directives within the <group> are recognized
           only to maintain proper nesting of conditional directives.
         - No nested directives in the <group> are processed.
@@ -722,7 +722,7 @@ nd02. The token-list in a processor-dependent directive may not begin
 
 
 3.10.2 Evaluation semantics specifications
--------------------------------------------
+------------------------------------------
 
 nd20. The result of evaluating a processor-dependent directive is
       processor-dependent.
@@ -956,8 +956,8 @@ pm40. '__DATE__' shall be predefined to a CHARACTER_STRING
 pm41. '__DATE__' shall be a character literal constant of the form
       "Mmm dd yyyy", where the names of the months are the same as
       those specified in C 2023 for the asctime function, and the
-      first character of dd is a space character if the value is less
-      than 10.
+      first character of "dd" is a space character if the value is
+      less than 10.
 
 pm42. If the date of translation is not available, a
       processor-dependent valid date shall be supplied.
@@ -968,11 +968,11 @@ pm42. If the date of translation is not available, a
 
 pm50. '__TIME__' shall be predefined to a CHARACTER_STRING
       representing the time of translation of the preprocessing
-      program unit
+      program unit.
 
 pm51. '__TIME__' shall be a character literal constant of the form
-      "hh:mm:ss", where hh is the hour of the day, mm is the minutes
-      of the hour, and ss is the seconds of the minute.
+      "hh:mm:ss", where "hh" is the hour of the day, "mm" is the
+      minutes of the hour, and "ss" is the seconds of the minute.
 
 pm52. If the time of translation is not available, a
       processor-dependent valid time shall be supplied.
@@ -981,11 +981,12 @@ pm52. If the time of translation is not available, a
 7.5 __STDF__
 ------------
 
-'__STDF__' is an analog to '__STDC__' in C and '__cplusplus' in C++. Its
-primary role is to provide preprocessor-visible and vendor-independent
-identification of the underlying target language (i.e., "the processor
-is Fortran"), which enables one to write multi-language header files
-with conditional compilation based on language.
+'__STDF__' is an analog to '__STDC__' in C and '__cplusplus' in C++.
+Its primary role is to provide preprocessor-visible and
+vendor-independent identification of the underlying target language
+(i.e., "the processor is Fortran"), which enables one to write
+multi-language header files with conditional compilation based on
+language.
 
 pm61. '__STDF__' shall be predefined to the WHOLE_NUMBER 1
 
