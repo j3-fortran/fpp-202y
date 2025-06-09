@@ -784,7 +784,7 @@ ex05. When evaluating a #if or #elif directive, first every instance
       '#undef' directive with the same subject identifier), 0 if it is
       not.
 
-ex10. When evaluating a #if or #elif directive and after 'define'
+ex10. When evaluating a #if or #elif directive and after 'defined'
       processing described in ex05, the token-list is then subjected
       to macro expansion and replacement (see section 4 "Macro
       recognition and expansion"). This results in a token-list of the
