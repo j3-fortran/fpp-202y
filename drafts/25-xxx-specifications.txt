@@ -213,7 +213,7 @@ to11. The following tokens also appear in the illustrative syntax
       |---------------------|---------------------------------------|
       | ID                  | Regex [A-Za-z][A-Za-z0-9_]*           |
       | WHOLE_NUMBER        | Regex [0-9]+                          |
-      | CHARACTER_STRING    | RegEx "[^"\n]*" where '\n' represents |
+      | CHARACTER_STRING    | Regex "[^"\n]*" where '\n' represents |
       |                     |    new-line.                          |
       | EOL                 | The new-line ending a directive line, |
       |                     | after continuation processing (see    |
@@ -743,7 +743,7 @@ forthcoming paper.
 
 We intend for macro recognition and expansion to operate almost
 exactly as specified in C 2023 section 6.10.5, however it will differ
-in minor ways to accomodate Fortran syntax. The following exceptions
+in minor ways to accommodate Fortran syntax. The following exceptions
 have consensus amongst the authors:
 
 me10. When determining argument boundaries in the invocation of a
