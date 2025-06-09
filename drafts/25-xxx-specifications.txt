@@ -20,7 +20,7 @@ a cpp-like preprocessor for Fortran 202Y (paper 25-114r2).
 This is the formal specifications document, revised according to the
 discussion arising from 25-114r2.
 
-Terminology: For the purpose of this specification, the 'preprocessor'
+Terminology: For the purpose of this specification, the "preprocessor"
 encompasses any stages of preprocessing of the input text. For didactic
 purposes, that might include additional phases of "preprocessing" that
 help define the expected priorities of preprocessing behaviors. (In past
@@ -151,7 +151,7 @@ co07. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 section 5.1.1.2 bullet 3.
 
 co09. In a directive line, the '!' character is not interpreted as introducing
-      a Fortran-style comment, and neither the `!` character nor any subsequent
+      a Fortran-style comment, and neither the '!' character nor any subsequent
       text are removed by the preprocessor.
 
 co11. Directive lines (by definition) cannot contain Fortran
@@ -328,7 +328,7 @@ df10. The replacement-list may be the empty sequence of tokens.
 df12. Whitespace before or after the replacement-list is not
       considered to be part of the replacement-list.
 
-df16. The "..." between the parentheses specifies that the function-like
+df16. The '...' between the parentheses specifies that the function-like
       macro may be invoked with a variable number of arguments. (See the
       section "Macro recognition and expansion" for the semantics of function-like macros
       with a variable number of arguments.)
@@ -389,7 +389,7 @@ Example syntax:
 --------------------------------------
 
 in06. In the second form, the character-list is any sequence of
-      processor-dependent characters except EOL and `>`.
+      processor-dependent characters except EOL and '>'.
 
 in08. In the third form, the token-list does not match the previous
       two forms.
@@ -478,12 +478,12 @@ if30. The conditional directive chains must properly nest.
 
 
 ix05. The #ifdef and #ifndef directives are evaluated as if they had been
-      written "#if defined(ID)" and "#if !defined(ID)" respectively.
+      written '#if defined(ID)' and '#if !defined(ID)' respectively.
       (For brevity, the descriptions of #ifdef and #ifndef directives
       below are omitted, and assume this transformation.)
 
 ix10. The #elifdef and #elifndef directives are evaluated as if they had
-      been written "#elif defined(ID)" and "#elif !defined(ID)"
+      been written '#elif defined(ID)' and '#elif !defined(ID)'
       respectively. (For brevity, the descriptions below
       assume this transformation has been made).
 
@@ -584,7 +584,7 @@ ew04. The processor produces a diagnostic message that includes
       the token-list.
 
 ew06. The processor shall reject a submitted program if the processor
-      encounters a `#error` directive during preprocessing.
+      encounters a '#error' directive during preprocessing.
 
 ew10. Additional behavior is processor-dependent.
 
@@ -628,7 +628,7 @@ Example syntax:
 
 pr02. The token-list may not be empty.
 
-pr10. The token-list shall not begin with the identifier `STDF`, either
+pr10. The token-list shall not begin with the identifier 'STDF', either
       before or after macro expansion.
 
 
@@ -704,8 +704,8 @@ have consensus amongst the authors:
 
 me10. When determining argument boundaries in the invocation of a
       function-like macro, FPP ignores commas surrounded by matching
-      sets of `[  ]` or `(/  /)` brackets, in addition to matching
-      sets of `(  )` parentheses (as specified in C 2023 section
+      sets of '[  ]' or '(/  /)' brackets, in addition to matching
+      sets of '(  )' parentheses (as specified in C 2023 section
       6.10.5-11).
 
 Additional details are still under discussion and will be outlined in
@@ -729,14 +729,14 @@ above.
 
 
 ex05. When evaluating a #if or #elif directive, first every instance of the
-      `defined ID` or `defined(ID)` operator is evaluated and replaced with
-      the resulting WHOLE_NUMBER. A `defined` expression evaluates to 1 if
+      'defined ID' or 'defined(ID)' operator is evaluated and replaced with
+      the resulting WHOLE_NUMBER. A 'defined' expression evaluates to 1 if
       the identifier is currently defined as a macro name (that is, if it is
-      predefined or if it has been the subject of a `#define` preprocessing
-      directive without an intervening `#undef` directive with the same
+      predefined or if it has been the subject of a '#define' preprocessing
+      directive without an intervening '#undef' directive with the same
       subject identifier), 0 if it is not.
 
-ex10. When evaluating a #if or #elif directive and after `define` processing
+ex10. When evaluating a #if or #elif directive and after 'define' processing
       described in ex05, the token-list is then subjected to macro expansion
       and replacement (see the section "Macro recognition and expansion").
       This results in a token-list of the expression to be
@@ -850,24 +850,24 @@ pm00. Macro names beginning with a leading underscore followed by an uppercase
       letter or a second underscore are reserved to the processor. Reserved
       names shall not be the subject of a #define or #undef preprocessing
       directive within a program unit.
-      [Note: Any macro name matching the regular expression `/^_[A-Z_][A-Za-z0-9_]*$/`
+      [Note: Any macro name matching the regular expression '/^_[A-Z_][A-Za-z0-9_]*$/'
       is considered reserved.]
 
 pm01. Any macro name predefined by the processor shall begin with a
       leading underscore followed by an uppercase letter or a second
       underscore.
 
-pm02. The processor shall not predefine the macro `__cplusplus`,
-      nor any macro whose name starts with `__STDC`.
+pm02. The processor shall not predefine the macro '__cplusplus',
+      nor any macro whose name starts with '__STDC'.
 
 pm03. Unless listed in the following subclauses, the processor shall not
-      predefine any macro whose name starts with `__STDF` or `__stdf`.
+      predefine any macro whose name starts with '__STDF' or '__stdf'.
 
 pm10. The values of the predefined macros listed in the following subclauses
-      (except for `__FILE__` and `__LINE__`) remain constant throughout the
+      (except for '__FILE__' and '__LINE__') remain constant throughout the
       program unit.
 
-pm12. The identifier `defined` shall not be the subject of a #define or a #undef
+pm12. The identifier 'defined' shall not be the subject of a #define or a #undef
       preprocessing directive.
 
 pm15. The presumed source file name and line number can be changed by the #line
@@ -878,23 +878,23 @@ The following macro names shall be defined by the processor:
 7.1 __LINE__
 ------------
 
-pm20. `__LINE__` shall be predefined to a WHOLE_NUMBER representing
+pm20. '__LINE__' shall be predefined to a WHOLE_NUMBER representing
       the presumed line number (within the current source file)
       of the current source line.
 
 7.2 __FILE__
 ------------
 
-pm30. `__FILE__` shall be predefined to a CHARACTER_STRING representing
+pm30. '__FILE__' shall be predefined to a CHARACTER_STRING representing
       the presumed name of the current source file
 
 7.3 __DATE__
 ------------
 
-pm40. `__DATE__` shall be predefined to a CHARACTER_STRING representing
+pm40. '__DATE__' shall be predefined to a CHARACTER_STRING representing
       the date of translation of the preprocessing program unit
 
-pm41. `__DATE__` shall be a character literal constant of the form "Mmm dd yyyy",
+pm41. '__DATE__' shall be a character literal constant of the form "Mmm dd yyyy",
       where the names of the months are the same as those specified in C 2023 for the
       asctime function, and the first character of dd is a space character if the
       value is less than 10.
@@ -905,10 +905,10 @@ pm42. If the date of translation is not available, a processor-dependent
 7.4 __TIME__
 ------------
 
-pm50. `__TIME__` shall be predefined to a CHARACTER_STRING representing
+pm50. '__TIME__' shall be predefined to a CHARACTER_STRING representing
       the time of translation of the preprocessing program unit
 
-pm51. `__TIME__` shall be a character literal constant of the form "hh:mm:ss",
+pm51. '__TIME__' shall be a character literal constant of the form "hh:mm:ss",
       where hh is the hour of the day, mm is the minutes of the hour, and ss is the
       seconds of the minute.
 
@@ -923,7 +923,7 @@ identification of the underlying target language (i.e., "the processor
 is Fortran"), which enables one to write multi-language header files
 with conditional compilation based on language.
 
-pm61. `__STDF__` shall be predefined to the WHOLE_NUMBER 1
+pm61. '__STDF__' shall be predefined to the WHOLE_NUMBER 1
 
 Appendix A: Divergences from C
 ==============================
@@ -937,33 +937,33 @@ as a reference for readers to assist in comparisons.
 
 General differences include:
 
-dfc10. FPP does not recognize `//`-style comments on directive lines.
+dfc10. FPP does not recognize '//'-style comments on directive lines.
 
-dfc20. FPP omits the `#embed` directive added in C 2023.
+dfc20. FPP omits the '#embed' directive added in C 2023.
 
 dfc30. FPP omits (and forbids) many predefined macros whose names begin
-       with `__STDC`.
+       with '__STDC'.
 
 dfc40. FPP expands macro invocations inside Fortran comments on
        source lines and in Fortran comment lines.
 
-dfc60. The token-list in the FPP `#pragma` directive may not be empty.
+dfc60. The token-list in the FPP '#pragma' directive may not be empty.
 
-Differences in the conditional expression grammar for `#if` and
-`#elif` directives include:
+Differences in the conditional expression grammar for '#if' and
+'#elif' directives include:
 
 dfc80. FPP omits the comma operator.
 
 dfc82. FPP omits character literal constants.
 
-dfc84. FPP omits the `true` and `false` boolean literals added in
+dfc84. FPP omits the 'true' and 'false' boolean literals added in
        C 2023.
 
-dfc86. FPP omits the `__has_include` expression added in C 2023.
+dfc86. FPP omits the '__has_include' expression added in C 2023.
 
-dfc88. FPP omits the `__has_c_attribute` expression added in C 2023.
+dfc88. FPP omits the '__has_c_attribute' expression added in C 2023.
 
-dfc90. FPP omits the `__has_embed` expression added in C 2023.
+dfc90. FPP omits the '__has_embed' expression added in C 2023.
 
 Differences in macro recognition and expansion are currently
 documented explicitly in section 4.1.
