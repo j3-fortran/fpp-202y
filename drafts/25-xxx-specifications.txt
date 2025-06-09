@@ -166,7 +166,7 @@ Translation phases).
 As such, there is a specific lexicon of tokens recognized by
 the preprocessor (including unrecognizable tokens).
 As in C 2023, these tokens are recognized after any line and
-comment handling specified in the "Line" and "Comments" sections above.
+comment handling specified in section 2.1 "Lines" and section 2.4 "Comments" above.
 
 We use illustrative syntax to describe the directive specifications,
 and the translation behavior of the preprocess on Fortran comment lines
@@ -215,8 +215,8 @@ below.
 We use illustrative syntax in the detailed descriptions. Detailed
 syntax will appear in a paper to be named later.
 
-Most directives take a sequence of tokens (as defined in the section
-"Token lexicon" above). In the detailed descriptions and illustrative
+Most directives take a sequence of tokens (as defined in
+section 2.5 "Token lexicon" above). In the detailed descriptions and illustrative
 syntax below, we denote these as just "token-list" or
 "replacement-list".
 
@@ -252,8 +252,8 @@ di10. The processor-dependent directive
 3.1 The '#define' object-like macro directive
 ---------------------------------------------
 
-See also the rules for expanding object-like macros in the
-section "Macro recognition and expansion" below.
+See also the rules for expanding object-like macros in
+section 4 "Macro recognition and expansion" below.
 
 Example syntax:
       #define ID replacement-list EOL
@@ -300,7 +300,7 @@ do28. Two replacement lists are identical if and only if the
 -----------------------------------------------
 
 See also the rules for expanding function-like macros in the
-section "Macro recognition and expansion" below.
+section 4 "Macro recognition and expansion" below.
 
 Example syntax:
       #define ID() replacement-list EOL
@@ -320,7 +320,7 @@ df04. The identifier-list is a comma-separated list of ID tokens.
 df06. No identifier may appear more than once in the identifier-list.
 
 df08. The identifier names in the identifier-list define macro "parameters" that affect
-      macro expansion of the replacement list. (See the section "Macro recognition and
+      macro expansion of the replacement list. (See section 4 "Macro recognition and
       expansion" for the semantics of function-like macro expansion.)
 
 df10. The replacement-list may be the empty sequence of tokens.
@@ -329,8 +329,8 @@ df12. Whitespace before or after the replacement-list is not
       considered to be part of the replacement-list.
 
 df16. The '...' between the parentheses specifies that the function-like
-      macro may be invoked with a variable number of arguments. (See the
-      section "Macro recognition and expansion" for the semantics of function-like macros
+      macro may be invoked with a variable number of arguments. (See
+      section 4 "Macro recognition and expansion" for the semantics of function-like macros
       with a variable number of arguments.)
 
 
@@ -361,8 +361,8 @@ Example syntax:
 3.3.1 Static semantics specifications
 -------------------------------------
 
-ud02. ID shall not be one of the macros defined in the "Predefined macros"
-      section below.
+ud02. ID shall not be one of the macros defined in section 7 "Predefined macros"
+       below.
 
 ud04. The specified identifier may or may not have been defined.
 
@@ -399,7 +399,7 @@ in08. In the third form, the token-list does not match the previous
 -----------------------------------------
 
 in18. In the third form, the token-list is processed as in Fortran
-      source fragments (see the section on "Macro recognition and
+      source fragments (see section 4 "Macro recognition and
       expansion" below). The directive resulting after all replacements
       shall match one of the previous two forms, and evaluation proceeds
       as such.
@@ -415,7 +415,7 @@ in24. If the file is located, the processor replaces the #include
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
 
-in28. Unlike INCLUDE lines (see the section on "INCLUDE lines"),
+in28. Unlike INCLUDE lines (see Fortran 2023 section 6.4, "Including source text"),
       the #include directive is not prohibited from including the
       same source file at a deeper level of nesting.
 
@@ -510,17 +510,17 @@ ix14. In the descriptions below, <group> constructs that are not
 
 ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       constructs that are not skipped, macros in the token-lists are
-      processed as described in the section "Macro recognition and expansion".
+      processed as described in section 4 "Macro recognition and expansion".
 
 ix20. After expansion, the resulting token list in <if-head> and <if-elif>
       constructs that are not skipped must be able to be parsed as a valid integer expression as
-      described in the section "Expressions allowed in #if and #elif
+      described in section 5 "Expressions allowed in #if and #elif
       directives" static semantics. This expression is called the "controlling
       expression" for the directive.
 
 ix25. The values of controlling expressions in <if-head> and <if-elif>
       constructs are evaluated according to the evaluation semantics
-      described in the section "Expressions allowed in #if and #elif
+      described in section 5 "Expressions allowed in #if and #elif
       directives".
 
 ix30. If the controlling expression in an <if-head> evaluates to a
@@ -738,7 +738,7 @@ ex05. When evaluating a #if or #elif directive, first every instance of the
 
 ex10. When evaluating a #if or #elif directive and after 'define' processing
       described in ex05, the token-list is then subjected to macro expansion
-      and replacement (see the section "Macro recognition and expansion").
+      and replacement (see section 4 "Macro recognition and expansion").
       This results in a token-list of the expression to be
       evaluated.
 
