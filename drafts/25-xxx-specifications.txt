@@ -22,7 +22,7 @@ This is the formal specifications document, revised according to the
 discussion arising from 25-114r2.
 
 Terminology: For the purpose of this specification, the "preprocessor"
-encompasses any stages of preprocessing of the input text. For
+encompasses all stages of preprocessing of the input text. For
 didactic purposes, that might include additional phases of
 "preprocessing" that help define the expected priorities of
 preprocessing behaviors. (In past discussions, these have included
