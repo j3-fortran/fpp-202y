@@ -332,7 +332,7 @@ Example syntax:
 3.2.1 Static semantics specifications
 -------------------------------------
 
-df02. The identifier ID must be immediately followed by the
+df02. The identifier ID must be immediately followed by a
       left parenthesis '(' with no intervening whitespace.
 
 df04. The identifier-list is a comma-separated list of ID tokens.
