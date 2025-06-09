@@ -52,7 +52,7 @@ li13. In fixed-form input files, a '#' in column 6 of a non-comment
 
 li15. A preprocessor directive can be continued with a backslash '\'
       immediately followed by a new-line. The backslash and new-line
-      are deleted, the content of the subsequent line are textually
+      are deleted, the content of the subsequent line is textually
       appended to the current directive, and the subsequent line is
       deleted. This process repeats until the current directive does
       not end with a backslash '\' immediately followed by a new-line.
