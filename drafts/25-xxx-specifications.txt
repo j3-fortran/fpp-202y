@@ -271,7 +271,7 @@ di10. The processor-dependent directive
 ---------------------------------------------
 
 See also the rules for expanding object-like macros in
-section 4 "Macro recognition and expansion" below.
+section 4 "Macro identification and expansion" below.
 
 Example syntax:
       #define ID replacement-list EOL
@@ -319,7 +319,7 @@ do28. Two replacement lists are identical if and only if the
 -----------------------------------------------
 
 See also the rules for expanding function-like macros in the
-section 4 "Macro recognition and expansion" below.
+section 4 "Macro identification and expansion" below.
 
 Example syntax:
       #define ID() replacement-list EOL
@@ -341,8 +341,8 @@ df06. No identifier may appear more than once in the identifier-list.
 
 df08. The identifier names in the identifier-list define macro
       "parameters" that affect macro expansion of the replacement
-      list. (See section 4 "Macro recognition and expansion" for the
-      semantics of function-like macro expansion.)
+      list. (See section 4 "Macro identification and expansion" for
+      the semantics of function-like macro expansion.)
 
 df10. The replacement-list may be the empty sequence of tokens.
 
@@ -351,9 +351,9 @@ df12. Whitespace before or after the replacement-list is not
 
 df16. The '...' between the parentheses specifies that the
       function-like macro may be invoked with a variable number of
-      arguments. (See section 4 "Macro recognition and expansion" for
-      the semantics of function-like macros with a variable number of
-      arguments.)
+      arguments. (See section 4 "Macro identification and expansion"
+      for the semantics of function-like macros with a variable number
+      of arguments.)
 
 
 
@@ -427,7 +427,7 @@ in08. In the third form, the token-list does not match the previous
 -----------------------------------------
 
 in18. In the third form, the token-list is processed as in Fortran
-      source fragments (see section 4 "Macro recognition and
+      source fragments (see section 4 "Macro identification and
       expansion" below). The directive resulting after all
       replacements shall match one of the previous two forms, and
       evaluation proceeds as such.
@@ -543,7 +543,7 @@ ix14. In the descriptions below, <group> constructs that are not
 
 ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       constructs that are not skipped, macros in the token-lists are
-      processed as described in section 4 "Macro recognition and
+      processed as described in section 4 "Macro identification and
       expansion".
 
 ix20. After expansion, the resulting token list in <if-head> and
@@ -730,18 +730,18 @@ nd20. The result of evaluating a processor-dependent directive is
 
 
 
-4 Macro recognition and expansion
-=================================
+4 Macro identification and expansion
+====================================
 
 NOTE: This section is currently incomplete. A self-contained
-specification for macro recognition and expansion will appear in a
+specification for macro identification and expansion will appear in a
 forthcoming paper.
 
 
-4.1 Comparison to Macro recognition and expansion in CPP
---------------------------------------------------------
+4.1 Comparison to Macro identification and expansion in CPP
+-----------------------------------------------------------
 
-We intend for macro recognition and expansion to operate almost
+We intend for macro identification and expansion to operate almost
 exactly as specified in C 2023 section 6.10.5, however it will differ
 in minor ways to accommodate Fortran syntax. The following exceptions
 have consensus amongst the authors:
@@ -788,8 +788,8 @@ ex05. When evaluating a #if or #elif directive, first every instance
 ex10. When evaluating a #if or #elif directive and after 'defined'
       processing described in ex05, the token-list is then subjected
       to macro expansion and replacement (see section 4 "Macro
-      recognition and expansion"). This results in a token-list of the
-      expression to be evaluated.
+      identification and expansion"). This results in a token-list of
+      the expression to be evaluated.
 
 ex12. Since expression evaluation occurs *after* macro expansion,
       there will be no object-like macro or function-like macro
@@ -1032,5 +1032,5 @@ dfc88. FPP omits the '__has_c_attribute' expression added in C 2023.
 
 dfc90. FPP omits the '__has_embed' expression added in C 2023.
 
-Differences in macro recognition and expansion are currently
+Differences in macro identification and expansion are currently
 documented explicitly in section 4.1.
