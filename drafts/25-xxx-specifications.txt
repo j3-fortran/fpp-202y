@@ -980,7 +980,7 @@ pm52. If the time of translation is not available, a
 7.5 __STDF__
 ------------
 
-__STDF__ is an analog to __STDC__ in C and __cplusplus in C++. Its
+'__STDF__' is an analog to '__STDC__' in C and '__cplusplus' in C++. Its
 primary role is to provide preprocessor-visible and vendor-independent
 identification of the underlying target language (i.e., "the processor
 is Fortran"), which enables one to write multi-language header files
