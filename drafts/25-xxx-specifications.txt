@@ -521,6 +521,7 @@ ix10. The #elifdef and #elifndef directives are evaluated as if they
 
 ix12. In the descriptions below, <group> constructs may be "skipped".
       When skipped:
+      
         - Conditional directives within the <group> are recognized
           only to maintain proper nesting of conditional directives.
         - No nested directives in the <group> are processed.
