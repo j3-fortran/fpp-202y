@@ -298,7 +298,7 @@ do20. This #define directive defines an object-like macro named by ID
       with a replacement list comprised of the tokens specified in the
       replacement-list.
 
-do22. There is one namespace for all macro identifiers.
+do22. There is one name space for all macro names.
 
 do24. The #define directive does not scan the replacement-list
       for macros to expand.
