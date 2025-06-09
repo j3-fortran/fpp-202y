@@ -11,6 +11,7 @@ References: 25-114r2 Fortran preprocessor requirements
                    (working draft N3096)
 
 
+
 1 Introduction
 ==============
 
@@ -28,8 +29,10 @@ discussions, these have included line continuation processing, comment
 handling, and tokenization for the preprocessor.)
 
 
+
 2 Lexical specifications
 ========================
+
 
 2.1 Lines
 ---------
@@ -136,6 +139,7 @@ ws11. In fixed-form input, macro names are not recognized as such when
       spaces are inserted into their invocations.
 
 
+
 2.4 Comments
 ------------
 
@@ -156,6 +160,7 @@ co09. In a directive line, the '!' character is not interpreted as introducing
 
 co11. Directive lines (by definition) cannot contain Fortran
       fixed-form 'C' or '*' style comments.
+
 
 
 2.5 Token lexicon
@@ -202,6 +207,7 @@ to11. The following tokens also appear in the illustrative syntax below.
       | EOL                 | The new-line ending a directive line,     |
       |                     | after continuation processing (see li15). |
       |---------------------|-------------------------------------------|
+
 
 
 
@@ -259,6 +265,7 @@ Example syntax:
       #define ID replacement-list EOL
 
 
+
 3.1.1 Static semantics specifications
 -------------------------------------
 
@@ -269,6 +276,7 @@ do04. The identifier ID must be immediately followed by whitespace
 
 do06. Whitespace before or after the replacement-list is not
       considered to be part of the replacement-list.
+
 
 
 3.1.2 Evaluation semantics specifications
@@ -295,7 +303,6 @@ do28. Two replacement lists are identical if and only if the
 
 
 
-
 3.2 The '#define' function-like macro directive
 -----------------------------------------------
 
@@ -307,6 +314,7 @@ Example syntax:
       #define ID(identifier-list) replacement-list EOL
       #define ID(...) replacement-list EOL
       #define ID(identifier-list, ...) replacement-list EOL
+
 
 
 3.2.1 Static semantics specifications
@@ -334,6 +342,7 @@ df16. The '...' between the parentheses specifies that the function-like
       with a variable number of arguments.)
 
 
+
 3.2.2 Evaluation semantics specifications
 -----------------------------------------
 
@@ -351,11 +360,13 @@ df34. An identifier currently defined as a function-like macro shall not
       replacement lists are identical (as in C 2023).
 
 
+
 3.3 The '#undef' directive
 --------------------------
 
 Example syntax:
       #undef ID EOL
+
 
 
 3.3.1 Static semantics specifications
@@ -367,6 +378,7 @@ ud02. ID shall not be one of the macros defined in section 7 "Predefined macros"
 ud04. The specified identifier may or may not have been defined.
 
 
+
 3.3.2 Evaluation semantics specifications
 -----------------------------------------
 
@@ -375,6 +387,8 @@ ud20. If no definition exists for the identifier ID, this directive has
 
 ud22. The definition for the object-like macro or function-like macro
       named by ID is removed.
+
+
 
 3.4 The '#include' directive
 ----------------------------
@@ -418,6 +432,7 @@ in26. A #include directive may appear in an included file, up to a
 in28. Unlike INCLUDE lines (see Fortran 2023 section 6.4, "Including source text"),
       the #include directive is not prohibited from including the
       same source file at a deeper level of nesting.
+
 
 
 3.5 The '#if', '#ifdef', '#ifndef', '#elif', '#elifdef',
@@ -560,6 +575,7 @@ ix65. When all controlling expressions in the <if-head> construct and
       all <group>s in these constructs are skipped.
 
 
+
 3.6 The '#error' and '#warning' directives
 ------------------------------------------
 
@@ -589,6 +605,7 @@ ew06. The processor shall reject a submitted program if the processor
 ew10. Additional behavior is processor-dependent.
 
 
+
 3.7 The '#line' directive
 -------------------------
 
@@ -615,6 +632,8 @@ li20. In both forms, the #line directive causes the processor
 li24. In the second form, the #line directive causes the processor
       to change the presumed file name of the source file to be the
       contents of the CHARACTER_STRING.
+
+
 
 3.8 The '#pragma' directive
 ---------------------------
@@ -646,11 +665,13 @@ pr24. Any #pragma that is not recognized by the processor
       is ignored.
 
 
+
 3.9 The null directive
 ----------------------
 
 Example syntax:
         # EOL
+
 
 3.9.1 Static semantics specifications
 -------------------------------------
@@ -665,11 +686,13 @@ nu02. The only tokens allowed on a null directive are the '#' and
 nu10. The null directive has no effect.
 
 
+
 3.10 The processor-dependent directive
 --------------------------------------
 
 Example syntax:
         # token-list EOL
+
 
 3.10.1 Static semantics specifications
 --------------------------------------
@@ -694,6 +717,7 @@ NOTE: This section is currently incomplete. A self-contained
 specification for macro recognition and expansion will appear in a
 forthcoming paper.
 
+
 4.1 Comparison to Macro recognition and expansion in CPP
 --------------------------------------------------------
 
@@ -711,17 +735,21 @@ me10. When determining argument boundaries in the invocation of a
 Additional details are still under discussion and will be outlined in
 a future paper.
 
+
 4.2 The identifiers __VA_ARGS__ and __VA_OPT__
 ----------------------------------------------
 
 As specified in C 2023 section 6.10.5.1, see also section 4.1
 above.
 
+
 4.9 The '#' and '##' operators
 ------------------------------
 
 As specified in C 2023 section 6.10.5.{2,3}, see also section 4.1
 above.
+
+
 
 
 5 Expressions allowed in #if and #elif directives
@@ -843,6 +871,9 @@ op13. The logical AND operator guarantees left-to-right evaluation; if the first
       resulting value is 0. Otherwise, the second operand is evaluated
       and provides the resulting value.
 
+
+
+
 7 Predefined macros
 ===================
 
@@ -875,6 +906,7 @@ pm15. The presumed source file name and line number can be changed by the #line
 
 The following macro names shall be defined by the processor:
 
+
 7.1 __LINE__
 ------------
 
@@ -882,11 +914,13 @@ pm20. '__LINE__' shall be predefined to a WHOLE_NUMBER representing
       the presumed line number (within the current source file)
       of the current source line.
 
+
 7.2 __FILE__
 ------------
 
 pm30. '__FILE__' shall be predefined to a CHARACTER_STRING representing
       the presumed name of the current source file
+
 
 7.3 __DATE__
 ------------
@@ -902,6 +936,7 @@ pm41. '__DATE__' shall be a character literal constant of the form "Mmm dd yyyy"
 pm42. If the date of translation is not available, a processor-dependent
       valid date shall be supplied.
 
+
 7.4 __TIME__
 ------------
 
@@ -915,8 +950,10 @@ pm51. '__TIME__' shall be a character literal constant of the form "hh:mm:ss",
 pm52. If the time of translation is not available, a processor-dependent
       valid time shall be supplied.
 
+
 7.5 __STDF__
 ------------
+
 __STDF__ is an analog to __STDC__ in C and __cplusplus in C++. Its
 primary role is to provide preprocessor-visible and vendor-independent
 identification of the underlying target language (i.e., "the processor
@@ -924,6 +961,9 @@ is Fortran"), which enables one to write multi-language header files
 with conditional compilation based on language.
 
 pm61. '__STDF__' shall be predefined to the WHOLE_NUMBER 1
+
+
+
 
 Appendix A: Divergences from C
 ==============================
