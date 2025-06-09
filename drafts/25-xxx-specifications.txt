@@ -738,7 +738,7 @@ specification for macro identification and expansion will appear in a
 forthcoming paper.
 
 
-4.1 Comparison to Macro identification and expansion in CPP
+4.1 Comparison to macro identification and expansion in CPP
 -----------------------------------------------------------
 
 We intend for macro identification and expansion to operate almost
