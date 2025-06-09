@@ -206,7 +206,7 @@ to09. The preprocessor is line-oriented. To define the end of
       is shown explicitly in the illustrative syntax.
 
 to11. The following tokens also appear in the illustrative syntax
-below.
+      below.
 
       |---------------------|---------------------------------------|
       | Token name          |  Characters                           |
