@@ -828,10 +828,9 @@ op03. A "precedence level" is assigned to each operator that
       containing other operators at different precedence levels.
 
 op05. An "associativity" is assigned to each operator that determines
-      how operators at the same precedence level are combined. -
-      "left" means the operator binds to the left, - "right" means the
-      operator binds to the right. - "nonassoc" means that the
-      operator is not associative.
+      how operators at the same precedence level are combined. "left"
+      means the operator binds to the left, "right" means the operator
+      binds to the right.
 
 op07. The following table describes the semantics of the allowed
       operators in conditional expressions. The table is grouped by
