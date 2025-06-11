@@ -891,12 +891,14 @@ op07. The following table describes the semantics of the allowed
 op12. The logical OR operator guarantees left-to-right evaluation; if
       the first operand evaluates to non-zero, the second operand is
       not evaluated and the resulting value is 1. Otherwise, the
-      second operand is evaluated and provides the resulting value.
+      second operand is evaluated, and if that evaluation yields 0 the
+      resulting value is 0, otherwise the resulting value is 1.
 
 op13. The logical AND operator guarantees left-to-right evaluation; if
       the first operand evaluates to 0, the second operand is not
       evaluated and the resulting value is 0. Otherwise, the second
-      operand is evaluated and provides the resulting value.
+      operand is evaluated, and if that evaluation yields 0 the
+      resulting value is 0, otherwise the resulting value is 1.
 
 
 
