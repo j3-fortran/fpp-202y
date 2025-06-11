@@ -549,8 +549,8 @@ ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       expansion".
 
 ix20. After expansion, the resulting token list in <if-head> and
-      <if-elif> constructs that are not skipped must be able to be
-      parsed as a valid integer expression as described in section 5
+      <if-elif> constructs that are not skipped must comprise
+      a valid integer expression as described in section 5
       "Expressions allowed in #if and #elif directives" static
       semantics. This expression is called the "controlling
       expression" for the directive.
