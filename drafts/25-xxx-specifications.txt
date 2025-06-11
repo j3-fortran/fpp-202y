@@ -216,8 +216,8 @@ to11. The following tokens also appear in the illustrative syntax
       | CHARACTER_STRING    | Regex "[^"\n]*" where '\n' represents |
       |                     |    new-line.                          |
       | EOL                 | The new-line ending a directive line, |
-      |                     | after continuation processing (see    |
-      |                     |    li15).                             |
+      |                     |    after continuation processing      |
+      |                     |    (see li15).                        |
       |---------------------|---------------------------------------|
 
 
