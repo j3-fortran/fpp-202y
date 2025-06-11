@@ -47,7 +47,7 @@ li11. A line that has a '#' character as the first non-blank character
       6.10.1 paragraph 2), except when otherwise specified by the next
       two rules.
 
-li13. In fixed-form input files, a '#' in column 6 of a non-comment
+li13. In fixed source form, a '#' in column 6 of a non-comment
       line does not introduce a directive line.
 
 li15. A preprocessor directive can be continued with a backslash '\'
