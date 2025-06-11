@@ -487,14 +487,14 @@ Example syntax (extra spacing for illustration purposes only):
 3.5.1 Static semantics specifications
 -------------------------------------
 
-if05. A #if, #ifdef, or #ifndef directive signals the start of a chain
-      of conditional directives.
+if05. An <if-head> is comprised of a #if, #ifdef, or #ifndef directive
+      and signals the start of a "chain" of conditional directives.
 
-if15. The chain of #elif, #elifdef, and #elifndef directives, and the
+if15. A series of #elif, #elifdef, and #elifndef directives, and the
       #else directive (if present) are part of the same chain of
-      directives introduced by the #if directive.
+      directives introduced by the nearest preceding <if-head>.
 
-if20. The chain of conditional directives ends with the #endif
+if20. A chain of conditional directives ends with the #endif
       directive.
 
 if25. Within a conditional directive chain, a #if, #ifdef, or #ifndef
@@ -565,38 +565,37 @@ ix25. The values of controlling expressions in <if-head> and <if-elif>
 ix30. If the controlling expression in an <if-head> evaluates to a
       nonzero value, then the <group> contained within that <if-head>
       construct participates in further preprocessing, as described
-      above. Subsequent <if-elif> and <if-else> constructs at the same
-      level of nesting are skipped.
+      above. Subsequent <if-elif> and <if-else> constructs in the same
+      chain are skipped.
 
 ix45. If the controlling expression in an <if-head> construct
       evaluates to a zero value, then the <group> contained within
       that <if-head> construct is skipped. Preprocessing continues
-      with any <if-elif> constructs at the same level of nesting, as
-      described below.
+      with any <if-elif> constructs in the same chain, as described
+      below.
 
 ix50. When the controlling expression in an <if-head> construct
       evaluates to zero, the controlling expressions in each <if-elif>
-      construct at the same nesting level are evaluated in turn, until
-      one evaluates to a non-zero value. Those
-      <group>s whose controlling expression evaluates to zero are
-      skipped.
+      construct in the same chain are evaluated in turn, until one
+      evaluates to a non-zero value. Those <group>s whose controlling
+      expression evaluates to zero are skipped.
 
 ix55. When the controlling expression in an <if-elif> construct
       evaluates to a nonzero value, the <group> contained within that
       <if-elif> construct continues to participate in preprocessing.
       Subsequent <if-elif> constructs and any remaining <if-else>
-      constructs at the same nesting level are skipped.
+      constructs in the same chain are skipped.
 
 ix60. When all controlling expressions in the <if-head> construct and
       <if-elif> constructs evaluate to a zero value and an <if-else>
-      construct is present at the same nesting level, the <group>
-      contained in the <if-else> construct continues to participate in
+      construct is present in the same chain, the <group> contained in
+      the <if-else> construct continues to participate in
       preprocessing.
 
 ix65. When all controlling expressions in the <if-head> construct and
       all <if-elif> constructs evaluate to a zero value and no
-      <if-else> construct is present at the same nesting level, then
-      all <group>s in these constructs are skipped.
+      <if-else> construct is present in the same chain, then all
+      <group>s in these constructs are skipped.
 
 
 
