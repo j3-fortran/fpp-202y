@@ -502,7 +502,9 @@ if25. Within a conditional directive chain, a #if, #ifdef, or #ifndef
       new nesting level, within the enclosing conditional directive
       chain.
 
-if30. The conditional directive chains must properly nest.
+if30. The conditional directive chains must properly nest, with each
+      nested chain appearing entirely within a single <group> of the
+      enclosing chain.
 
 
 
