@@ -939,7 +939,7 @@ The following macro names shall be defined by the processor:
 
 pm20. '__LINE__' shall be predefined to a WHOLE_NUMBER representing
       the presumed line number (within the current source file)
-      of the current source line.
+      of the current line.
 
 
 7.2 __FILE__
