@@ -211,7 +211,7 @@ to11. The following tokens also appear in the illustrative syntax
       |---------------------|---------------------------------------|
       | Token name          |  Characters                           |
       |---------------------|---------------------------------------|
-      | ID                  | Regex [A-Za-z][A-Za-z0-9_]*           |
+      | ID                  | Regex [A-Za-z_][A-Za-z0-9_]*          |
       | WHOLE_NUMBER        | Regex [0-9]+                          |
       | CHARACTER_STRING    | Regex "[^"\n]*" where '\n' represents |
       |                     |    new-line.                          |
