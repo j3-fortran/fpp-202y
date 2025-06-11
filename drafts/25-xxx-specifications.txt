@@ -148,14 +148,16 @@ ws11. In fixed-form input, macro names are not recognized as such when
 
 co01. Directive lines may contain C-style '/*' ... '*/' comments.
 
-co03. Directive lines shall not contain C style '//' comments.
-
 co05. '/*' ... '*/' comments on directive lines shall extend past a
       new-line only if the line ends in '\' new-line, indicating a
       continuation line.
 
 co07. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 section 5.1.1.2 bullet 3.
+
+co08. In a directive line, the '//' token is not interpreted as
+      introducing a C-style comment, and neither the '//' token
+      nor any subsequent text are removed by the preprocessor.
 
 co09. In a directive line, the '!' character is not interpreted as
       introducing a Fortran-style comment, and neither the '!'
