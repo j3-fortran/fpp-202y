@@ -111,7 +111,7 @@ cs01. Directive names are case-sensitive and recognized in lower-case.
 cs03. Macro names and function-like macro argument names are
       case-sensitive.
 
-cs05. Preprocessor-defined macro names are case-sensitive.
+cs05. Predefined macro names are case-sensitive.
 
 
 
