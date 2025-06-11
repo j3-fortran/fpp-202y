@@ -523,15 +523,15 @@ ix10. The #elifdef and #elifndef directives are evaluated as if they
       respectively. (For brevity, the descriptions below assume this
       transformation has been made).
 
-ix12. In the descriptions below, <group> constructs may be "skipped".
+ix12. In the descriptions below, constructs may be "skipped".
       When skipped:
 
-        - Conditional directives within the <group> are recognized
+        - Conditional directives within the construct are recognized
           only to maintain proper nesting of conditional directives.
-        - No nested directives in the <group> are processed.
+        - No nested directives in the construct are processed.
         - No macro expansion takes place in directive lines, Fortran
-          comment lines or source lines in the <group>.
-        - No skipped lines of any kind in the <group> are made
+          comment lines or source lines in the construct.
+        - No skipped lines of any kind in the construct are made
           available to subsequent processing by the processor.
 
 ix14. In the descriptions below, <group> constructs that are not
