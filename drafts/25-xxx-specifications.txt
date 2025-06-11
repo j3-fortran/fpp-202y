@@ -196,7 +196,7 @@ to01. In the definitions of object macros and function-like macros,
       the replacement list may include any arbitrary sequence of
       characters that doesn't include a new-line. Once tokenized,
       this for example may include any tokens allowed in Fortran
-      source lines, those allowed in C integer expressions,
+      source fragments, those allowed in C integer expressions,
       and any additional tokens recognized by the processor.
 
 to03. Without naming all the tokens explicitly, they appear in the
@@ -481,7 +481,7 @@ Example syntax (extra spacing for illustration purposes only):
         <group> is zero or more of:
             directive lines
             Fortran comment lines
-            Fortran source lines
+            Fortran source fragment lines
 
 
 3.5.1 Static semantics specifications
@@ -530,7 +530,8 @@ ix12. In the descriptions below, constructs may be "skipped".
           only to maintain proper nesting of conditional directives.
         - No nested directives in the construct are processed.
         - No macro expansion takes place in directive lines, Fortran
-          comment lines or source lines in the construct.
+          comment lines or Fortran source fragment lines in the
+          construct.
         - No skipped lines of any kind in the construct are made
           available to subsequent processing by the processor.
 
@@ -541,9 +542,9 @@ ix14. In the descriptions below, <group> constructs that are not
         - Macros are expanded in Fortran comment lines and source
           lines.
         - Nested directives in the <group> are processed.
-        - The resulting Fortran comment lines and source lines
-          are made available for subsequent processing by the
-          processor.
+        - The resulting Fortran comment lines and Fortran source
+          fragment lines are made available for subsequent processing
+          by the processor.
 
 ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       constructs that are not skipped, macros in the token-lists are
@@ -1016,7 +1017,7 @@ dfc30. FPP omits (and forbids) many predefined macros whose names
        begin with '__STDC'.
 
 dfc40. FPP expands macro invocations inside Fortran comments on
-       source lines and in Fortran comment lines.
+       Fortran source fragment lines and in Fortran comment lines.
 
 dfc60. The token-list in the FPP #pragma directive may not be empty.
 
