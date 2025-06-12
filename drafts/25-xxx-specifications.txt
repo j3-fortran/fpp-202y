@@ -1005,10 +1005,9 @@ ic01. Fortran 'INCLUDE' source lines are expanded during preprocessing,
       in section 3.4 "The #include directive").
 
 ic03. The source text included via an 'INCLUDE' line is subject to
-      preprocessing. Preprocessing continues after the INCLUDE line is
-      replaced with the source text of the included file, as if the
-      referenced source text physically replaced the 'INCLUDE' line
-      prior to preprocessing.
+      preprocessing. After the INCLUDE line is replaced with the 
+      source text of the included file, preprocessing continues at
+      the first line of the replacement text.
 
 ic05. In the second form of the 'INCLUDE' line, the token-list is
       subject to macro identification and expansion. After expansion is
