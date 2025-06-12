@@ -849,7 +849,9 @@ op07. The following table describes the semantics of the allowed
 
 | Prec |   Op    |    Syntax    | Assoc'y  |  Evaluation Semantics      |
 |------+---------+--------------+----------+----------------------------|
-| low  |   ? :   | e1 ? e2 : e3 |  right   |  e3 if e1==0, e2 otherwise |
+| low  |   ? :   | e1 ? e2 : e3 |  right   | conditional expression |
+|      |         |              |          |   (see op14)           |
+
 |------+---------+--------------+----------+----------------------------|
 |      |   ||    |   e1 || e2   |  left    |   logical OR (see op12)    |
 |------+---------+--------------+----------+----------------------------|
@@ -900,6 +902,12 @@ op13. The logical AND operator guarantees left-to-right evaluation; if
       operand is evaluated, and if that evaluation yields 0 the
       resulting value is 0, otherwise the resulting value is 1.
 
+op14. The conditional expression 'e1 ? e2 : e3' guarantees left-to-right
+      evaluation; if the first operand e1 evaluates to non-zero, 
+      then the third operand e3 is not evaluated and the resulting value 
+      is the value of evaluating the second operand e2. Otherwise, 
+      the second operand e2 is not evaluated and the resulting value 
+      is the value of evaluating the third operand e3.
 
 
 
