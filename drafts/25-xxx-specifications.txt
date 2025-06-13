@@ -849,8 +849,8 @@ op07. The following table describes the semantics of the allowed
 
 | Prec |   Op    |    Syntax    | Assoc'y  |  Evaluation Semantics      |
 |------+---------+--------------+----------+----------------------------|
-| low  |   ? :   | e1 ? e2 : e3 |  right   | conditional expression |
-|      |         |              |          |   (see op14)           |
+| low  |   ? :   | e1 ? e2 : e3 |  right   |   conditional expression   |
+|      |         |              |          |   (see op14)               |
 
 |------+---------+--------------+----------+----------------------------|
 |      |   ||    |   e1 || e2   |  left    |   logical OR (see op12)    |
