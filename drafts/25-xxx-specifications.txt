@@ -47,7 +47,7 @@ li11. A line that has a '#' character as the first non-blank character
       6.10.1 paragraph 2), except when otherwise specified by the next
       two rules.
 
-li13. In fixed-form input files, a '#' in column 6 of a non-comment
+li13. In fixed source form, a '#' in column 6 of a non-comment
       line does not introduce a directive line.
 
 li15. A preprocessor directive can be continued with a backslash '\'
@@ -111,7 +111,7 @@ cs01. Directive names are case-sensitive and recognized in lower-case.
 cs03. Macro names and function-like macro argument names are
       case-sensitive.
 
-cs05. Preprocessor-defined macro names are case-sensitive.
+cs05. Predefined macro names are case-sensitive.
 
 
 
@@ -148,14 +148,16 @@ ws11. In fixed-form input, macro names are not recognized as such when
 
 co01. Directive lines may contain C-style '/*' ... '*/' comments.
 
-co03. Directive lines shall not contain C style '//' comments.
-
 co05. '/*' ... '*/' comments on directive lines shall extend past a
       new-line only if the line ends in '\' new-line, indicating a
       continuation line.
 
 co07. '/*' ... '*/' comments on directive lines are replaced by a
       single space, as specified in C 2023 section 5.1.1.2 bullet 3.
+
+co08. In a directive line, the '//' token is not interpreted as
+      introducing a C-style comment, and neither the '//' token
+      nor any subsequent text are removed by the preprocessor.
 
 co09. In a directive line, the '!' character is not interpreted as
       introducing a Fortran-style comment, and neither the '!'
@@ -194,7 +196,7 @@ to01. In the definitions of object macros and function-like macros,
       the replacement list may include any arbitrary sequence of
       characters that doesn't include a new-line. Once tokenized,
       this for example may include any tokens allowed in Fortran
-      source lines, those allowed in C integer expressions,
+      source fragments, those allowed in C integer expressions,
       and any additional tokens recognized by the processor.
 
 to03. Without naming all the tokens explicitly, they appear in the
@@ -211,13 +213,13 @@ to11. The following tokens also appear in the illustrative syntax
       |---------------------|---------------------------------------|
       | Token name          |  Characters                           |
       |---------------------|---------------------------------------|
-      | ID                  | Regex [A-Za-z][A-Za-z0-9_]*           |
+      | ID                  | Regex [A-Za-z_][A-Za-z0-9_]*          |
       | WHOLE_NUMBER        | Regex [0-9]+                          |
       | CHARACTER_STRING    | Regex "[^"\n]*" where '\n' represents |
       |                     |    new-line.                          |
       | EOL                 | The new-line ending a directive line, |
-      |                     | after continuation processing (see    |
-      |                     |    li15).                             |
+      |                     |    after continuation processing      |
+      |                     |    (see li15).                        |
       |---------------------|---------------------------------------|
 
 
@@ -479,20 +481,20 @@ Example syntax (extra spacing for illustration purposes only):
         <group> is zero or more of:
             directive lines
             Fortran comment lines
-            Fortran source lines
+            Fortran source fragment lines
 
 
 3.5.1 Static semantics specifications
 -------------------------------------
 
-if05. A #if, #ifdef, or #ifndef directive signals the start of a chain
-      of conditional directives.
+if05. An <if-head> is comprised of a #if, #ifdef, or #ifndef directive
+      and signals the start of a "chain" of conditional directives.
 
-if15. The chain of #elif, #elifdef, and #elifndef directives, and the
+if15. A series of #elif, #elifdef, and #elifndef directives, and the
       #else directive (if present) are part of the same chain of
-      directives introduced by the #if directive.
+      directives introduced by the nearest preceding <if-head>.
 
-if20. The chain of conditional directives ends with the #endif
+if20. A chain of conditional directives ends with the #endif
       directive.
 
 if25. Within a conditional directive chain, a #if, #ifdef, or #ifndef
@@ -500,7 +502,9 @@ if25. Within a conditional directive chain, a #if, #ifdef, or #ifndef
       new nesting level, within the enclosing conditional directive
       chain.
 
-if30. The conditional directive chains must properly nest.
+if30. The conditional directive chains must properly nest, with each
+      nested chain appearing entirely within a single <group> of the
+      enclosing chain.
 
 
 
@@ -519,15 +523,16 @@ ix10. The #elifdef and #elifndef directives are evaluated as if they
       respectively. (For brevity, the descriptions below assume this
       transformation has been made).
 
-ix12. In the descriptions below, <group> constructs may be "skipped".
+ix12. In the descriptions below, constructs may be "skipped".
       When skipped:
 
-        - Conditional directives within the <group> are recognized
+        - Conditional directives within the construct are recognized
           only to maintain proper nesting of conditional directives.
-        - No nested directives in the <group> are processed.
+        - No nested directives in the construct are processed.
         - No macro expansion takes place in directive lines, Fortran
-          comment lines or source lines in the <group>.
-        - No skipped lines of any kind in the <group> are made
+          comment lines or Fortran source fragment lines in the
+          construct.
+        - No skipped lines of any kind in the construct are made
           available to subsequent processing by the processor.
 
 ix14. In the descriptions below, <group> constructs that are not
@@ -537,9 +542,9 @@ ix14. In the descriptions below, <group> constructs that are not
         - Macros are expanded in Fortran comment lines and source
           lines.
         - Nested directives in the <group> are processed.
-        - The resulting Fortran comment lines and source lines
-          are made available for subsequent processing by the
-          processor.
+        - The resulting Fortran comment lines and Fortran source
+          fragment lines are made available for subsequent processing
+          by the processor.
 
 ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       constructs that are not skipped, macros in the token-lists are
@@ -547,8 +552,8 @@ ix15. Before evaluating the token-lists in any <if-head> and <if-elif>
       expansion".
 
 ix20. After expansion, the resulting token list in <if-head> and
-      <if-elif> constructs that are not skipped must be able to be
-      parsed as a valid integer expression as described in section 5
+      <if-elif> constructs that are not skipped must comprise
+      a valid integer expression as described in section 5
       "Expressions allowed in #if and #elif directives" static
       semantics. This expression is called the "controlling
       expression" for the directive.
@@ -561,38 +566,37 @@ ix25. The values of controlling expressions in <if-head> and <if-elif>
 ix30. If the controlling expression in an <if-head> evaluates to a
       nonzero value, then the <group> contained within that <if-head>
       construct participates in further preprocessing, as described
-      above. Subsequent <if-elif> and <if-else> constructs at the same
-      level of nesting are skipped.
+      above. Subsequent <if-elif> and <if-else> constructs in the same
+      chain are skipped.
 
 ix45. If the controlling expression in an <if-head> construct
       evaluates to a zero value, then the <group> contained within
       that <if-head> construct is skipped. Preprocessing continues
-      with any <if-elif> constructs at the same level of nesting, as
-      described below.
+      with any <if-elif> constructs in the same chain, as described
+      below.
 
 ix50. When the controlling expression in an <if-head> construct
       evaluates to zero, the controlling expressions in each <if-elif>
-      construct at the same nesting level are evaluated in turn, until
-      one evaluates to a non-zero value. Those
-      <group>s whose controlling expression evaluates to zero are
-      skipped.
+      construct in the same chain are evaluated in turn, until one
+      evaluates to a non-zero value. Those <group>s whose controlling
+      expression evaluates to zero are skipped.
 
 ix55. When the controlling expression in an <if-elif> construct
       evaluates to a nonzero value, the <group> contained within that
       <if-elif> construct continues to participate in preprocessing.
       Subsequent <if-elif> constructs and any remaining <if-else>
-      constructs at the same nesting level are skipped.
+      constructs in the same chain are skipped.
 
 ix60. When all controlling expressions in the <if-head> construct and
       <if-elif> constructs evaluate to a zero value and an <if-else>
-      construct is present at the same nesting level, the <group>
-      contained in the <if-else> construct continues to participate in
+      construct is present in the same chain, the <group> contained in
+      the <if-else> construct continues to participate in
       preprocessing.
 
 ix65. When all controlling expressions in the <if-head> construct and
       all <if-elif> constructs evaluate to a zero value and no
-      <if-else> construct is present at the same nesting level, then
-      all <group>s in these constructs are skipped.
+      <if-else> construct is present in the same chain, then all
+      <group>s in these constructs are skipped.
 
 
 
@@ -845,7 +849,8 @@ op07. The following table describes the semantics of the allowed
 
 | Prec |   Op    |    Syntax    | Assoc'y  |  Evaluation Semantics      |
 |------+---------+--------------+----------+----------------------------|
-| low  |   ? :   | e1 ? e2 : e3 |  right   |      conditional-expr      |
+| low  |   ? :   | e1 ? e2 : e3 |  right   |   conditional expression   |
+|      |         |              |          |     (see op14)             |
 |------+---------+--------------+----------+----------------------------|
 |      |   ||    |   e1 || e2   |  left    |   logical OR (see op12)    |
 |------+---------+--------------+----------+----------------------------|
@@ -887,13 +892,21 @@ op07. The following table describes the semantics of the allowed
 op12. The logical OR operator guarantees left-to-right evaluation; if
       the first operand evaluates to non-zero, the second operand is
       not evaluated and the resulting value is 1. Otherwise, the
-      second operand is evaluated and provides the resulting value.
+      second operand is evaluated, and if that evaluation yields 0 the
+      resulting value is 0, otherwise the resulting value is 1.
 
 op13. The logical AND operator guarantees left-to-right evaluation; if
       the first operand evaluates to 0, the second operand is not
       evaluated and the resulting value is 0. Otherwise, the second
-      operand is evaluated and provides the resulting value.
+      operand is evaluated, and if that evaluation yields 0 the
+      resulting value is 0, otherwise the resulting value is 1.
 
+op14. The conditional expression 'e1 ? e2 : e3' guarantees left-to-right
+      evaluation; if the first operand e1 evaluates to non-zero, 
+      then the third operand e3 is not evaluated and the resulting value 
+      is the value of evaluating the second operand e2. Otherwise, 
+      the second operand e2 is not evaluated and the resulting value 
+      is the value of evaluating the third operand e3.
 
 
 
@@ -936,7 +949,7 @@ The following macro names shall be defined by the processor:
 
 pm20. '__LINE__' shall be predefined to a WHOLE_NUMBER representing
       the presumed line number (within the current source file)
-      of the current source line.
+      of the current line.
 
 
 7.2 __FILE__
@@ -1013,7 +1026,7 @@ dfc30. FPP omits (and forbids) many predefined macros whose names
        begin with '__STDC'.
 
 dfc40. FPP expands macro invocations inside Fortran comments on
-       source lines and in Fortran comment lines.
+       Fortran source fragment lines and in Fortran comment lines.
 
 dfc60. The token-list in the FPP #pragma directive may not be empty.
 
