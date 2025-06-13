@@ -1035,6 +1035,28 @@ ic12. The maximum depth of nesting of any nested INCLUDE lines
 
 
 
+9 Translation limits
+====================
+
+To enhance portability of source translated by the Fortran preprocessor,
+the standard shall specify limits for various aspects of preprocessed
+source. Source files exceeding these limits may not be acceptable to
+all processors.
+
+Specific values for limits are a subject for a future paper.
+
+- Nesting levels of conditional inclusion
+- Characters in a macro name
+- Quantity of macro identifiers simultaneously defined in one
+  preprocessing translation unit
+- Characters in a string literal
+- Parameters in a macro definition
+- Arguments in a macro invocation
+- Nesting levels for #include files
+
+
+
+
 Appendix A: Divergences from C
 ==============================
 
