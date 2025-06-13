@@ -1,5 +1,5 @@
 To: J3                                                     J3/25-142
-From: Gary Klimowicz & Dan Bonachea & Patrick Fasano
+From: Gary Klimowicz & Dan Bonachea & Patrick Fasano & Steve Lionel
 Subject: Formal specifications for the Fortran preprocessor (FPP)
 Date: 2025-June-09
 References: 25-114r2 Fortran preprocessor requirements
