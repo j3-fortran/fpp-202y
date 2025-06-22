@@ -539,8 +539,8 @@ ix14. In the descriptions below, <group> constructs that are not
       skipped participate in further preprocessing and processing.
       When participating:
 
-        - Macros are expanded in Fortran comment lines and source
-          lines.
+        - Macros are expanded in Fortran comment lines and Fortran
+          source fragment lines.
         - Nested directives in the <group> are processed.
         - The resulting Fortran comment lines and Fortran source
           fragment lines are made available for subsequent processing
