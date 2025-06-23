@@ -446,9 +446,10 @@ in24. If the file is located, the processor replaces the #include
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
 
-in28. Unlike INCLUDE lines (see Fortran 2023 section 6.4, "Including
-      source text"), the #include directive is not prohibited from
-      including the same source file at a deeper level of nesting.
+in28. Unlike INCLUDE lines in Fortran 2023 (see 25-007 section 6.4,
+      "Including source text"), the #include directive is not prohibited
+      from including the same source file at a deeper level of nesting.
+      See also section 8 "INCLUDE line processing".
 
 
 
