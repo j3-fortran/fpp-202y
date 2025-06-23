@@ -1047,12 +1047,12 @@ all processors.
 Specific minimum values for the limits will be the subject of a future
 paper, but are expected to include at least the number of:
 
-- Nesting levels of conditional inclusion
+- Nesting levels of conditional compilation directives
 - Characters in a macro name
 - Macro identifiers simultaneously defined in one program unit
 - Characters in a string literal
-- Parameters in one macro definition
-- Arguments in one macro invocation
+- Parameters in one function-like macro definition
+- Arguments in one function-like macro invocation
 - Nesting levels for #include files
 
 
