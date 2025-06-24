@@ -839,7 +839,7 @@ op05. An "associativity" is assigned to each operator that determines
       binds to the right.
 
 op07. The following table describes the semantics of the allowed
-      operators in conditional expressions. The table is grouped by
+      operators in controlling expressions. The table is grouped by
       precedence level, from lowest precedence to highest.
 
       We label subexpressions "e1", "e2", and "e3" to aid in
@@ -1084,7 +1084,7 @@ dfc40. FPP expands macro invocations inside Fortran comments on
 
 dfc60. The token-list in the FPP #pragma directive may not be empty.
 
-Differences in the conditional expression grammar for #if and #elif
+Differences in the controlling expression grammar for #if and #elif
 directives include:
 
 dfc80. FPP omits the comma operator.
