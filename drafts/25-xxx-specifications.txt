@@ -916,9 +916,10 @@ op14. The conditional expression 'e1 ? e2 : e3' guarantees left-to-right
 
 pm00. Macro names beginning with a leading underscore followed by an
       uppercase letter or a second underscore are reserved to the
-      processor. Reserved names shall not be the subject of a #define
-      or #undef preprocessing directive within a program unit. [Note:
-      Any macro name matching the regular expression
+      processor. If a macro with a reserved name is the subject of a
+      #define or #undef directive within the program unit, then behavior
+      is processor-dependent.
+      [Note: Any macro name matching the regular expression
       '/^_[A-Z_][A-Za-z0-9_]*$/' is considered reserved.]
 
 pm01. Any macro name predefined by the processor shall begin with a
