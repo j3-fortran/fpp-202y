@@ -446,9 +446,10 @@ in24. If the file is located, the processor replaces the #include
 in26. A #include directive may appear in an included file, up to a
       processor-defined nesting limit.
 
-in28. Unlike INCLUDE lines (see Fortran 2023 section 6.4, "Including
-      source text"), the #include directive is not prohibited from
-      including the same source file at a deeper level of nesting.
+in28. Unlike INCLUDE lines in Fortran 2023 (see 25-007 section 6.4,
+      "Including source text"), the #include directive is not prohibited
+      from including the same source file at a deeper level of nesting.
+      See also section 8 "INCLUDE line processing".
 
 
 
@@ -539,8 +540,8 @@ ix14. In the descriptions below, <group> constructs that are not
       skipped participate in further preprocessing and processing.
       When participating:
 
-        - Macros are expanded in Fortran comment lines and source
-          lines.
+        - Macros are expanded in Fortran comment lines and Fortran
+          source fragment lines.
         - Nested directives in the <group> are processed.
         - The resulting Fortran comment lines and Fortran source
           fragment lines are made available for subsequent processing
@@ -838,7 +839,7 @@ op05. An "associativity" is assigned to each operator that determines
       binds to the right.
 
 op07. The following table describes the semantics of the allowed
-      operators in conditional expressions. The table is grouped by
+      operators in controlling expressions. The table is grouped by
       precedence level, from lowest precedence to highest.
 
       We label subexpressions "e1", "e2", and "e3" to aid in
@@ -870,8 +871,8 @@ op07. The following table describes the semantics of the allowed
 |      |    <    |   e1 < e2    |  left    | 1 if e1 < e2, 0 otherwise  |
 |      |   <=    |   e1 <= e2   |  left    | 1 if e1 <= e2, 0 otherwise |
 |------+---------+--------------+----------+----------------------------|
-|      |   <<    |   e1 << e2   |  left    | Fortran ISHFT(e1, e2)      |
-|      |   >>    |   e1 >> e2   |  left    | Fortran ISHFT(e1, -e2)     |
+|      |   <<    |   e1 << e2   |  left    | Fortran SHIFTL(e1, e2)     |
+|      |   >>    |   e1 >> e2   |  left    | Fortran SHIFTR(e1, e2)     |
 |------+---------+--------------+----------+----------------------------|
 |      |    +    |   e1 + e2    |  left    |             +              |
 |      |    -    |   e1 - e2    |  left    |             -              |
@@ -915,9 +916,10 @@ op14. The conditional expression 'e1 ? e2 : e3' guarantees left-to-right
 
 pm00. Macro names beginning with a leading underscore followed by an
       uppercase letter or a second underscore are reserved to the
-      processor. Reserved names shall not be the subject of a #define
-      or #undef preprocessing directive within a program unit. [Note:
-      Any macro name matching the regular expression
+      processor. If a macro with a reserved name is the subject of a
+      #define or #undef directive within the program unit, then behavior
+      is processor-dependent.
+      [Note: Any macro name matching the regular expression
       '/^_[A-Z_][A-Za-z0-9_]*$/' is considered reserved.]
 
 pm01. Any macro name predefined by the processor shall begin with a
@@ -1047,12 +1049,12 @@ all processors.
 Specific minimum values for the limits will be the subject of a future
 paper, but are expected to include at least the number of:
 
-- Nesting levels of conditional inclusion
+- Nesting levels of conditional compilation directives
 - Characters in a macro name
 - Macro identifiers simultaneously defined in one program unit
 - Characters in a string literal
-- Parameters in one macro definition
-- Arguments in one macro invocation
+- Parameters in one function-like macro definition
+- Arguments in one function-like macro invocation
 - Nesting levels for #include files
 
 
@@ -1082,7 +1084,7 @@ dfc40. FPP expands macro invocations inside Fortran comments on
 
 dfc60. The token-list in the FPP #pragma directive may not be empty.
 
-Differences in the conditional expression grammar for #if and #elif
+Differences in the controlling expression grammar for #if and #elif
 directives include:
 
 dfc80. FPP omits the comma operator.
