@@ -425,8 +425,11 @@ vm01. A function-like macro can be defined to accept a variable number
       parameter (25-142r2 section 3.2). Such a macro is a "variadic"
       macro.
 
-vm03. During expansion of a variadic macro, the special identifier
-      '__VA_ARGS__' in the replacement list is replaced by the tokens
+vm02. The special identifier '__VA_ARGS__' may only appear in the
+      replacement list of a variadic macro.
+
+vm03. During expansion of a variadic macro, the '__VA_ARGS__' in the
+      replacement list is replaced by the tokens
       resulting from the expansion of
       all the variable arguments from the invocation, including the
       commas between them. A variadic macro must be invoked with at
@@ -467,23 +470,34 @@ EXAMPLE vme01:
 
 
 2.3.1 '__VA_OPT__'
-----------------
+------------------
 
-vo01. The special identifier '__VA_OPT__' may appear in the replacement
+vo01. The special identifier '__VA_OPT__' may only appear in the
+      replacement
       list of a variadic macro, followed by a parenthesized sequence of
-      preprocessing tokens.
+      preprocessing tokens. The sequence of preprocessing tokens within
+      the parentheses is called the va-opt-arg. The closing ')' is
+      determined by skipping intervening pairs of matching left and
+      right parentheses in its preprocessing tokens.
 
-vo03. When the macro is expanded, if the variable arguments were provided
-      (i.e., if the invocation includes at least one argument
-      corresponding to the ellipsis) and the (hypothetical) expansion
+vo02. The va-opt-arg shall not contain the identifier '__VA_OPT__'.
+
+vo03. When a variadic function-like macro is being expanded, if the
+      replacement-list contains the identifier' __VA_OPT__', the
+      following two rules apply.
+
+vo05. If no variable arguments are provided or if the expansion of the
+      variable arguments results in no tokens, then the identifier
+      '__VA_OPT__' and the following parenthesized va-opt-arg are
+      replaced by no tokens. (Expansion is not performed on the
+      va-opt-arg.)
+
+vo07. If the expansion
       of the variable arguments results in a non-empty sequence of
-      tokens, then the sequence of tokens within the parentheses
-      of the '__VA_OPT__' are included in the expansion, with any occurrences of
-      '__VA_ARGS__' within the sequence replaced as usual.
-
-vo05. If no variable arguments are provided or if the (hypothetical)
-      substitution of the variable arguments results in no tokens, the
-      entire '__VA_OPT__(...)' is replaced by no tokens.
+      tokens, then the identifier '__VA_OPT__' and the following
+      parenthesized va-opt-arg are replaced by the expansion of the
+      va-opt-arg. Any occurrences of macro parameters including
+      '__VA_ARGS__' within the va-opt-arg are substituted as usual.
 
 EXAMPLE voe01:
 
