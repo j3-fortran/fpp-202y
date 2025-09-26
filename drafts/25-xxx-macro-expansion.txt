@@ -148,11 +148,14 @@ EXAMPLE age04:
 
       Given the macro definition:
 
-      #define GEN(x, y)  TBD
-            GEN( foo{1,2,3}, 20 )
+      #define ASSIGN(x, y) x = y
 
-      TODO: meaningful generics example
+      The invocation:
 
+            ASSIGN(A(5,6)[7,8], foo{T1, T2}(20, B[30]))
+
+      is equivalent to:
+            A(5,6)[7,8] = foo{T1, T2}(20, B[30])
 
 2.1.2 Line breaks and continuations in macro invocations (free-form)
 --------------------------------------------------------------------
@@ -370,16 +373,16 @@ EXAMPLE ste01:
 
       Given the macro definitions:
 
-      #define C the-best-language
+      #define fox rabbit
       #define STR(x) #x
 
       The invocation:
 
-            STR( A     "B" C )
+            STR( The "quick"   brown fox )
 
       is equivalent to:
 
-            "A ""B"" C"
+            "The ""quick"" brown fox"
 
 
 
@@ -469,7 +472,7 @@ EXAMPLE voe01:
 
       Given the macro definitions:
 
-      #define LOG(msg, ...) print*, msg __VA_OPT__(, __VA_ARGS__)
+      #define LOG(msg, ...) call log_message(msg __VA_OPT__(, __VA_ARGS__))
       #define NOTHING
 
       The invocation:
@@ -478,7 +481,7 @@ EXAMPLE voe01:
 
       is equivalent to:
 
-            print*, "hello"
+            call log_message("hello" )
 
       The invocation:
 
@@ -486,7 +489,7 @@ EXAMPLE voe01:
 
       is equivalent to:
 
-            print*, "Answer:" , 42
+            call log_message("Answer:" , 42)
 
       The invocation:
 
@@ -494,7 +497,7 @@ EXAMPLE voe01:
 
       is equivalent to
 
-            print*, "nothing:"
+            call log_message("nothing:" )
 
 
 
@@ -562,19 +565,19 @@ EXAMPLE rse01:
 
       Given the macro definitions:
 
-      #define X X
-      #define Y Z
-      #define Z Y
+      #define A A
+      #define B C
+      #define C B
 
       The invocations:
 
-            X
-            Y
+            A
+            B
 
       are equivalent to:
 
-            X
-            Y
+            A
+            B
 
 EXAMPLE rse02:
 
@@ -615,10 +618,10 @@ EXAMPLE rse05:
 
       The invocations:
 
-            H(A)
+            H(K)
             H(H)
 
       are equivalent to:
 
-            I+A(2)
+            I+K(2)
             I+I(2)
