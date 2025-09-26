@@ -560,6 +560,24 @@ EXAMPLE rse01:
 
       Given the macro definitions:
 
+      #define X X
+      #define Y Z
+      #define Z Y
+
+      The invocations:
+
+            X
+            Y
+
+      are equivalent to:
+
+            X
+            Y
+
+EXAMPLE rse02:
+
+      Given the macro definitions:
+
       #define X(a) (a, Y(a))
       #define Y(a) (a, X(a))
 
@@ -571,7 +589,7 @@ EXAMPLE rse01:
 
             (1, (1, X(1)))
 
-EXAMPLE rse02:
+EXAMPLE rse03:
 
       Given the macro definition:
 
@@ -581,41 +599,9 @@ EXAMPLE rse02:
 
             ID(ID(1))
 
-      is processed by first identifying the argument of the outer ID as
-      the token sequence 'ID(1)'. The result of the expansion is then
-      'ID(1)', which is rescanned, and finally expands to '1'.
-
-EXAMPLE rse03:
-
-      Given the macro definition:
-
-      #define ID(x) x
-
-      The invocation
-
-            ID(ID)(ID(1))
-
       is equivalent to:
 
-            ID(1)
-
-EXAMPLE rse04:
-
-      Given the macro definitions:
-
-      #define X X
-      #define Y Z
-      #define Z
-
-      The invocations:
-
-            X
-            Y
-
-      are equivalent to:
-
-            X
-            Y
+            1
 
 EXAMPLE rse05:
 
