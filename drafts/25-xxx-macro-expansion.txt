@@ -133,7 +133,7 @@ EXAMPLE age03:
 
       is equivalent to:
 
-            A(1,2)[3,4] = A(1,2)[3,4] + 10 ; print *, "The new value is:", 10
+            A(1,2)[3,4] = A(1,2)[3,4] + 10 ; print *, "The new value is:", A(1,2)[3,4]
 
 EXAMPLE age04:
 
