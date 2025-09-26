@@ -3,26 +3,27 @@ From: Patrick Fasano & Dan Bonachea
 Subject: Formal specifications for macro identification and expansion in
          the Fortran preprocessor (FPP)
 Date: 2025-XXX-XX
-References: 25-142r2 Formal specifications for the Fortran preprocessor
-                  (FPP)
-            25-114r2 Fortran preprocessor requirements
-            ISO/IEC 9899:2024 Programming languages -- C ("C 2023")
-                  (working draft N3220)
+References:
+      25-142r2 Formal specifications for the Fortran preprocessor (FPP)
+      25-114r2 Fortran preprocessor requirements
+      ISO/IEC 9899:2024 Programming languages -- C ("C 2023")
+            (working draft N3220)
 
 Background
 ==========
 
-At meeting #235 in Feb 2025, J3 approved requirements for
-a cpp-like preprocessing for Fortran 202Y (paper 25-114r2).
+At meeting #235 in Feb 2025, J3 approved requirements for a cpp-like
+preprocessing for Fortran 202Y (paper 25-114r2).
 
-At meeting #236 in Jun 2025, J3 approved corresponding
-specifications covering the majority of preprocessing (paper 25-142r2).
-That document left one incomplete section, section 4 "Macro identification 
-and expansion".
+At meeting #236 in Jun 2025, J3 approved corresponding specifications
+covering the majority of preprocessing (paper 25-142r2). That document
+left one incomplete section, section 4 "Macro identification and
+expansion".
 
 This document provides the remaining specifications for preprocessing,
 specifying the details of macro identification and expansion. It should
-be read along with 25-142r2, which provides all the other specifications.
+be read along with 25-142r2, which provides all the other
+specifications.
 
 
 1 General
@@ -37,15 +38,14 @@ ge01. Macro identification and expansion is a process that occurs on
       as specified in section 4.
 
 ge02. During expansion, an identifier that is the name of a defined
-      object-like macro (25-142r2 Sec 3.1) is replaced by the
+      object-like macro (25-142r2 section 3.1) is replaced by the
       replacement-list of that macro's definition.
 
 ge04. During expansion, an identifier that is the name of a defined
-      function-like macro (25-142r2 Sec 3.2) followed by a left
+      function-like macro (25-142r2 section 3.2) followed by a left
       parenthesis '(' introduces an invocation of the function-like
-      macro. The
-      arguments of the macro invocation are collected before the macro
-      is expanded (section 2).
+      macro. The arguments of the macro invocation are collected before
+      the macro is expanded (section 2).
 
 ge05. After expansion has replaced a macro invocation, the resulting
       tokens are rescanned to find additional macro invocations for
@@ -64,11 +64,10 @@ ge05. After expansion has replaced a macro invocation, the resulting
 ------------------------
 
 ag01. During expansion when a function-like macro name is encountered
-      followed by a '(' as the next nonblank character, the
-      processor shall scan
-      ahead, removing comments (section 2.1.4), to identify the full
-      list of macro arguments. The argument list begins after the
-      initial '(' and terminates at the matching closing parenthesis
+      followed by a '(' as the next nonblank character, the processor
+      shall scan ahead, removing comments (section 2.1.4), to identify
+      the full list of macro arguments. The argument list begins after
+      the initial '(' and terminates at the matching closing parenthesis
       ')'. The argument list shall terminate before the end of the
       current file.
 
@@ -80,8 +79,8 @@ ag03. Commas within the argument list separate individual arguments.
       properly nested.
 
 ag05. During argument gathering, commas and bracketing characters within
-      comments are removed
-      (section 2.1.4) and thus do not affect argument separation.
+      comments are removed (section 2.1.4) and thus do not affect
+      argument separation.
 
 ag07. The collected arguments consist of all tokens between the
       separating commas (or the opening/closing parentheses). Whitespace
@@ -109,10 +108,9 @@ ag13. An argument is considered empty if no preprocessing tokens appear
 ag15. Preprocessing directives are not recognized as such within the
       arguments of a function-like macro invocation.
 
-ag17. Within the
-      arguments of a function-like macro invocation, the token INCLUDE
-      is not treated as introducing an INCLUDE line, even if it
-      resembles one.
+ag17. Within the arguments of a function-like macro invocation, the
+      token INCLUDE is not treated as introducing an INCLUDE line, even
+      if it resembles one.
 
 EXAMPLE age01:
 
@@ -175,12 +173,12 @@ EXAMPLE age04:
 lb01. An invocation of a function-like macro can be broken across
       multiple lines. An invocation that begins with an open parenthesis
       '(' continues until the matching closing parenthesis ')' is found
-      (outside of a comment), which may occur on a subsequent source fragment
-      line. A newline character appearing within the argument list is
-      treated as a blank character.
+      (outside of a comment), which may occur on a subsequent source
+      fragment line. A newline character appearing within the argument
+      list is treated as a blank character.
 
-lb03. Comment lines within the argument list of an invocation of a function-like macro are
-      discarded (section 2.1.4).
+lb03. Comment lines within the argument list of an invocation of a
+      function-like macro are discarded (section 2.1.4).
 
 lb05. Fortran-style continuation markers are also permitted. An
       ampersand '&' which is the last non-whitespace character (after
@@ -235,8 +233,8 @@ lc01. An invocation of a function-like macro can be broken across
       '(' continues until the matching closing parenthesis ')' is found
       (outside of a comment), possibly on a subsequent source line.
 
-lc03. Comment lines within the argument list of an invocation of a function-like macro are
-      discarded (section 2.1.4).
+lc03. Comment lines within the argument list of an invocation of a
+      function-like macro are discarded (section 2.1.4).
 
 lc07. If character position 6 of a continuation line contains any
       character other than a blank or zero, any trailing blank
@@ -295,9 +293,9 @@ cm03. A Fortran comment line encountered during argument gathering,
       including the newline, is removed.
 
 cm05. During argument gathering, a Fortran-style comment on a source
-      fragment line fragment begins with an exclamation mark '!' and includes all
-      subsequent characters on that line. The entire sequence is
-      removed.
+      fragment line fragment begins with an exclamation mark '!' and
+      includes all subsequent characters on that line. The entire
+      sequence is removed.
 
 cm07. In a source fragment line, the token sequence '/*' ... '*/' is not
       interpreted as a comment (unlike in directive lines, see 25-142r2
@@ -360,8 +358,8 @@ me05. The entire macro invocation, from the identifier to the closing
       ')', is replaced by the tokens from the replacement-list after all
       substitutions as described in this document.
 
-me07. The resulting tokens are rescanned for the presence of further macro
-      names to be expanded, according to the rules in section 4.
+me07. The resulting tokens are rescanned for the presence of further
+      macro names to be expanded, according to the rules in section 4.
 
 
 2.2.2 The Stringizing Operator (#)
@@ -373,13 +371,13 @@ st01. If a parameter in a function-like macro's replacement list is
       preprocessing tokens of the corresponding argument (which are not
       expanded, see me01).
 
-st03. Before constructing the character literal, leading and trailing whitespace
-      is removed from the argument's tokens, and any sequence of one or
-      more whitespace characters within the argument is replaced by a
-      single blank character. Each double quote character (") within the
-      argument is replaced by a pair of double quote characters ("").
-      The resulting sequence of characters is then enclosed in double
-      quotes to form the character literal.
+st03. Before constructing the character literal, leading and trailing
+      whitespace is removed from the argument's tokens, and any sequence
+      of one or more whitespace characters within the argument is
+      replaced by a single blank character. Each double quote character
+      (") within the argument is replaced by a pair of double quote
+      characters (""). The resulting sequence of characters is then
+      enclosed in double quotes to form the character literal.
 
 EXAMPLE ste01:
 
@@ -454,12 +452,11 @@ EXAMPLE vme01:
 ------------------
 
 vo01. The special identifier '__VA_OPT__' may only appear in the
-      replacement
-      list of a variadic macro, followed by a parenthesized sequence of
-      preprocessing tokens. The sequence of preprocessing tokens within
-      the parentheses is called the va-opt-arg. The closing ')' is
-      determined by skipping intervening pairs of matching left and
-      right parentheses in its preprocessing tokens.
+      replacement list of a variadic macro, followed by a parenthesized
+      sequence of preprocessing tokens. The sequence of preprocessing
+      tokens within the parentheses is called the va-opt-arg. The
+      closing ')' is determined by skipping intervening pairs of
+      matching left and right parentheses in its preprocessing tokens.
 
 vo02. The va-opt-arg shall not contain the identifier '__VA_OPT__'.
 
@@ -473,11 +470,10 @@ vo05. If no variable arguments are provided or if the expansion of the
       replaced by no tokens. (Expansion is not performed on the
       va-opt-arg.)
 
-vo07. If the expansion
-      of the variable arguments results in a non-empty sequence of
-      tokens, then the identifier '__VA_OPT__' and the following
-      parenthesized va-opt-arg are replaced by the expansion of the
-      va-opt-arg. Any occurrences of macro parameters including
+vo07. If the expansion of the variable arguments results in a non-empty
+      sequence of tokens, then the identifier '__VA_OPT__' and the
+      following parenthesized va-opt-arg are replaced by the expansion
+      of the va-opt-arg. Any occurrences of macro parameters including
       '__VA_ARGS__' within the va-opt-arg are substituted as usual.
 
 EXAMPLE voe01:
@@ -518,11 +514,10 @@ EXAMPLE voe01:
 
 tp01. If a '##' operator appears in the replacement list of a
       object-like or function-like macro, it concatenates the preceding
-      and following
-      preprocessing
-      tokens to form a single new preprocessing token. Any whitespace
-      surrounding the '##' operator is removed. The result of the
-      concatenation must be a valid preprocessing token.
+      and following preprocessing tokens to form a single new
+      preprocessing token. Any whitespace surrounding the '##' operator
+      is removed. The result of the concatenation must be a valid
+      preprocessing token.
 
 tp03. If an operand of the '##' operator is a macro parameter, it is
       replaced by the corresponding argument's preprocessing tokens. The
@@ -643,38 +638,36 @@ EXAMPLE rse05:
 Appendix A: Divergences from C
 ==============================
 
-In many ways, the FPP specified by this document adheres to the
-existing practice established by the C preprocessor over the past
-several decades. However FPP semantics also deliberately diverge from
-the analogous behavior of the C preprocessor as specified in C 2023.
-This non-normative section enumerates such deliberate differences
-that were discussed in this document, as a reference for readers
-to assist in comparisons.
+In many ways, the FPP specified by this document adheres to the existing
+practice established by the C preprocessor over the past several
+decades. However FPP semantics also deliberately diverge from the
+analogous behavior of the C preprocessor as specified in C 2023. This
+non-normative section enumerates such deliberate differences that were
+discussed in this document, as a reference for readers to assist in
+comparisons.
 
-For additional differences not discussed within this document,
-see the corresponding Appendix in 25-142r2.
+For additional differences not discussed within this document, see the
+corresponding Appendix in 25-142r2.
 
 Differences include:
 
-dfc40. FPP expands macro invocations inside Fortran comments on
-       Fortran source fragment lines and in Fortran comment lines
-       (see rule ge01).
+dfc40. FPP expands macro invocations inside Fortran comments on Fortran
+       source fragment lines and in Fortran comment lines (rule ge01).
 
 dfc50. Line continuation semantics within the argument list of
-       function-like macros have been adjusted to allow for Fortran-style
-       line continuation (see sec 2.1.2 and 2.1.3).
+       function-like macros have been adjusted to allow for
+       Fortran-style line continuation (sections 2.1.2 and 2.1.3).
 
-dfc60. Fortran-style comments within the argument list of
-       function-like macros are removed during argument gathering
-       (see sec 2.1.4).
+dfc60. Fortran-style comments within the argument list of function-like
+       macros are removed during argument gathering (section 2.1.4).
 
 dfc70. When determining argument boundaries in the invocation of a
        function-like macro, FPP ignores commas surrounded by matching
-       sets of '[  ]', '{ }', or '(/  /)' bracketing characters,
-       in addition to matching sets of '(  )' parentheses (see rule ag03).
+       sets of '[  ]', '{ }', or '(/  /)' bracketing characters, in
+       addition to matching sets of '(  )' parentheses (rule ag03).
 
 dfc80. The rules for applying the stringizing operator `#` have been
-       adjusted to match Fortran character string quoting (see rule st03).
+       adjusted to match Fortran character string quoting (rule st03).
 
 
 
