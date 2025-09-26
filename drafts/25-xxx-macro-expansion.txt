@@ -67,8 +67,6 @@ ag03. Commas within the argument list separate individual arguments.
       bracketing characters within an argument must be balanced and
       properly nested.
 
-TODO: Maybe add a straw poll here on the balance/nesting of bracketing?
-
 ag05. During argument gathering, commas and bracketing characters within
       comments are removed
       (section 2.1.4) and thus do not affect argument separation.
