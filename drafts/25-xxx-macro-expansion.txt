@@ -29,8 +29,9 @@ ge02. During expansion, an identifier that is the name of a defined
       replacement-list of that macro's definition.
 
 ge04. During expansion, an identifier that is the name of a defined
-      function-like macro (25-142r2 Sec 3.2) followed by a left parenthesis '(' as the next
-      token introduces an invocation of the function-like macro. The
+      function-like macro (25-142r2 Sec 3.2) followed by a left
+      parenthesis '(' introduces an invocation of the function-like
+      macro. The
       arguments of the macro invocation are collected before the macro
       is expanded (section 2).
 
@@ -51,7 +52,8 @@ ge05. After expansion has replaced a macro invocation, the resulting
 ------------------------
 
 ag01. During expansion when a function-like macro name is encountered
-      followed by a '(' as the next token, the preprocessor shall scan
+      followed by a '(' as the next nonblank character, the
+      preprocessor shall scan
       ahead, removing comments (section 2.1.4), to identify the full
       list of macro arguments. The argument list begins after the
       initial '(' and terminates at the matching closing parenthesis
