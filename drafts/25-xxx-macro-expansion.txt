@@ -625,8 +625,45 @@ EXAMPLE rse05:
 
             I+K(2)
             I+I(2)
-            
-            
-            
-            
+
+
+
+Appendix A: Divergences from C
+==============================
+
+In many ways, the FPP specified by this document adheres to the
+existing practice established by the C preprocessor over the past
+several decades. However FPP semantics also deliberately diverge from
+the analogous behavior of the C preprocessor as specified in C 2023.
+This non-normative section enumerates such deliberate differences
+that were discussed in this document, as a reference for readers
+to assist in comparisons.
+
+For additional differences not discussed within this document,
+see the corresponding Appendix in 25-142r2.
+
+Differences include:
+
+dfc40. FPP expands macro invocations inside Fortran comments on
+       Fortran source fragment lines and in Fortran comment lines
+       (see rule ge01).
+
+dfc50. Line continuation semantics within the argument list of
+       function-like macros have been adjusted to allow for Fortran-style
+       line continuation (see sec 2.1.2 and 2.1.3).
+
+dfc60. Fortran-style comments within the argument list of
+       function-like macros are removed during argument gathering
+       (see sec 2.1.4).
+
+dfc70. When determining argument boundaries in the invocation of a
+       function-like macro, FPP ignores commas surrounded by matching
+       sets of '[  ]', '{ }', or '(/  /)' bracketing characters,
+       in addition to matching sets of '(  )' parentheses (see rule ag03).
+
+dfc80. The rules for applying the stringizing operator `#` have been
+       adjusted to match Fortran character string quoting (see rule st03).
+
+
+
 ===END===
