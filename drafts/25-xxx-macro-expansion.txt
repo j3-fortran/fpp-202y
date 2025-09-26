@@ -53,7 +53,7 @@ ge05. After expansion has replaced a macro invocation, the resulting
 
 ag01. During expansion when a function-like macro name is encountered
       followed by a '(' as the next nonblank character, the
-      preprocessor shall scan
+      processor shall scan
       ahead, removing comments (section 2.1.4), to identify the full
       list of macro arguments. The argument list begins after the
       initial '(' and terminates at the matching closing parenthesis
@@ -94,7 +94,7 @@ ag13. An argument is considered empty if no preprocessing tokens appear
       parenthesis and a comma). When an empty argument is substituted,
       it is replaced by no tokens.
 
-ag15. Preprocessor directives are not recognized as such within the
+ag15. Preprocessing directives are not recognized as such within the
       arguments of a function-like macro invocation.
 
 ag17. Within the
