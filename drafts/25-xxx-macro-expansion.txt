@@ -461,9 +461,52 @@ EXAMPLE vme01:
 2.3.1 '__VA_OPT__'
 ----------------
 
-vo01. TODO
+vo01. The special identifier '__VA_OPT__' may appear in the replacement
+      list of a variadic macro, followed by a parenthesized sequence of
+      preprocessing tokens.
 
+vo03. When the macro is expanded, if the variable arguments are provided
+      (i.e., if the invocation includes at least one argument
+      corresponding to the ellipsis) and the (hypothetical) substitution
+      of the variable arguments results in a non-empty sequence of
+      preprocessing tokens, the sequence of tokens within the
+      parentheses is included in the expansion, with any occurrences of
+      '__VA_ARGS__' within the sequence replaced as usual.
 
+vo05. If no variable arguments are provided or if the (hypothetical)
+      substitution of the variable arguments results in no tokens, the
+      entire '__VA_OPT__(...)' is replaced by no tokens.
+
+EXAMPLE voe01:
+
+      Given the macro definitions:
+
+      #define LOG(msg, ...) print*, msg __VA_OPT__(, __VA_ARGS__)
+      #define NOTHING
+
+      The invocation:
+
+            LOG("hello")
+
+      is equivalent to:
+
+            print*, "hello"
+
+      The invocation:
+
+            LOG("Answer:", 42)
+
+      is equivalent to:
+
+            print*, "Answer:" , 42
+
+      The invocation:
+
+            LOG("nothing:", NOTHING)
+
+      is equivalent to
+
+            print*, "nothing:"
 
 
 3 Rescanning and Recursion Prevention
