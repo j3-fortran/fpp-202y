@@ -6,11 +6,23 @@ Date: 2025-XXX-XX
 References: 25-142r2 Formal specifications for the Fortran preprocessor
                   (FPP)
             25-114r2 Fortran preprocessor requirements
-            25-007 Fortran 2023 Interpretation Document
-            24-109 On Fortran awareness in a Fortran preprocessor.txt
             ISO/IEC 9899:2024 Programming languages -- C ("C 2023")
                   (working draft N3220)
 
+Background
+==========
+
+At meeting #235 in Feb 2025, J3 approved requirements for
+a cpp-like preprocessing for Fortran 202Y (paper 25-114r2).
+
+At meeting #236 in Jun 2025, J3 approved corresponding
+specifications covering the majority of preprocessing (paper 25-142r2).
+That document left one incomplete section, section 4 "Macro identification 
+and expansion".
+
+This document provides the remaining specifications for preprocessing,
+specifying the details of macro identification and expansion. It should
+be read along with 25-142r2, which provides all the other specifications.
 
 
 1 General
