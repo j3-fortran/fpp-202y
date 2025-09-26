@@ -22,7 +22,7 @@ TODO: link to existing papers, explain this is a section of
 ge01. Macro identification and expansion is a process that occurs on
       source fragment lines and comment lines when they are first
       encountered during preprocessing, and may be recursively repeated
-      as specified in section 3.
+      as specified in section 4.
 
 ge02. During expansion, an identifier that is the name of a defined
       object-like macro (25-142r2 Sec 3.1) is replaced by the
@@ -36,7 +36,7 @@ ge04. During expansion, an identifier that is the name of a defined
 
 ge05. After expansion has replaced a macro invocation, the resulting
       tokens are rescanned to find additional macro invocations for
-      expansion (section 3).
+      expansion (section 4).
 
 
 
@@ -326,7 +326,7 @@ as01. After the arguments of a function-like macro have been identified,
 
 me01. For each parameter that appears in the replacement list of the
       function-like macro that is neither preceded by '#' (section
-      2.2.2), nor preceded or followed by '##' (section 2.2.3), nor part of
+      2.2.2), nor preceded or followed by '##' (section 3), nor part of
       a va-opt-replacement (section 2.3.1), the tokens comprising the
       argument are subjected to complete macro expansion as if they were
       the only tokens remaining in the file. The result of that
@@ -338,16 +338,15 @@ me01. For each parameter that appears in the replacement list of the
 
 me03. During the expansion of a macro's arguments, the name of the macro
       being invoked is not treated as a macro name. This prevents
-      recursive expansion. See also section 3 "Rescanning and Recursion
+      recursive expansion. See also section 4 "Rescanning and Recursion
       Prevention".
 
 me05. The entire macro invocation, from the identifier to the closing
       ')', is replaced by the tokens from the replacement-list after all
-      the substitutions described above and those in sections
-      2.2.3-2.2.5.
+      substitutions as described in this document.
 
 me07. The resulting tokens are rescanned for the presence of further macro
-      names to be expanded, according to the rules in section 3.
+      names to be expanded, according to the rules in section 4.
 
 
 2.2.2 The Stringizing Operator (#)
@@ -381,39 +380,6 @@ EXAMPLE ste01:
       is equivalent to:
 
             "A ""B"" C"
-
-
-2.2.3 The Token-Pasting Operator (##)
--------------------------------------
-
-tp01. If a '##' operator appears in the replacement list of a
-      function-like macro, it concatenates the preceding and following
-      preprocessing
-      tokens to form a single new preprocessing token. Any whitespace
-      surrounding the '##' operator is removed. The result of the
-      concatenation must be a valid preprocessing token.
-
-tp03. If an operand of the '##' operator is a macro parameter, it is
-      replaced by the corresponding argument's preprocessing tokens. The
-      argument itself is not macro-expanded before being concatenated
-      (see me01).
-
-tp05. The '##' operator shall not appear at the beginning or end of a
-      replacement list.
-
-EXAMPLE tpe01:
-
-      Given the macro definition:
-
-      #define MAKE_VAR(type, index) type ## var ## index
-
-      The invocation:
-
-            integer :: MAKE_VAR(real, 1)
-
-      is equivalent to:
-
-            integer :: realvar1
 
 
 
@@ -531,7 +497,43 @@ EXAMPLE voe01:
             print*, "nothing:"
 
 
-3 Rescanning and Recursion Prevention
+
+3 The Token-Pasting Operator (##)
+=================================
+
+tp01. If a '##' operator appears in the replacement list of a
+      object-like or function-like macro, it concatenates the preceding
+      and following
+      preprocessing
+      tokens to form a single new preprocessing token. Any whitespace
+      surrounding the '##' operator is removed. The result of the
+      concatenation must be a valid preprocessing token.
+
+tp03. If an operand of the '##' operator is a macro parameter, it is
+      replaced by the corresponding argument's preprocessing tokens. The
+      argument itself is not macro-expanded before being concatenated
+      (see me01).
+
+tp05. The '##' operator shall not appear at the beginning or end of a
+      replacement list.
+
+EXAMPLE tpe01:
+
+      Given the macro definition:
+
+      #define MAKE_VAR(type, index) type ## var ## index
+
+      The invocation:
+
+            integer :: MAKE_VAR(real, 1)
+
+      is equivalent to:
+
+            integer :: realvar1
+
+
+
+4 Rescanning and Recursion Prevention
 =====================================
 
 rs01. After a macro invocation is replaced, the resulting sequence of
