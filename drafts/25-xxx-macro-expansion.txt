@@ -20,20 +20,23 @@ TODO: link to existing papers, explain this is a section of
       already-passed document 25-142r2
 
 ge01. Macro identification and expansion is a process that occurs on
-      source fragment lines, and comment lines when they are first
+      source fragment lines and comment lines when they are first
       encountered during preprocessing, and may be recursively repeated
-      as specified section 2.3.
+      as specified in section 3.
 
 ge02. During expansion, an identifier that is the name of a defined
-      object-like macro is replaced by the text of that macro's
-      definition (section 4.3).
+      object-like macro (25-142r2 Sec 3.1) is replaced by the
+      replacement-list of that macro's definition.
 
 ge04. During expansion, an identifier that is the name of a defined
-      function-like macro followed by a left parenthesis '(' as the next
+      function-like macro (25-142r2 Sec 3.2) followed by a left parenthesis '(' as the next
       token introduces an invocation of the function-like macro. The
       arguments of the macro invocation are collected before the macro
-      is expanded.
+      is expanded (section 2).
 
+ge05. After expansion has replaced a macro invocation, the resulting
+      tokens are rescanned to find additional macro invocations for
+      expansion (section 3).
 
 
 
@@ -50,20 +53,20 @@ ge04. During expansion, an identifier that is the name of a defined
 ag01. During expansion when a function-like macro name is encountered
       followed by a '(' as the next token, the preprocessor shall scan
       ahead, removing comments (section 2.1.4), to identify the full
-      list of macro arguments. The argument list begins after the
-      initial '(' and terminates at the matching closing parenthesis
-      ')'. The argument list must terminate by the end of the current
-      file.
+      ')'. The argument list shall terminate before the end of the
+      current file.
 
 ag03. Commas within the argument list separate individual arguments.
       However, a comma that appears within a balanced set of parentheses
       (), square brackets '[]', curly braces '{}', or array constructor
       delimiters '(/ /)' does not act as an argument separator. All such
-      brackets within an argument must be balanced and properly nested.
+      bracketing characters within an argument must be balanced and
+      properly nested.
 
 TODO: Maybe add a straw poll here on the balance/nesting of bracketing?
 
-ag05. Commas and bracketing characters within comments are removed
+ag05. During argument gathering, commas and bracketing characters within
+      comments are removed
       (section 2.1.4) and thus do not affect argument separation.
 
 ag07. The collected arguments consist of all tokens between the
@@ -79,8 +82,10 @@ ag09. For a macro that is not variadic (section 2.3), the number of
 
 ag11. For a variadic macro (section 2.3), the number of arguments shall
       not be less than the number of named parameters, and any arguments
-      supplied beyond the named parameters, along with the commas that
-      separate them, are gathered together as a single argument.
+      supplied beyond the number of named parameters, along with the
+      commas that separate them, are gathered together as a single
+      argument, collectively known as the "variable arguments" (section
+      2.3).
 
 ag13. An argument is considered empty if no preprocessing tokens appear
       between its delimiters (e.g., between two commas, or between a
@@ -88,7 +93,9 @@ ag13. An argument is considered empty if no preprocessing tokens appear
       it is replaced by no tokens.
 
 ag15. Preprocessor directives are not recognized as such within the
-      arguments of a function-like macro invocation. Within the
+      arguments of a function-like macro invocation.
+
+ag17. Within the
       arguments of a function-like macro invocation, the token INCLUDE
       is not treated as introducing an INCLUDE line, even if it
       resembles one.
@@ -266,14 +273,22 @@ cm01. Fortran-style comments and comment lines that appear within the
       argument list of a function-like macro invocation are removed
       during argument gathering and do not become part of the arguments.
 
-cm03. A Fortran-style comment begins with an exclamation mark '!' and
-      includes all subsequent characters on that line. The entire
-      sequence is removed.
-
-cm05. A Fortran comment line encountered during argument gathering,
+cm03. A Fortran comment line encountered during argument gathering,
       including the newline, is removed.
 
-cm07. The processing specified in this subsection effectively takes
+cm05. During argument gathering, a Fortran-style comment on a source
+      line fragment begins with an exclamation mark '!' and includes all
+      subsequent characters on that line. The entire sequence is
+      removed.
+
+cm07. In a source line fragment, the token sequence '/*' ... '*/' is not
+      interpreted as a comment (unlike in directive lines, see 25-142r2
+      sec 2.4).
+
+cm09. In a source line fragment, the '//' token is not interpreted as
+      introducing a comment.
+
+cm11. The processing specified in this subsection effectively takes
       place before line continuation processing (sections 2.1.2 and
       2.1.3).
 
@@ -391,7 +406,7 @@ EXAMPLE tpe01:
 
       is equivalent to:
 
-            integer :: real_var_1
+            integer :: realvar1
 
 
 
@@ -400,7 +415,8 @@ EXAMPLE tpe01:
 
 vm01. A function-like macro can be defined to accept a variable number
       of arguments by specifying an ellipsis '...' as its final
-      parameter. Such a macro is a "variadic" macro.
+      parameter (25-142r2 section 3.2). Such a macro is a "variadic"
+      macro.
 
 vm03. During expansion of a variadic macro, the special identifier
       '__VA_ARGS__' in the replacement list is replaced by the text of
