@@ -488,19 +488,16 @@ vo01. The special identifier '__VA_OPT__' may only appear in the
 vo03. The <va-opt-arg> shall not contain the identifier '__VA_OPT__'.
 
 vo05. When a variadic function-like macro is being expanded, if the
-      replacement-list contains the identifier '__VA_OPT__', the
-      following two rules apply.
+      replacement-list contains a <va-opt-replacement>, the following
+      two rules apply.
 
 vo07. If no variable arguments are provided or if the expansion of the
-      variable arguments results in no tokens, then the identifier
-      '__VA_OPT__' and the following parenthesized <va-opt-arg> are
-      replaced by no tokens. (Expansion is not performed on the
-      va-opt-arg.)
+      variable arguments results in no tokens, then the
+      <va-opt-replacement> is replaced by no tokens.
 
 vo09. If the expansion of the variable arguments results in a non-empty
-      sequence of tokens, then the identifier '__VA_OPT__' and the
-      following parenthesized <va-opt-arg> are replaced by the expansion
-      of the <va-opt-arg>. Any occurrences of macro parameters including
+      sequence of tokens, then the <va-opt-replacement> is replaced by
+      the <va-opt-arg>. Any occurrences of macro parameters including
       '__VA_ARGS__' within the <va-opt-arg> are substituted as usual.
 
 EXAMPLE voe01:
