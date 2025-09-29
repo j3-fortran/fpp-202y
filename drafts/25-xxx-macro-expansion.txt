@@ -38,17 +38,17 @@ ge01. Macro identification and expansion is a process that occurs on
       encountered during preprocessing, and may be recursively repeated
       as specified in section 4.
 
-ge02. During expansion, an identifier that is the name of a defined
+ge03. During expansion, an identifier that is the name of a defined
       object-like macro (25-142r2 section 3.1) is replaced by the
       replacement-list of that macro's definition.
 
-ge04. During expansion, an identifier that is the name of a defined
+ge05. During expansion, an identifier that is the name of a defined
       function-like macro (25-142r2 section 3.2) followed by a left
       parenthesis '(' introduces an invocation of the function-like
       macro. The arguments of the macro invocation are collected before
       the macro is expanded (section 2).
 
-ge05. After expansion has replaced a macro invocation, the resulting
+ge07. After expansion has replaced a macro invocation, the resulting
       tokens are rescanned to find additional macro invocations for
       expansion (section 4).
 
@@ -94,30 +94,30 @@ ag07. The collected arguments consist of all tokens between the
       2.1.4) are removed as part of argument gathering and thus are not
       part of any arguments themselves.
 
-ag08. Outside of character constants, multiple adjacent whitespace
+ag09. Outside of character constants, multiple adjacent whitespace
       characters within an argument are treated as a single blank
       character.
 
-ag09. For a macro that is not variadic (section 2.3), the number of
+ag11. For a macro that is not variadic (section 2.3), the number of
       arguments in the invocation shall be equal to the number of
       parameters in the macro definition.
 
-ag11. For a variadic macro (section 2.3), the number of arguments shall
+ag13. For a variadic macro (section 2.3), the number of arguments shall
       not be less than the number of named parameters, and any arguments
       supplied beyond the number of named parameters, along with the
       commas that separate them, are gathered together as a single
       argument, collectively known as the "variable arguments" (section
       2.3).
 
-ag13. An argument is considered empty if no preprocessing tokens appear
+ag15. An argument is considered empty if no preprocessing tokens appear
       between its delimiters (e.g., between two commas, or between a
       parenthesis and a comma). When an empty argument is substituted,
       it is replaced by no tokens.
 
-ag15. Preprocessing directives are not recognized as such within the
+ag17. Preprocessing directives are not recognized as such within the
       arguments of a function-like macro invocation.
 
-ag17. Within the arguments of a function-like macro invocation, the
+ag19. Within the arguments of a function-like macro invocation, the
       token INCLUDE is not treated as introducing an INCLUDE line, even
       if it resembles one.
 
@@ -194,10 +194,10 @@ lb01. An invocation of a function-like macro can be broken across
 lb03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
 
-lb04. A newline character appearing within the argument list is treated
-      as a blank character, except where rule lb05 applies.
+lb05. A newline character appearing within the argument list is treated
+      as a blank character, except where rule lb07 applies.
 
-lb05. Fortran-style continuation markers are permitted. An ampersand '&'
+lb07. Fortran-style continuation markers are permitted. An ampersand '&'
       which is the last non-whitespace character (after the removal of
       comments) preceding a newline character is removed, and all
       subsequent characters up to and including the newline are removed.
@@ -426,10 +426,10 @@ vm01. A function-like macro can be defined to accept a variable number
       parameter (25-142r2 section 3.2). Such a macro is a "variadic"
       macro.
 
-vm02. The special identifier '__VA_ARGS__' may only appear in the
+vm03. The special identifier '__VA_ARGS__' may only appear in the
       replacement list of a variadic macro.
 
-vm03. During expansion of a variadic macro, the '__VA_ARGS__' in the
+vm05. During expansion of a variadic macro, the '__VA_ARGS__' in the
       replacement list is replaced by the tokens resulting from the
       expansion of all the variable arguments from the invocation,
       including the commas between them. A variadic macro must be
@@ -485,19 +485,19 @@ vo01. The special identifier '__VA_OPT__' may only appear in the
       closing ')' is determined by skipping intervening pairs of
       matching left and right parentheses in its preprocessing tokens.
 
-vo02. The <va-opt-arg> shall not contain the identifier '__VA_OPT__'.
+vo03. The <va-opt-arg> shall not contain the identifier '__VA_OPT__'.
 
-vo03. When a variadic function-like macro is being expanded, if the
+vo05. When a variadic function-like macro is being expanded, if the
       replacement-list contains the identifier '__VA_OPT__', the
       following two rules apply.
 
-vo05. If no variable arguments are provided or if the expansion of the
+vo07. If no variable arguments are provided or if the expansion of the
       variable arguments results in no tokens, then the identifier
       '__VA_OPT__' and the following parenthesized <va-opt-arg> are
       replaced by no tokens. (Expansion is not performed on the
       va-opt-arg.)
 
-vo07. If the expansion of the variable arguments results in a non-empty
+vo09. If the expansion of the variable arguments results in a non-empty
       sequence of tokens, then the identifier '__VA_OPT__' and the
       following parenthesized <va-opt-arg> are replaced by the expansion
       of the <va-opt-arg>. Any occurrences of macro parameters including
