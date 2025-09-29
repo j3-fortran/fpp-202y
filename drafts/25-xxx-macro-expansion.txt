@@ -549,7 +549,7 @@ tp03. If an operand of the '##' operator is a macro parameter, the
       operator becomes its operand. The argument itself is not
       macro-expanded before being concatenated (see me01).
 
-tp05. The '##' operator shall not appear at the beginning or end of a
+tp07. The '##' operator shall not appear at the beginning or end of a
       replacement list.
 
 EXAMPLE tpe01:
