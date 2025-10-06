@@ -135,7 +135,7 @@ EXAMPLE age01:
 
             1--3
 
-      The second argument is empty, so `b` is replaced by no tokens.
+      The second argument is empty, so 'b' is replaced by no tokens.
 
 EXAMPLE age02:
 
