@@ -106,10 +106,10 @@ ag11. For a macro that is not variadic (section 2.3), the number of
 
 ag13. For a variadic macro (section 2.3), the number of arguments shall
       not be less than the number of named parameters, and any arguments
-      supplied beyond the number of named parameters, along with the
-      commas that separate them, are gathered together as a single
-      argument, collectively known as the "variable arguments" (section
-      2.3).
+      supplied beyond the number of named parameters are collectively
+      known as the "variable arguments list" (section 2.3). If the
+      number of arguments is equal to the number of named parameters,
+      the list variable arguments is empty.
 
 ag15. An argument is considered empty if contains no preprocessing
       tokens. When an empty argument is substituted,
@@ -425,12 +425,13 @@ vm01. A function-like macro can be defined to accept a variable number
 vm03. The special identifier '__VA_ARGS__' may only appear in the
       replacement list of a variadic macro.
 
-vm05. During expansion of a variadic macro, the '__VA_ARGS__' in the
-      replacement list is replaced by the tokens resulting from the
-      expansion of all the variable arguments from the invocation,
-      including the commas between them. If the variable arguments in
-      the invocation are absent or if the expansion of the variable
-      arguments results in no tokens, then a '__VA_ARGS__' identifier
+vm05. During expansion of a variadic macro, the variable arguments list
+      is merged by inserting commas between the elements of the list.
+      The identifier '__VA_ARGS__' in the replacement list is then
+      replaced by the tokens resulting from the expansion of the merged
+      variable arguments. If the variable arguments list is empty or if
+      the expansion of the merged variable arguments results in no
+      tokens, then a '__VA_ARGS__' identifier
       in the replacement-list is replaced by no tokens.
 
 EXAMPLE vme01:
