@@ -113,7 +113,7 @@ ag13. For a variadic macro (section 2.3), the number of arguments shall
 
 ag15. An argument is considered empty if contains no preprocessing
       tokens. When an empty argument is substituted,
-      it is replaced by no tokens.
+      it is replaced by a placemarker token (section 3).
 
 ag17. Preprocessing directives are not recognized as such within the
       arguments of a function-like macro invocation.
@@ -136,7 +136,8 @@ EXAMPLE age01:
 
             1--3
 
-      The second argument is empty, so 'b' is replaced by no tokens.
+      The second argument is empty, so 'b' is replaced by a placemarker
+      token, which is then removed.
 
 EXAMPLE age02:
 
@@ -392,7 +393,8 @@ st01. If a parameter in a function-like macro's replacement list is
 st03. Before constructing the character literal, leading and trailing
       whitespace is removed from the argument's tokens, and any sequence
       of one or more whitespace characters within the argument is
-      replaced by a single blank character. Each double quote character
+      replaced by a single blank character. Placemarker tokens (section
+      3) are removed. Each double quote character
       (") within the argument is replaced by a pair of double quote
       characters (""). The resulting sequence of characters is then
       enclosed in double quotes to form the character literal.
@@ -432,7 +434,8 @@ vm05. During expansion of a variadic macro, the variable arguments list
       variable arguments. If the variable arguments list is empty or if
       the expansion of the merged variable arguments results in no
       tokens, then a '__VA_ARGS__' identifier
-      in the replacement-list is replaced by no tokens.
+      in the replacement-list is replaced by a placemarker token
+      (section 3).
 
 EXAMPLE vme01:
 
@@ -489,7 +492,8 @@ vo05. When a variadic function-like macro is being expanded, if the
 
 vo07. If no variable arguments are provided or if the expansion of the
       variable arguments results in no tokens, then the
-      <va-opt-replacement> is replaced by no tokens.
+      <va-opt-replacement> is replaced by a placemarker token (section
+      3).
 
 vo09. If the expansion of the variable arguments results in a non-empty
       sequence of tokens, then the <va-opt-replacement> is replaced by
@@ -540,6 +544,11 @@ tp01. If a '##' operator appears in the replacement list of a
       is removed. The result of the concatenation must be a valid
       preprocessing token.
 
+tp02. Placemarker tokens are handled specially: concatenation of two
+      placemarkers results in a single placemarker token, and
+      concatenation of a placemarker with a non-placemarker token
+      results in the non-placemarker token.
+
 tp03. If an operand of the '##' operator is a macro parameter, the
       parameter is replaced by the corresponding argument's
       preprocessing tokens, and the resulting token adjacent to the '##'
@@ -568,7 +577,8 @@ EXAMPLE tpe01:
 4 Rescanning and Recursion Prevention
 =====================================
 
-rs01. After a macro invocation is replaced, the resulting sequence of
+rs01. After a macro invocation is replaced, all placemarker tokens are
+      removed. The resulting sequence of
       tokens is rescanned, together with the subsequent tokens in the
       source file, for more macro names to expand.
 
