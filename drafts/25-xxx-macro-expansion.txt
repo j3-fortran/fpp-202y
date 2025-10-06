@@ -493,7 +493,8 @@ vo07. If no variable arguments are provided or if the expansion of the
 
 vo09. If the expansion of the variable arguments results in a non-empty
       sequence of tokens, then the <va-opt-replacement> is replaced by
-      the <va-opt-arg>. Any occurrences of macro parameters including
+      the expansion of <va-opt-arg>. Any occurrences of macro parameters
+      including
       '__VA_ARGS__' within the <va-opt-arg> are substituted as usual.
 
 EXAMPLE voe01:
