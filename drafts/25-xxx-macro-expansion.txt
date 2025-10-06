@@ -370,11 +370,6 @@ me01. For each parameter that appears in the replacement list of a
       a parameter and the variable arguments form the tokens that are
       expanded (as described above) and then used to replace it.
 
-me03. During the expansion of a macro's arguments, the name of the macro
-      being invoked is not treated as a macro name. This prevents
-      recursive expansion. See also section 4 "Rescanning and Recursion
-      Prevention".
-
 me05. The entire function-like macro invocation, from the identifier to
       the closing ')', is replaced by the tokens from the
       replacement-list after all substitutions as described in this
