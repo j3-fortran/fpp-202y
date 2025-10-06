@@ -611,6 +611,10 @@ EXAMPLE rse01:
             A
             B
 
+      Here A was expanded once, then expansion stopped due to rule rs03.
+      Similarly, B was expanded once to C, then rescanned and expanded
+      back into B, then expansion stopped due to rule rs03.
+
 EXAMPLE rse02:
 
       Given the macro definitions:
