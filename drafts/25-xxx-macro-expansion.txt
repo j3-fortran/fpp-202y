@@ -645,7 +645,7 @@ EXAMPLE rse05:
       Given the macro definitions:
 
         #define H I
-        #define I(x) J+x(2)
+        #define I(x) J(1)+x(2)
         #define J H
 
       The invocations:
@@ -655,8 +655,8 @@ EXAMPLE rse05:
 
       are equivalent to:
 
-            I+K(2)
-            I+I(2)
+            I(1)+K(2)
+            I(1)+I(2)
 
 
 
