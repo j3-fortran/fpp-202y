@@ -174,10 +174,10 @@ EXAMPLE age04:
 
       The invocation:
 
-            ASSIGN(A(5,6)[7,8], foo{T1, T2}(20, B[30]))
+            ASSIGN(A(5,6)[7,8], foo{T1, T2}(9, B[10,11]))
 
       is equivalent to:
-            A(5,6)[7,8] = foo{T1, T2}(20, B[30])
+            A(5,6)[7,8] = foo{T1, T2}(9, B[10,11])
 
 2.1.2 Line breaks and continuations in macro invocations (free-form)
 --------------------------------------------------------------------
