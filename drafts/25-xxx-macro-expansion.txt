@@ -71,9 +71,10 @@ ag01. During expansion when a function-like macro name is encountered
       followed by a '(' as the next nonblank character, the processor
       shall scan ahead, removing comments (section 2.1.4), to identify
       the full list of macro arguments. The argument list begins after
-      the initial '(' and terminates at the matching closing parenthesis
-      ')'. The argument list shall terminate before the end of the
-      current file.
+      the initial '(' and terminates before the matching closing
+      parenthesis ')', skipping intervening matched pairs of
+      parentheses. The argument list shall terminate before the end of
+      the current file.
 
 ag03. Commas within the argument list separate individual arguments.
       However, a comma that appears within a balanced set of parentheses
@@ -87,9 +88,11 @@ ag05. During argument gathering, commas and bracketing characters within
       comments are removed (section 2.1.4) and thus do not affect
       argument separation.
 
-ag07. The collected arguments consist of all tokens between the
-      separating commas (or the opening/closing parentheses). Whitespace
-      surrounding an argument is not part of the argument itself. Line
+ag07. An argument consists of all tokens between the beginning of the
+      argument list and a separating comma, between a pair of separating
+      commas, or between a separating comma and the end of the argument
+      list. Whitespace preceding or following an argument is not part of
+      the argument itself. Line
       continuations (sections 2.1.2 and 2.1.3), and comments (section
       2.1.4) are removed as part of argument gathering and thus are not
       part of any arguments themselves.
@@ -109,9 +112,8 @@ ag13. For a variadic macro (section 2.3), the number of arguments shall
       argument, collectively known as the "variable arguments" (section
       2.3).
 
-ag15. An argument is considered empty if no preprocessing tokens appear
-      between its delimiters (e.g., between two commas, or between a
-      parenthesis and a comma). When an empty argument is substituted,
+ag15. An argument is considered empty if contains no preprocessing
+      tokens. When an empty argument is substituted,
       it is replaced by no tokens.
 
 ag17. Preprocessing directives are not recognized as such within the
@@ -682,7 +684,7 @@ dfc50. Line continuation semantics within the argument list of
        Fortran-style line continuation (sections 2.1.2 and 2.1.3).
 
 dfc60. Fortran-style comments within the argument list of function-like
-       macro invocation are removed during argument gathering 
+       macro invocation are removed during argument gathering
        (section 2.1.4).
 
 dfc70. When determining argument boundaries in the invocation of a
