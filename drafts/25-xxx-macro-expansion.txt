@@ -432,10 +432,10 @@ vm03. The special identifier '__VA_ARGS__' may only appear in the
 vm05. During expansion of a variadic macro, the '__VA_ARGS__' in the
       replacement list is replaced by the tokens resulting from the
       expansion of all the variable arguments from the invocation,
-      including the commas between them. 
-      If no variable arguments are provided in the
-      invocation, the a '__VA_ARGS__' identifier in the replacement-list
-      is replaced by no tokens.
+      including the commas between them. If the variable arguments in
+      the invocation are absent or if the expansion of the variable
+      arguments results in no tokens, then a '__VA_ARGS__' identifier
+      in the replacement-list is replaced by no tokens.
 
 EXAMPLE vme01:
 
