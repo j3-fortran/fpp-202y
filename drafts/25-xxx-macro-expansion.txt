@@ -111,7 +111,7 @@ ag13. For a variadic macro (section 2.3), the number of arguments shall
       number of arguments is equal to the number of named parameters,
       the list variable arguments is empty.
 
-ag15. An argument is considered empty if contains it no preprocessing
+ag15. An argument is considered empty if it contains no preprocessing
       tokens. When an empty argument is substituted,
       it is replaced by a placemarker token (section 3).
 
