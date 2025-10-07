@@ -293,6 +293,7 @@ EXAMPLE lce01:
 
       are equivalent to:
 
+      !23456
             MAC(a,b,c)
             MAC(a,b,c)
             MAC(d,e f,g)
@@ -346,6 +347,75 @@ EXAMPLE cme01:
 
             1+2   ! second argument is 2
 
+EXAMPLE cme02:
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following free form source lines:
+
+            MAC(a, ! comment 1
+                b, ! comment 2
+                c)
+            MAC(d, & ! comment 1
+                e, & ! comment 2
+                     ! comment 3
+              & f)
+            MAC(g, !$foo
+                h, !$foo
+                i) !$foo
+            MAC(l, m& ! comment 1
+                n& ! comment 2
+               &o, p)
+            MAC(q,r!comment 1
+            s,!comment 2
+            t)
+
+      are equivalent to:
+
+            MAC(a,b,c)
+            MAC(d,e,f)
+            MAC(g,h,i) !$foo
+            MAC(l,m no,p)
+            MAC(q,r s,t)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
+
+EXAMPLE cme03:
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following fixed form source lines lines:
+
+      !23456
+            MAC(a, ! comment 1
+                b, ! comment 2
+                c)
+            MAC(d, ! comment 1
+      foo       e, ! comment 2
+      c comment line
+           &    f)
+            MAC(g, !$foo
+           &    h, !$foo
+                i) !$foo
+            MAC(j,k !comment 1
+           &l!comment 2
+           &m, n)
+            MAC(l,m ! comment 1
+           &n! comment 2
+           &o,p)
+            MAC(q,r!comment 1
+            s,!comment 2
+            t)
+
+      are equivalent to:
+
+            MAC(a,b,c)
+            MAC(d,e,f)
+            MAC(g,h,i) !$foo
+            MAC(j,klm,k)
+            MAC(q,r s,t)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
 
 
 2.2 Argument substitution and expansion
