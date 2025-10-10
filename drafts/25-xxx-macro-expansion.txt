@@ -410,6 +410,7 @@ EXAMPLE cme03: (fixed-form)
 
       are equivalent to:
 
+      !23456
             MAC(a,b,c)
             MAC(d,e,f)
             MAC(g,h,i) !$foo
