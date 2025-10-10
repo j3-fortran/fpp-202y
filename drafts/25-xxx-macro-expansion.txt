@@ -73,8 +73,8 @@ ag01. During expansion when a function-like macro name is encountered
       the full list of macro arguments. The argument list begins after
       the initial '(' and terminates before the matching closing
       parenthesis ')', skipping intervening matched pairs of
-      parentheses. The argument list shall terminate before the end of
-      the current file.
+      `(` and `)` parentheses. The argument list shall terminate before
+      the end of the current file.
 
 ag03. Commas within the argument list separate individual arguments.
       However, a comma that appears within a balanced set of parentheses
@@ -109,7 +109,7 @@ ag13. For a variadic macro (section 2.3), the number of arguments shall
       supplied beyond the number of named parameters are collectively
       known as the "variable arguments list" (section 2.3). If the
       number of arguments is equal to the number of named parameters,
-      the list variable arguments is empty.
+      then the variable arguments list is empty.
 
 ag15. An argument is considered empty if it contains no preprocessing
       tokens. When an empty argument is substituted,
@@ -347,7 +347,7 @@ EXAMPLE cme01:
 
             1+2   ! second argument is 2
 
-EXAMPLE cme02:
+EXAMPLE cme02: (free-form)
 
       If MAC is a function-like macro which accepts three arguments,
       then the following free form source lines:
@@ -364,6 +364,7 @@ EXAMPLE cme02:
                 i) !$foo
             MAC(l, m& ! comment 1
                 n& ! comment 2
+                 ! comment line
                &o, p)
             MAC(q,r!comment 1
             s,!comment 2
@@ -380,7 +381,7 @@ EXAMPLE cme02:
       where all line continuations and extraneous blank characters have
       been removed.
 
-EXAMPLE cme03:
+EXAMPLE cme03: (fixed-form)
 
       If MAC is a function-like macro which accepts three arguments,
       then the following fixed form source lines:
@@ -397,7 +398,8 @@ EXAMPLE cme03:
            &    h, !$foo
                 i) !$foo
             MAC(j,k !comment 1
-           &l!comment 2
+           &l ! comment 2
+             ! comment line
            &m, n)
             MAC(o,p ! comment 1
            &q! comment 2
@@ -500,11 +502,12 @@ vm03. The special identifier '__VA_ARGS__' may only appear in the
 
 vm05. During expansion of a variadic macro, the variable arguments list
       is merged by inserting commas between the elements of the list.
-      The identifier '__VA_ARGS__' in the replacement list is then
-      replaced by the tokens resulting from the expansion of the merged
-      variable arguments. If the variable arguments list is empty or if
-      the expansion of the merged variable arguments results in no
-      tokens, then a '__VA_ARGS__' identifier
+      An identifier '__VA_ARGS__' in the replacement list is treated as
+      a parameter and the merged variable arguments are the
+      corresponding argument which is then substituted according to rule
+      me01. If the variable arguments list is empty or if the
+      substitution of the merged variable arguments results in no
+      tokens, then the '__VA_ARGS__' identifier
       in the replacement-list is replaced by a placemarker token
       (section 3).
 
@@ -562,15 +565,17 @@ vo05. When a variadic function-like macro is being expanded, if the
       two rules apply.
 
 vo07. If no variable arguments are provided or if the expansion of the
-      variable arguments results in no tokens, then the
+      merged variable argument list (rule vm05) results in no tokens,
+      then the
       <va-opt-replacement> is replaced by a placemarker token (section
       3).
 
-vo09. If the expansion of the variable arguments results in a non-empty
+vo09. If the expansion of the merged variable argument list (rule vm05)
+      results in a non-empty
       sequence of tokens, then the <va-opt-replacement> is replaced by
       the expansion of <va-opt-arg>. Any occurrences of macro parameters
-      including
-      '__VA_ARGS__' within the <va-opt-arg> are substituted as usual.
+      including '__VA_ARGS__' within the <va-opt-arg> are substituted as
+      specified in rule me01 before that expansion is performed.
 
 EXAMPLE voe01:
 
@@ -649,7 +654,7 @@ EXAMPLE tpe01:
 =====================================
 
 rs01. After a macro invocation is replaced, all placemarker tokens are
-      removed. The resulting sequence of
+      removed from the replacement. The resulting sequence of
       tokens is rescanned, together with the subsequent tokens in the
       source file, for more macro names to expand.
 
