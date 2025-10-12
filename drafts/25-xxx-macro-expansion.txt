@@ -91,10 +91,9 @@ ag05. During argument gathering, commas and bracketing characters within
 ag07. An argument consists of all tokens between the beginning of the
       argument list and a separating comma, between a pair of separating
       commas, or between a separating comma and the end of the argument
-      list. Line
-      continuations (sections 2.1.2 and 2.1.3), and comments (section
-      2.1.4) are removed as part of argument gathering and thus are not
-      part of any arguments themselves.
+      list. Line continuations (sections 2.1.2 and 2.1.3), and comments
+      (section 2.1.4) are removed as part of argument gathering and thus
+      are not part of any arguments themselves.
 
 ag09. Outside of character constants, multiple adjacent whitespace
       characters within an argument are treated as a single blank
