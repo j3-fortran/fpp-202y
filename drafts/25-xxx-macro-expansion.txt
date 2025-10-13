@@ -469,6 +469,14 @@ st01. If a parameter in a function-like macro's replacement list is
       preprocessing tokens of the corresponding argument (which are not
       expanded, see me01).
 
+st02. Let the "stringizing argument" be the preprocessing token sequence
+      for the corresponding argument with placemarker tokens removed. Each
+      occurrence of white space between the stringizing argument's
+      preprocessing tokens becomes a single space character in the
+      character string literal. White space before the first preprocessing
+      token and after the last preprocessing token composing the
+      stringizing argument is deleted.
+
 st03. Before constructing the character literal, leading and trailing
       whitespace is removed from the argument's tokens, and any sequence
       of one or more whitespace characters within the argument is
