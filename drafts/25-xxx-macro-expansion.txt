@@ -252,7 +252,8 @@ function-like macro invocations in fixed source form.
 lc01. An invocation of a function-like macro can be broken across
       multiple lines. An invocation that begins with an open parenthesis
       '(' continues until the matching closing parenthesis ')' is found
-      (outside of a comment), possibly on a subsequent source line.
+      (outside of a comment), which may occur on a subsequent source
+      fragment line.
 
 lc03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
