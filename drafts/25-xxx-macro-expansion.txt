@@ -129,7 +129,7 @@ EXAMPLE age01:
 
       The invocation:
 
-            F(1, , 3)
+            F(1,,3)
 
       is equivalent to:
 
