@@ -104,11 +104,11 @@ ag11. For a macro that is not variadic (section 2.3), the number of
       parameters in the macro definition.
 
 ag13. For a variadic macro (section 2.3), the number of arguments shall
-      not be less than the number of named parameters, and any arguments
-      supplied beyond the number of named parameters are collectively
-      known as the "variable arguments list" (section 2.3). If the
-      number of arguments is equal to the number of named parameters,
-      then the variable arguments list is empty.
+      not be less than the number of named parameters in the macro
+      definition, and any arguments supplied beyond the number of named
+      parameters are collectively known as the "variable arguments list"
+      (section 2.3). If the number of arguments is equal to the number of
+      named parameters, then the variable arguments list is empty.
 
 ag15. An argument is considered empty if it contains no preprocessing
       tokens. When an empty argument is substituted, it is replaced by a
