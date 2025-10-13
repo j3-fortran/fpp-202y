@@ -136,7 +136,7 @@ EXAMPLE age01:
             1--3
 
       The second argument is empty, so 'b' is replaced by a placemarker
-      token, which is then removed.
+      token, which is then removed (section 4).
 
 EXAMPLE age02:
 
