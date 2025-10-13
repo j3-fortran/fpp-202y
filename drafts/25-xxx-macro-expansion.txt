@@ -658,8 +658,9 @@ EXAMPLE tpe01:
 =====================================
 
 rs01. After a macro invocation is replaced, all placemarker tokens are
-      removed from the replacement. The resulting sequence of tokens is
-      rescanned, together with the subsequent tokens in the source file,
+      removed from the replacement. This removal never pastes adjacent
+      tokens together. The resulting sequence of tokens is rescanned,
+      together with the subsequent tokens in the source file,
       for more macro names to expand.
 
 rs03. (C2023 6.10.5.4-2) If the name of the macro being replaced is found
