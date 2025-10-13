@@ -434,7 +434,7 @@ part of substitution.
 2.2.1 Macro expansion during argument substitution
 --------------------------------------------------
 
-me01. For each parameter that appears in the replacement list of a
+me01. For each parameter appearing in the replacement list of a
       function-like macro that is neither preceded by '#' (section
       2.2.2), nor preceded or followed by '##' (section 3), nor part of
       a <va-opt-replacement> (section 2.3.1), the tokens comprising the
