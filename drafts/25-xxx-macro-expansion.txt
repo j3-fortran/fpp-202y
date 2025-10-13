@@ -125,7 +125,7 @@ EXAMPLE age01:
 
       Given the macro definition:
 
-      #define F(a,b,c) a-b-c
+      #define F(a,b,c) a;b;c
 
       The invocation:
 
@@ -133,7 +133,7 @@ EXAMPLE age01:
 
       is equivalent to:
 
-            1--3
+            1;;3
 
       The second argument is empty, so 'b' is replaced by a placemarker
       token, which is then removed (section 4).
