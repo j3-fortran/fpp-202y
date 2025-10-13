@@ -95,10 +95,6 @@ ag07. An argument consists of all tokens between the beginning of the
       (section 2.1.4) are removed as part of argument gathering and thus
       are not part of any arguments themselves.
 
-ag09. Outside of character constants, multiple adjacent whitespace
-      characters within an argument are treated as a single blank
-      character.
-
 ag11. For a macro that is not variadic (section 2.3), the number of
       arguments in the invocation shall be equal to the number of
       parameters in the macro definition.
