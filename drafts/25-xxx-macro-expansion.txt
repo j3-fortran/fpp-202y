@@ -689,7 +689,7 @@ EXAMPLE rse01:
             A
             B
 
-      are equivalent to:
+      once fully expanded are equivalent to:
 
             A
             B
