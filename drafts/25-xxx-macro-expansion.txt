@@ -559,16 +559,16 @@ vo01. The special identifier '__VA_OPT__' may only appear in the
       closing ')' is determined by skipping intervening pairs of
       matching left and right parentheses in its preprocessing tokens.
 
-vo03. The <va-opt-arg> shall not contain the identifier '__VA_OPT__'.
+vo03. A <va-opt-arg> shall not contain the identifier '__VA_OPT__'.
 
 vo05. When a variadic function-like macro is being expanded, if the
       replacement-list contains a <va-opt-replacement>, the following
       two rules apply.
 
-vo07. If no variable arguments are provided or if the expansion of the
-      merged variable argument list (rule vm05) results in no tokens,
-      then the <va-opt-replacement> is replaced by a placemarker token
-      (section 3).
+vo07. If the variable arguments list is empty (rule ag13) or if the
+      expansion of the merged variable argument list (rule vm05) results in
+      no tokens, then the <va-opt-replacement> is replaced by a placemarker
+      token (section 3).
 
 vo09. If the expansion of the merged variable argument list (rule vm05)
       results in a non-empty sequence of tokens, then the
