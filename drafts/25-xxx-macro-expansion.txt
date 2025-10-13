@@ -357,26 +357,30 @@ EXAMPLE cme02: (free-form)
                 c)
             MAC(d, & ! comment 1
                 e, & ! comment 2
-                     ! comment 3
+                     ! comment line
               & f)
-            MAC(g, !$foo
-                h, !$foo
-                i) !$foo
-            MAC(l, m& ! comment 1
-                n& ! comment 2
-                 ! comment line
-               &o, p)
-            MAC(q,r!comment 1
-            s,!comment 2
-            t)
+            MAC(g, !$foo 1
+                h, !$foo 2
+                i) !$foo 3
+            MAC(j,k& ! comment 1
+                &l&  ! comment 2
+                     ! comment line
+                &m, n)
+            MAC(o,p& ! comment 1
+                &q! comment 2
+                &r,s)
+            MAC(t,u!comment 1
+            v,!comment 2
+            w)
 
       are equivalent to:
 
             MAC(a,b,c)
             MAC(d,e,f)
-            MAC(g,h,i) !$foo
-            MAC(l,m no,p)
-            MAC(q,r s,t)
+            MAC(g,h,i) !$foo 3
+            MAC(j,klm,n)
+            MAC(o,pq r,s)
+            MAC(t,u v,w)
 
       where all line continuations and extraneous blank characters have
       been removed.
@@ -391,12 +395,12 @@ EXAMPLE cme03: (fixed-form)
                 b, ! comment 2
                 c)
             MAC(d, ! comment 1
-      foo       e, ! comment 2
+      junk      e, ! comment 2
       c comment line
            &    f)
-            MAC(g, !$foo
-           &    h, !$foo
-                i) !$foo
+            MAC(g, !$foo 1
+           &    h, !$foo 2
+                i) !$foo 3
             MAC(j,k !comment 1
            &l ! comment 2
              ! comment line
@@ -413,7 +417,7 @@ EXAMPLE cme03: (fixed-form)
       !23456
             MAC(a,b,c)
             MAC(d,e,f)
-            MAC(g,h,i) !$foo
+            MAC(g,h,i) !$foo 3
             MAC(j,klm,n)
             MAC(o,pq r,s)
             MAC(t,u v,w)
