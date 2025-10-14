@@ -95,10 +95,6 @@ ag07. An argument consists of all tokens between the beginning of the
       (section 2.1.4) are removed as part of argument gathering and thus
       are not part of any arguments themselves.
 
-ag09. Outside of character constants, multiple adjacent whitespace
-      characters within an argument are treated as a single blank
-      character.
-
 ag11. For a macro that is not variadic (section 2.3), the number of
       arguments in the invocation shall be equal to the number of
       parameters in the macro definition.
@@ -125,15 +121,15 @@ EXAMPLE age01:
 
       Given the macro definition:
 
-      #define F(a,b,c) a-b-c
+      #define F(a,b,c) a;b;c
 
       The invocation:
 
-            F(1, , 3)
+            F(1,,3)
 
       is equivalent to:
 
-            1--3
+            1;;3
 
       The second argument is empty, so 'b' is replaced by a placemarker
       token, which is then removed (section 4).
@@ -469,11 +465,19 @@ st01. If a parameter in a function-like macro's replacement list is
       preprocessing tokens of the corresponding argument (which are not
       expanded, see me01).
 
-st03. Before constructing the character literal, leading and trailing
-      whitespace is removed from the argument's tokens, and any sequence
-      of one or more whitespace characters within the argument is
-      replaced by a single blank character. Placemarker tokens (section
-      3) are removed. Each double quote character (") within the
+st02. (C2023 6.10.5.2-3) Let the "stringizing argument" be the
+      preprocessing token sequence for the corresponding argument with
+      placemarker tokens removed. Each occurrence of white space between
+      the stringizing argument's preprocessing tokens becomes a single
+      space character in the character string literal. White space
+      before the first preprocessing token and after the last
+      preprocessing token composing the stringizing argument is deleted.
+      Otherwise, the original spelling of each preprocessing token in
+      the stringizing argument is retained in the character string
+      literal, except for special handling for producing the spelling of
+      character literals (st03).
+
+st03. Each double quote character (") within the stringizing
       argument is replaced by a pair of double quote characters ("").
       The resulting sequence of characters is then enclosed in double
       quotes to form the character literal.
@@ -658,8 +662,9 @@ EXAMPLE tpe01:
 =====================================
 
 rs01. After a macro invocation is replaced, all placemarker tokens are
-      removed from the replacement. The resulting sequence of tokens is
-      rescanned, together with the subsequent tokens in the source file,
+      removed from the replacement. This removal never pastes adjacent
+      tokens together. The resulting sequence of tokens is rescanned,
+      together with the subsequent tokens in the source file,
       for more macro names to expand.
 
 rs03. (C2023 6.10.5.4-2) If the name of the macro being replaced is found
