@@ -2,7 +2,7 @@ To: J3                                                     J3/25-176rx
 From: Patrick Fasano & Dan Bonachea
 Subject: Formal specifications for macro identification and expansion in
          the Fortran preprocessor (FPP)
-Date: 2025-October-XX
+Date: 2025-November-XX
 References:
       25-142r2 Formal specifications for the Fortran preprocessor (FPP)
       25-114r2 Fortran preprocessor requirements
@@ -29,6 +29,53 @@ specifying the details of macro identification and expansion. It should
 be read along with 25-142r2, which provides all the other
 specifications.
 
+Straw polls
+===========
+
+Straw poll 1
+------------
+How should fixed source form be handled in forthcoming syntax/edit
+papers?
+
+OPTION 1: Fixed source form preprocessing should be fully
+          specified, and support is just as mandatory as free-form
+          preprocessing.
+
+OPTION 2: Fixed source form preprocessing should have recommendations
+          but be explicitly labeled as optional because of fixed-form
+          obsolescence.
+
+OPTION 3: Nothing should be specified about preprocessing for fixed
+          source form, which means preprocessing for fixed source form
+          remains processor-dependent as it is today. The edits
+          explicitly note that preprocessing of fixed source form is
+          processor dependent.
+
+The subgroup is unanimously opposed to option 1, and recommends
+option 3.
+
+Straw poll 2
+------------
+Should '&' be mandatory on a continued line inside function-like macro
+invocation?
+
+OPTION 1: '&' is required on the continued line. It is an error to
+          begin a function-like macro invocation and not continue the
+          line or provide the ')' needed to close the argument list.
+
+OPTION 2: '&' is permitted on the continued line, as in 25-176r1. If
+          present, a '&' continuation character is not part of the
+          argument list of a function-like macro.
+
+The subgroup does not have a recommendation and is divided. The subgroup
+unanimously agrees that either option is preferable to not passing a
+version of this paper.
+
+PROS OPTION 1:
+CONS OPTION 1:
+
+PROS OPTION 2:
+CONS OPTION 2
 
 1 General
 =========
@@ -182,11 +229,16 @@ EXAMPLE age04:
 This subsection describes the handling of line continuations
 within function-like macro invocations in free source form.
 
-lb01. An invocation of a function-like macro can be broken across
-      multiple lines. An invocation that begins with an open parenthesis
-      '(' continues until the matching closing parenthesis ')' is found
-      (outside of a comment), which may occur on a subsequent source
-      fragment line.
+lb01. [Straw poll 2, option 1] An invocation of a function-like macro
+      can be continued across multiple lines. An invocation that begins
+      with an open parenthesis '(' continues until the matching closing
+      parenthesis ')' is found (outside of a comment).
+
+lb01. [Straw poll 2, option 2] An invocation of a function-like macro
+      can be broken across multiple lines. An invocation that begins
+      with an open parenthesis '(' continues until the matching closing
+      parenthesis ')' is found (outside of a comment), which may occur
+      on a subsequent source fragment line.
 
 lb03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
@@ -194,14 +246,66 @@ lb03. Comment lines within the argument list of an invocation of a
 lb05. A newline character appearing within the argument list is treated
       as a blank character, except where rule lb07 applies.
 
-lb07. Fortran-style continuation markers are permitted. An ampersand '&'
-      which is the last non-whitespace character (after the removal of
-      comments) preceding a newline character is removed, and all
-      subsequent characters up to and including the newline are removed.
-      If the first non-whitespace character on a continuation line is an
-      ampersand '&', all characters up to and including the leading
-      ampersand '&' are removed.
+lb07. [Straw poll 2, option 1] Fortran-style continuation markers are
+      required. An ampersand '&' which is the last non-whitespace
+      character (after the removal of comments) preceding a newline
+      character is removed, and all subsequent characters up to and
+      including the newline are removed. If the first non-whitespace
+      character on a continuation line is an ampersand '&', all
+      characters up to and including the leading ampersand '&' are
+      removed.
 
+lb07. [Straw poll 2, option 2] Fortran-style continuation markers are
+      permitted. An ampersand '&' which is the last non-whitespace
+      character (after the removal of comments) preceding a newline
+      character is removed, and all subsequent characters up to and
+      including the newline are removed. If the first non-whitespace
+      character on a continuation line is an ampersand '&', all
+      characters up to and including the leading ampersand '&' are
+      removed.
+
+[Straw poll 2, option 1]
+EXAMPLE lbe01:
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following lines:
+
+            MAC(a,
+                b,
+                c)
+            MAC(q,r
+            s,
+            t)
+
+      are erroneous.
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following lines:
+
+            MAC(a, &
+                b, &
+              & c)
+            MAC(d, &
+                e &
+               &f, g)
+            MAC(h, &
+                i&
+               &j, k)
+            MAC(l, m&
+                n&
+               &o, p)
+
+      are equivalent to:
+
+            MAC(a,b,c)
+            MAC(d,e f,g)
+            MAC(h,ij,k)
+            MAC(l,m no,p)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
+
+[Straw poll 2, option 2]
 EXAMPLE lbe01:
 
       If MAC is a function-like macro which accepts three arguments,
@@ -241,27 +345,84 @@ EXAMPLE lbe01:
 
 2.1.3 Line breaks and continuations in macro invocations (fixed-form)
 ---------------------------------------------------------------------
+[Straw poll 1, option 3 -> remove section]
 
 This subsection describes the handling of line continuations within
 function-like macro invocations in fixed source form.
 
-lc01. An invocation of a function-like macro can be broken across
-      multiple lines. An invocation that begins with an open parenthesis
-      '(' continues until the matching closing parenthesis ')' is found
-      (outside of a comment), which may occur on a subsequent source
-      fragment line.
+lc01. [Straw poll 2, option 1] An invocation of a function-like macro
+      can be continued across multiple lines. An invocation that begins
+      with an open parenthesis '(' continues until the matching closing
+      parenthesis ')' is found (outside of a comment).
+
+lc01. [Straw poll 2, option 2] An invocation of a function-like macro
+      can be broken across multiple lines. An invocation that begins
+      with an open parenthesis '(' continues until the matching closing
+      parenthesis ')' is found (outside of a comment), which may occur
+      on a subsequent source fragment line.
 
 lc03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
 
-lc07. If character position 6 of a continuation line contains any
+lc07. [Straw poll 2, option 1] If character position 6 of a continuation
+      line contains any character other than a blank or zero, then any
+      trailing blank characters of the continued line are removed along
+      with the newline
+
+lc07. [Straw poll 2, option 2] If character position 6 of a continuation line contains any
       character other than a blank or zero, then any trailing blank
       characters of the continued line are removed along with the
       newline. Otherwise, the newline of the continued line is replaced
-      with a blank character. Characters in positions 1-6 are removed
-      from the continuation line regardless of the character in position
-      6.
+      with a blank character.
 
+lc09. Character position 1 contain a blank, 'c', '!', or '*'. Character
+      positions 2-5 must contain blanks.
+
+
+[Straw poll 2, option 1]
+EXAMPLE lce01:
+
+     The following lines:
+
+      !23456
+            MAC(a,
+                b,
+                c)
+            MAC(q,r
+            s,
+            t)
+
+      are erroneous.
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following lines:
+
+      !23456
+            MAC(a,
+                b,
+           &    c)
+            MAC(d,
+           &    e
+            f, g)
+            MAC(h,
+           &    i
+           &j, k)
+            MAC(l, m
+           &    n
+           &o, p)
+
+      are equivalent to:
+
+      !23456
+            MAC(a,b,c)
+            MAC(d,e f,g)
+            MAC(h,ij,k)
+            MAC(l,m no,p)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
+
+[Straw poll 2, option 2]
 EXAMPLE lce01:
 
       If MAC is a function-like macro which accepts three arguments,
@@ -272,7 +433,7 @@ EXAMPLE lce01:
                 b,
                 c)
             MAC(a,
-      foo       b,
+                b,
            &    c)
             MAC(d,
            &    e
@@ -317,9 +478,10 @@ cm05. During argument gathering, a Fortran-style comment on a source
       subsequent characters on that line. The entire sequence is removed
       (not including the newline character).
 
-cm07. In a source fragment line, the token sequence '/*' ... '*/' is not
-      interpreted as a comment (unlike in directive lines, see 25-142r2
-      section 2.4).
+cm07. In a source fragment line, the token sequences '/*' and '*/' do
+      not introduce a comment (unlike in directive lines, see 25-142r2
+      section 2.4). C-style comments are not supported on source
+      fragment lines.
 
 cm09. In a source fragment line, the '//' token is not interpreted as
       introducing a comment.
@@ -336,13 +498,53 @@ EXAMPLE cme01:
 
       The following invocation:
 
-            ADD(1,   ! first argument is 1
+            ADD(1, & ! first argument is 1
                 2)   ! second argument is 2
 
       is equivalent to:
 
+            ADD(1,2)   ! second argument is 2
+
+      and is equivalent to:
+
             1+2   ! second argument is 2
 
+[Straw poll 2, option 1]
+EXAMPLE cme02: (free-form)
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following free form source lines:
+
+            MAC(d, & ! comment 1
+                e, & ! comment 2
+                     ! comment line
+              & f)
+            MAC(g, & !$foo 1
+                h, & !$foo 2
+                i) & !$foo 3
+            MAC(j,k& ! comment 1
+                &l&  ! comment 2
+                     ! comment line
+                &m, n)
+            MAC(o,p& ! comment 1
+                &q! comment 2
+                &r,s)
+            MAC(t,u&!comment 1
+            v,&!comment 2
+            w)
+
+      are equivalent to:
+
+            MAC(d,e,f)
+            MAC(g,h,i) !$foo 3
+            MAC(j,klm,n)
+            MAC(o,pq r,s)
+            MAC(t,u v,w)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
+
+[Straw poll 2, option 2]
 EXAMPLE cme02: (free-form)
 
       If MAC is a function-like macro which accepts three arguments,
@@ -381,6 +583,42 @@ EXAMPLE cme02: (free-form)
       where all line continuations and extraneous blank characters have
       been removed.
 
+[Straw poll 1, option 3 -> remove cme03]
+[Straw poll 2, option 1]
+EXAMPLE cme03: (fixed-form)
+
+      If MAC is a function-like macro which accepts three arguments,
+      then the following fixed form source lines:
+
+      !23456
+            MAC(d, ! comment 1
+           &    e, ! comment 2
+      c comment line
+           &    f)
+            MAC(g, !$foo 1
+           &    h, !$foo 2
+           &    i) !$foo 3
+            MAC(j,k !comment 1
+           &l ! comment 2
+             ! comment line
+           &m, n)
+            MAC(o,p ! comment 1
+           &q! comment 2
+           & r,s)
+
+      are equivalent to:
+
+      !23456
+            MAC(a,b,c)
+            MAC(d,e,f)
+            MAC(g,h,i) !$foo 3
+            MAC(j,klm,n)
+            MAC(o,pq r,s)
+
+      where all line continuations and extraneous blank characters have
+      been removed.
+
+[Straw poll 2, option 2]
 EXAMPLE cme03: (fixed-form)
 
       If MAC is a function-like macro which accepts three arguments,
@@ -391,7 +629,7 @@ EXAMPLE cme03: (fixed-form)
                 b, ! comment 2
                 c)
             MAC(d, ! comment 1
-      junk      e, ! comment 2
+                e, ! comment 2
       c comment line
            &    f)
             MAC(g, !$foo 1
