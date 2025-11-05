@@ -88,10 +88,37 @@ unanimously agrees that either option is preferable to not passing a
 version of this paper.
 
 PROS OPTION R:
+RP01. Forces a style which is more aesthetically "Fortranic".
+
 CONS OPTION R:
+RC01. Mandates more restrictive line continuation syntax.
+RC02. Forcing the programmer to type a continuation does not resolve any
+      ambiguity between two or more correct programs in this context. If
+      the the closing `)` for the argument list does not appear on the
+      opening line, then it must appear on a subsequent line, otherwise
+      the entire program is an error.
+RC03. This requirement will break current codes that don't use explicit
+      continuations (e.g. due to focusing on a compiler that does not
+      currently require them).
+RC04. In compilers that don't currently recognize explicit continuations
+      in FLM invocations, this syntax generates confusing garbage (e.g.
+      adding the `&` to the argument), which is a very unfriendly error
+      behavior until those compilers are upgraded to the standard
+      preprocessor.
 
 PROS OPTION O:
+OP01. Provides more permissive line continuation syntax.
+OP02. Option O accepts a strictly wider set of current programs than
+      Option R, and hence it reduces breakage of existing codes.
+OP03. Users who are accustomed to typing explicit continuations may
+      still do so.
+OP04. Current codes that are not using explicit continuations (e.g. due
+      to focusing on a compiler that does not currently accept them)
+      will continue to work unchanged.
+
 CONS OPTION O:
+OC01. Allows omitting the redundant continuation indicator, a style
+      which is less aesthetically "Fortranic".
 
 1 General
 =========
