@@ -592,8 +592,8 @@ EXAMPLE cme02-R: (free-form)
                 &q & ! comment 2
                 &r,s)
             MAC(t,u&!comment 1
-            v,&!comment 2
-            w)
+                v,&!comment 2
+                w)
 
       are equivalent to:
 
