@@ -443,7 +443,8 @@ lc09. On a continuation source fragment line inside the argument list
 [Straw poll 2, option R]
 EXAMPLE lce01-R:
 
-     The following lines:
+      If MAC is a function-like macro which accepts three arguments,
+      then the following lines:
 
       !23456
             MAC(a,
@@ -460,11 +461,11 @@ EXAMPLE lce01-R:
 
       !23456
             MAC(a,
-                b,
+           &    b,
            &    c)
             MAC(d,
            &    e
-            f, g)
+           &    f, g)
             MAC(h,
            &    i
            &j, k)
