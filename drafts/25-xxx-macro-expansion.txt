@@ -29,13 +29,19 @@ specifying the details of macro identification and expansion. It should
 be read along with 25-142r2, which provides all the other
 specifications.
 
+The first revision of this document (25-176r1) was discussed in plenary at
+J3 meeting #237 on 2025-10-27. Updates were made based on that discussion,
+most notably the addition of the "Straw polls" section below; this will be
+used to resolve controversial issues that arose in the initial discussion
+and establish clear design direction to inform future papers.
+
 Straw polls
 ===========
 
 Straw poll 1
 ------------
 How should fixed source form be handled in forthcoming syntax/edit
-papers?
+papers for preprocessing?
 
 OPTION A: Fixed source form preprocessing should be fully
           specified, and support is just as mandatory as free-form
@@ -47,15 +53,15 @@ OPTION B: Fixed source form preprocessing should have recommendations
 
 OPTION C: Nothing should be specified about preprocessing for fixed
           source form, which means preprocessing for fixed source form
-          remains processor-dependent as it is today. The edits should
-          explicitly note that preprocessing of fixed source form is
+          remains entirely processor-dependent (as it is today). The edits
+          should explicitly note that preprocessing of fixed source form is
           processor-dependent.
 
 The subgroup is unanimously opposed to option A, and recommends
 option C.
 
 NOTE: the results of this straw poll will inform the content of
-subsequent papers, not serve to amend or excise content in this paper.
+subsequent papers, not serve to excise content from this paper.
 
 Straw poll 2
 ------------
@@ -86,6 +92,12 @@ macro.
 The subgroup does not have a recommendation and is divided. The subgroup
 unanimously agrees that either option is preferable to not passing a
 version of this paper.
+
+
+Straw poll 2 analysis
+---------------------
+The analysis provided below is intended to help inform the committee
+regarding the implications of straw poll 2.
 
 PROS OPTION R:
 RP01. Forces a style which is more aesthetically "Fortranic".
@@ -119,6 +131,11 @@ OP04. Current codes that are not using explicit continuations (e.g. due
 CONS OPTION O:
 OC01. Allows omitting the redundant continuation indicator, a style
       which is less aesthetically "Fortranic".
+
+==========================================================================
+
+Specifications
+==============
 
 1 General
 =========
