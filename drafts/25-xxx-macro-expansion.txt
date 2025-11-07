@@ -272,12 +272,12 @@ EXAMPLE age04:
 This subsection describes the handling of line continuations
 within function-like macro invocations in free source form.
 
-lb01. [Straw poll 2, option R] An invocation of a function-like macro
+lb01-R. [Straw poll 2, option R] An invocation of a function-like macro
       can be continued across multiple lines. An invocation that begins
       with an open parenthesis '(' continues until the matching closing
       parenthesis ')' is found (outside of a comment).
 
-lb01. [Straw poll 2, option O] An invocation of a function-like macro
+lb01-O. [Straw poll 2, option O] An invocation of a function-like macro
       can be broken across multiple lines. An invocation that begins
       with an open parenthesis '(' continues until the matching closing
       parenthesis ')' is found (outside of a comment), which may occur
@@ -289,7 +289,7 @@ lb03. Comment lines within the argument list of an invocation of a
 lb05. A newline character appearing within the argument list is treated
       as a blank character, except where rule lb07 applies.
 
-lb07. [Straw poll 2, option R] Fortran-style continuation markers are
+lb07-R. [Straw poll 2, option R] Fortran-style continuation markers are
       required when the argument list spans multiple source fragment
       lines. An ampersand '&' which is the last non-whitespace character
       (after the removal of comments) preceding a newline character is
@@ -298,7 +298,7 @@ lb07. [Straw poll 2, option R] Fortran-style continuation markers are
       continuation line is an ampersand '&', all characters up to and
       including the leading ampersand '&' are removed.
 
-lb07. [Straw poll 2, option O] Fortran-style continuation markers are
+lb07-O. [Straw poll 2, option O] Fortran-style continuation markers are
       permitted when the argument list spans multiple source fragment
       lines. An ampersand '&' which is the last non-whitespace
       character (after the removal of comments) preceding a newline
@@ -394,12 +394,12 @@ EXAMPLE lbe01-O:
 This subsection describes the handling of line continuations within
 function-like macro invocations in fixed source form.
 
-lc01. [Straw poll 2, option R] An invocation of a function-like macro
+lc01-R. [Straw poll 2, option R] An invocation of a function-like macro
       can be continued across multiple lines. An invocation that begins
       with an open parenthesis '(' continues until the matching closing
       parenthesis ')' is found (outside of a comment).
 
-lc01. [Straw poll 2, option O] An invocation of a function-like macro
+lc01-O. [Straw poll 2, option O] An invocation of a function-like macro
       can be broken across multiple lines. An invocation that begins
       with an open parenthesis '(' continues until the matching closing
       parenthesis ')' is found (outside of a comment), which may occur
@@ -408,12 +408,12 @@ lc01. [Straw poll 2, option O] An invocation of a function-like macro
 lc03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
 
-lc07. [Straw poll 2, option R] If character position 6 of a continuation
+lc07-R. [Straw poll 2, option R] If character position 6 of a continuation
       line contains any character other than a blank or zero, then any
       trailing blank characters of the continued line are removed along
       with the newline
 
-lc07. [Straw poll 2, option O] If character position 6 of a continuation
+lc07-O. [Straw poll 2, option O] If character position 6 of a continuation
       line contains any character other than a blank or zero, then any
       trailing blank characters of the continued line are removed along
       with the newline. Otherwise, the newline of the continued line is
