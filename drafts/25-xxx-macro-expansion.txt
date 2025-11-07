@@ -558,7 +558,7 @@ EXAMPLE cme01:
 
       #define ADD(a,b) a+b
 
-      The following invocation:
+      The following invocation in free-form source:
 
             ADD(1, & ! first argument is 1
                 2)   ! second argument is 2
