@@ -117,6 +117,8 @@ RC04. In compilers that don't currently recognize explicit continuations
       adding the `&` to the argument), which is a very unfriendly error
       behavior until those compilers are upgraded to the standard
       preprocessor.
+RC05. Current implementations may need adjustment to match specified
+      behavior.
 
 PROS OPTION O:
 OP01. Provides more permissive line continuation syntax.
@@ -131,6 +133,8 @@ OP04. Current codes that are not using explicit continuations (e.g. due
 CONS OPTION O:
 OC01. Allows omitting the redundant continuation indicator, a style
       which is less aesthetically "Fortranic".
+OC02. Current implementations may need adjustment to match specified
+      behavior.
 
 ==========================================================================
 
