@@ -408,14 +408,14 @@ lc01-O. [Straw poll 2, option O] An invocation of a function-like macro
 lc03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
 
-lc07-R. [Straw poll 2, option R] If character position 6 of a continuation
-      line contains any character other than a blank or zero, then any
-      trailing blank characters of the continued line are removed along
-      with the newline
+lc07-R. [Straw poll 2, option R] If character position 6 of a source
+      fragment line contains any character other than a blank or zero, then
+      any trailing blank characters of the continued line are removed along
+      with the newline.
 
-lc07-O. [Straw poll 2, option O] If character position 6 of a continuation
-      line contains any character other than a blank or zero, then any
-      trailing blank characters of the continued line are removed along
+lc07-O. [Straw poll 2, option O] If character position 6 of a source
+      fragment line contains any character other than a blank or zero, then
+      any trailing blank characters of the continued line are removed along
       with the newline. Otherwise, the newline of the continued line is
       replaced with a blank character.
 
