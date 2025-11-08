@@ -1,8 +1,8 @@
-To: J3                                                     J3/25-176r2
+To: J3                                                     J3/25-176rx
 From: Patrick Fasano & Dan Bonachea
 Subject: Formal specifications for macro identification and expansion in
          the Fortran preprocessor (FPP)
-Date: 2025-November-08
+Date: 2025-November-XX
 References:
       25-142r2 Formal specifications for the Fortran preprocessor (FPP)
       25-114r2 Fortran preprocessor requirements
