@@ -60,13 +60,13 @@ OPTION C: Nothing should be specified about preprocessing for fixed
 The subgroup is unanimously opposed to option A, and recommends
 option C.
 
-NOTE: the results of this straw poll will inform the content of
+NOTE: the results of straw poll 1 will inform the content of
 subsequent papers, not serve to excise content from this paper.
 
 Straw poll 2
 ------------
 Should it be mandatory to explicitly continue lines inside the argument
-list for the invocation of a function-like macro invocation?
+list for the invocation of a function-like macro?
 
 OPTION R: Explicit Fortran-style continuation is required to continue
           lines within the argument list of a function-like macro
