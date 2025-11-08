@@ -29,11 +29,12 @@ specifying the details of macro identification and expansion. It should
 be read along with 25-142r2, which provides all the other
 specifications.
 
-The first revision of this document (25-176r1) was discussed in plenary at
-J3 meeting #237 on 2025-10-27. Updates were made based on that discussion,
-most notably the addition of the "Straw polls" section below; this will be
-used to resolve controversial issues that arose in the initial discussion
-and establish clear design direction to inform future papers.
+The first revision of this document (25-176r1) was discussed in plenary
+at J3 meeting #237 on 2025-10-27. Updates were made based on that
+discussion, most notably the addition of the "Straw polls" section
+below; this will be used to resolve controversial issues that arose in
+the initial discussion and establish clear design direction to inform
+future papers.
 
 Straw polls
 ===========
@@ -53,15 +54,15 @@ OPTION B: Fixed source form preprocessing should have recommendations
 
 OPTION C: Nothing should be specified about preprocessing for fixed
           source form, which means preprocessing for fixed source form
-          remains entirely processor-dependent (as it is today). The edits
-          should explicitly note that preprocessing of fixed source form is
-          processor-dependent.
+          remains entirely processor-dependent (as it is today). The
+          edits should explicitly note that preprocessing of fixed
+          source form is processor-dependent.
 
 The subgroup is unanimously opposed to option A, and recommends
 option C.
 
-NOTE: the results of straw poll 1 will inform the content of
-subsequent papers, not serve to excise content from this paper.
+NOTE: the results of straw poll 1 will inform the content of subsequent
+papers, not serve to excise content from this paper.
 
 Straw poll 2
 ------------
@@ -181,11 +182,11 @@ arguments for the invocation of a function-like macro.
 ag01. During expansion when a function-like macro name is encountered
       followed by a '(' as the next nonblank character, the processor
       shall scan ahead, removing comments (section 2.1.4), to identify
-      the full list of macro arguments. This process is known as "argument
-      gathering".  The argument list begins after the initial '(' and
-      terminates before the matching closing parenthesis ')', skipping
-      intervening matched pairs of `(` and `)` parentheses. The argument
-      list shall terminate before the end of the current file.
+      the full list of macro arguments. This process is known as
+      "argument gathering".  The argument list begins after the initial
+      '(' and terminates before the matching closing parenthesis ')',
+      skipping intervening matched pairs of `(` and `)` parentheses. The
+      argument list shall terminate before the end of the current file.
 
 ag03. After argument gathering, argument separation is performed.
       Commas within the argument list separate individual arguments.
@@ -415,8 +416,8 @@ EXAMPLE lbe01-O:
 [Straw poll 1, option C -> mark subsection 2.1.3 as "rejected"]
 
 This subsection describes the handling of line continuations during
-argument gathering within function-like macro invocations in fixed source
-form.
+argument gathering within function-like macro invocations in fixed
+source form.
 
 lc01-R. [Straw poll 2, option R] An invocation of a function-like macro
       can be continued across multiple lines. An invocation that begins
@@ -433,15 +434,15 @@ lc03. Comment lines within the argument list of an invocation of a
       function-like macro are discarded (section 2.1.4).
 
 lc07-R. [Straw poll 2, option R] If character position 6 of a source
-      fragment line contains any character other than a blank or zero, then
-      any trailing blank characters of the continued line are removed along
-      with the newline.
+      fragment line contains any character other than a blank or zero,
+      then any trailing blank characters of the continued line are
+      removed along with the newline.
 
 lc07-O. [Straw poll 2, option O] If character position 6 of a source
-      fragment line contains any character other than a blank or zero, then
-      any trailing blank characters of the continued line are removed along
-      with the newline. Otherwise, the newline of the continued line is
-      replaced with a blank character.
+      fragment line contains any character other than a blank or zero,
+      then any trailing blank characters of the continued line are
+      removed along with the newline. Otherwise, the newline of the
+      continued line is replaced with a blank character.
 
 lc09. On a continuation source fragment line inside the argument list
       for a function-like macro, character positions 1 to 5 shall be
