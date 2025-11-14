@@ -38,7 +38,8 @@ future papers.
 
 The second revision of this document (25-176r2) was discussed in plenary
 at J3 meeting #237 on 2025-11-12. The results of the straw polls in
-25-176r2 have been applied to the current revision of this paper.
+25-176r2 have been applied to the current revision of this paper,
+25-176r3, which passed as amended at J3 meeting #237.
 
 Straw polls
 ===========
