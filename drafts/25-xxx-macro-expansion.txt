@@ -112,7 +112,7 @@ version of this paper.
 ********
 At plenary on 2025-11-12, the straw poll results were:
       * OPTION R: 11 votes
-      * OPTION B: 4 votes
+      * OPTION O: 4 votes
       * Undecided: 5 votes
 
 Based on these totals, this revision adopts OPTION R.
